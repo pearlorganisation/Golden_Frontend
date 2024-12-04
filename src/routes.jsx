@@ -8,6 +8,7 @@ import PricingPage from "./pages/PricingPage";
 import AboutUs from "./pages/AboutUs";
 import Layout from "./components/Layout";
 import PostPaymentPDFView from "./pages/PostPaymentPDFView";
+import DetailPage from "./pages/DetailPage";
 
 const routes = createBrowserRouter([
   {
@@ -52,7 +53,17 @@ const routes = createBrowserRouter([
   {
     path:"/aboutus",
     element: <AboutUs/>
+
   }
+
+,{
+  path:"/detail",
+  element:<DetailPage/>
+}
+
+
+  
 ]);
+
 
 export default routes;

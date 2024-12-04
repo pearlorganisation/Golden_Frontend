@@ -87,7 +87,7 @@ const PricingPage = () => {
             }}
             classname="text-4xl sm:text-5xl font-extrabold capitalize mb-10 text-yellow-600"
           />
-        <p className="text-lg text-gray-600 mt-4">
+        {/* <p className="text-lg text-gray-600 mt-4">
         <TextAnimation
             text="  Select the best plan that suits your needs."
             variants={{
@@ -102,7 +102,7 @@ const PricingPage = () => {
             classname="text-4xl sm:text-5xl font-extrabold capitalize mb-10"
           />
 
-        </p>
+        </p> */}
       </header>
 
       {/* Pricing Plans Section */}
