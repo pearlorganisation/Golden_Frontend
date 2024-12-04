@@ -42,10 +42,9 @@ const DetailPage = () => {
     // Ad
     
 }
+const [selectedOption, setSelectedOption] = useState("1month"); // Default selected option
 
-const[selectDropdown,setDropdown]=useState("1month")
-const selectedMonth = ["1month", "6month"];
-
+const selectMonth = ["1month", "6month"];
 const Month = {
   "1month": {
     rupees: 399,
@@ -54,7 +53,6 @@ const Month = {
     rupees: 1500,
   },
 };
-
 
 
 
@@ -124,16 +122,39 @@ const Month = {
           {content[selectedSpeciality]?.subSpecialties || "N/A"} sub-specialties.
         </p>
       </div>
-      <div className="ring ring-gray-50 bg-red-500 px-4 ">
+      <div className="ring ring-gray-50 px-4 ">
         <div className="text-3xl text-[#333333]">PDf</div>
+        <div className="p-4">
+      <h3 className="text-lg font-semibold mb-4">Select Duration</h3>
+      {/* Dropdown */}
+      <select
+        className="border rounded w-32 p-2 text-lg"
+        value={selectedOption}
+        onChange={(e) => setSelectedOption(e.target.value)}
+      >
+        {selectMonth.map((item) => (
+          <option key={item} value={item}>
+            {item}
+          </option>
+        ))}
+      </select>
 
-        {
-           selectedMonth.map((item)=>(<>
-           <li key={item} className=""></li>
-           </>))
-        }
+      {/* Display Selected Price */}
+      <div className="mt-4">
+        <p className="text-lg">
+          Selected Plan: <strong>{selectedOption}</strong>
+        </p>
+        <p className="text-lg">
+          Price: <strong>₹{Month[selectedOption].rupees}</strong>
+        </p>
+      </div>
+    </div>
       </div></div>
 </div>
+
+
+
+
   
 
 
