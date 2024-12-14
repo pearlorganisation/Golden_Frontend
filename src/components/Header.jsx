@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import LoadingIndicator from "./LoadingIndicator";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { registerUser, userLogin } from "../features/Auth/AuthaAction";
 
 const Header = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -12,7 +14,7 @@ const Header = () => {
 
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [isSigningUp, setIsSigningUp] = useState(false);
-
+const dispatch=useDispatch();
   const {
     register: registerLogin,
     handleSubmit: handleLoginSubmit,
@@ -61,17 +63,24 @@ const Header = () => {
   const onLoginSubmit = async (data) => {
     setIsLoggingIn(true);
     console.log("Login Data:", data);
-    await new Promise((resolve) => setTimeout(resolve, 5000));
+    // await new Promise((resolve) => setTimeout(resolve, 5000));
+    dispatch(userLogin(data))
     setIsLoggingIn(false);
     closeLoginModal();
   };
 
   const onSignupSubmit = async (data) => {
+
     setIsSigningUp(true);
     console.log("Signup Data:", data);
-    await new Promise((resolve) => setTimeout(resolve, 5000)); // Simulate API call
+    // await new Promise((resolve) => setTimeout(resolve, 5000)); 
+    
+    dispatch(registerUser(data))// Simulate API call
     setIsSigningUp(false);
     closeSignupModal();
+
+
+  
   };
 
   const pages = [
@@ -161,23 +170,26 @@ const Header = () => {
 
         {/* Right Section */}
         <div className="hidden md:flex space-x-4">
+          <Link to="/login">
           <button
-            onClick={openLoginModal}
+            // onClick={openLoginModal}
+          
             className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
           >
             Login
-          </button>
+          </button></Link>
+          <Link to="/signup">
           <button
-            onClick={openSignupModal}
+           href="/signup"
             className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
           >
             Sign-Up
-          </button>
+          </button></Link>
         </div>
       </nav>
 
       {/* Login Modal */}
-      {isLoginModalOpen && (
+      {/* {isLoginModalOpen && (
         <motion.div
           className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
           initial={{ opacity: 0 }}
@@ -231,8 +243,95 @@ const Header = () => {
             </form>
           </motion.div>
         </motion.div>
-      )}
+      )} */}
 
+
+{isLoginModalOpen && (
+        <motion.div
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          <motion.div
+            className="bg-white rounded-lg p-6 w-80"
+            initial={{ scale: 0.8 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            <h2 className="text-xl font-semibold mb-4">Login</h2>
+            <form onSubmit={handleLoginSubmit(onLoginSubmit)}>
+            <div className="mb-4">
+                <label className="block text-gray-700 font-medium mb-2">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  placeholder="Email Address"
+                  {...registerLogin("email", {
+                    required: "Email is required",
+                    pattern: {
+                      value:
+                        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                      message: "Invalid email address",
+                    },
+                  })}
+                  className={`w-full px-4 py-2 border rounded-md focus:outline-none ${
+                    loginErrors.email
+                      ? "border-red-500"
+                      : "focus:ring-green-600"
+                  }`}
+                />
+                {loginErrors.email && (
+                  <p className="text-red-500 text-sm">
+                    {loginErrors.email.message}
+                  </p>
+                )}
+              </div>
+            <div className="mb-4">
+                <label className="block text-gray-700 font-medium mb-2">
+              Password
+                </label>
+                <input
+                  type="text"
+                  placeholder="password"
+                  {...registerLogin("password", {
+                    required: "Password  is required",
+                 
+                  })}
+                  className={`w-full px-4 py-2 border rounded-md focus:outline-none ${
+                    loginErrors.Password
+                      ? "border-red-500"
+                      : "focus:ring-green-600"
+                  }`}
+                />
+                {loginErrors.password && (
+                  <p className="text-red-500 text-sm">
+                    {loginErrors.password.message}
+                  </p>
+                )}
+              </div>
+              <div className="flex justify-end space-x-4">
+                <button
+                  type="button"
+                  onClick={closeLoginModal}
+                  className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400"
+                >
+                  Close
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center justify-center"
+                  disabled={isLoggingIn}
+                >
+                  {/* {isLoggingIn ? <LoadingIndicator /> : "Send OTP"} */}
+                  submit
+                </button>
+                
+              </div>
+            </form>
+          </motion.div>
+        </motion.div>
+      )}
       {/* Sign-Up Modal */}
       {isSignupModalOpen && (
         <motion.div
@@ -318,6 +417,29 @@ const Header = () => {
                 {signupErrors.mobile && (
                   <p className="text-red-500 text-sm">
                     {signupErrors.mobile.message}
+                  </p>
+                )}
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 font-medium mb-2">
+              Password
+                </label>
+                <input
+                  type="text"
+                  placeholder="password"
+                  {...registerSignup("password", {
+                    required: "Password  is required",
+                 
+                  })}
+                  className={`w-full px-4 py-2 border rounded-md focus:outline-none ${
+                    signupErrors.Password
+                      ? "border-red-500"
+                      : "focus:ring-green-600"
+                  }`}
+                />
+                {signupErrors.password && (
+                  <p className="text-red-500 text-sm">
+                    {signupErrors.password.message}
                   </p>
                 )}
               </div>

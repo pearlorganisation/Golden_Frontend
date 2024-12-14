@@ -90,7 +90,7 @@ const HeroSection = () => {
 
   return (
     <section
-      className="relative text-white py-20"
+      className="relative text-white py-20 overflow-hidden"
       style={{
         backgroundImage:
           "url('https://media.istockphoto.com/id/995966976/photo/they-bring-accuracy-and-expertise-into-every-procedure.jpg?s=612x612&w=0&k=20&c=l-J5YF7bDB67Fhn6D4hjm-i-B0DeCgLHmL7vdPrvkJM=')",
