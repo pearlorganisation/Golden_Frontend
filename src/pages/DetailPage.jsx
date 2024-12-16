@@ -1,99 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa";
 import { IoIosClose } from "react-icons/io";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllSubjects } from "../features/Subject/SubjectAction";
 
 const DetailPage = () => {
-  const [selectedSpeciality, setSelectedSpeciality] = useState("Overview");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // For mobile sidebar toggle
   const [globalDuration, setGlobalDuration] = useState(""); // For global duration filter
+  const [selectedSpeciality, setSelectedSpeciality] = useState("Overview");
 
-  const specialties = [
-    "Biochem",
-    "Physiology",
-    "Pathology",
-    "Micro",
-    "Pharma",
-    "Forensic",
-    "ENT",
-    "Ophthal",
-    "PSM",
-    "Medicine",
-    "Surgery",
-    "OBG",
-    "Anesthesia",
-    "Derm",
-    "Psychiatry",
-  ];
-   const content = {
-    Biochem: {
-      title: "Biochemistry",
-      description: "Pages: 25. Faculty: Zainab ma'am (Cerebellum), Smily ma'am (Cerebellum).",
-    },
-    Physiology: {
-      title: "Physiology",
-      description: "Pages: 30. Faculty: Soumen sir (Prepladder), Krishna Kumar sir (Marrow).",
-    },
-    Pathology: {
-      title: "Pathology",
-      description: "Pages: 39. Faculty: Sparsh sir (Cerebellum), Preeti ma'am (Prepladder).",
-    },
-    Micro: {
-      title: "Microbiology",
-      description: "Pages: 32. Faculty: Sonu Panwar sir (Prev Prepladder), Preeti ma'am (Prepladder).",
-    },
-    Pharma: {
-      title: "Pharmacology",
-      description: "Pages: 37. Faculty: Govind Garg sir (Cerebellum), Nikita ma'am, Zainab ma'am.",
-    },
-    Forensic: {
-      title: "Forensic Medicine",
-      description: "Pages: 20. Faculty: JP sir (Marrow), Nikita ma'am.",
-    },
-    ENT: {
-      title: "ENT",
-      description: "Pages: 22. Faculty: Manisha Budhiraja (Marrow).",
-    },
-    Ophthal: {
-      title: "Ophthalmology",
-      description: "Pages: 21. Faculty: Ruchi Rai.",
-    },
-    PSM: {
-      title: "Preventive and Social Medicine",
-      description: "Pages: 50. Faculty: Vivek Jain (Cerebellum), Neha Taneja (Prepladder).",
-    },
-    Medicine: {
-      title: "General Medicine",
-      description: "Pages: 107. Faculty: Deepak Marwah (Prepladder), Zainab ma'am.",
-    },
-    Surgery: {
-      title: "General Surgery",
-      description: "Pages: 92. Faculty: Prithesh Singh (Prepladder), Rohan sir (Marrow).",
-    },
-    OBG: {
-      title: "Obstetrics and Gynecology",
-      description: "Pages: 58. Faculty: Sakshi ma'am (Marrow), Prassan Viji (Prepladder).",
-    },
-    Anesthesia: {
-      title: "Anesthesia",
-      description: "Pages: 14. Faculty: Swati ma'am (Prev Prepladder).",
-    },
-    Derm: {
-      title: "Dermatology",
-      description: "Pages: 20. Faculty: Chestna Agarwal (DAMS), Zainab ma'am.",
-    },
-    Psychiatry: {
-      title: "Psychiatry",
-      description: "Pages: 17. Faculty: Praveen sir (Cerebellum).",
-    },
-  };
-  const subject=useSelector((state)=>state.subject)
+  const dispatch = useDispatch();
+  const { subject } = useSelector((state) => state.subject);
 
-  useEffect(()=>{
-getAllSubjects()
-  },[])
-  console.log("sub",subject)
+  // Fetch subjects data on mount
+  useEffect(() => {
+    dispatch(getAllSubjects());
+  }, [dispatch]);
+
+  const specialties = subject?.data || []; // Use fetched data
+  const content = specialties.reduce((acc, speciality) => {
+    acc[speciality.name] = {
+      title: speciality.name,
+      description: `Pages: ${speciality.pages || "N/A"}. Faculty: ${
+        speciality.faculty || "N/A"
+      }.`,
+    };
+    return acc;
+  }, {});
 
   const selectMonth = ["1month", "6month"];
   const Month = {
@@ -105,14 +38,19 @@ getAllSubjects()
     },
   };
 
+  // Initialize selected options state dynamically based on specialties
+  const [selectedOptions, setSelectedOptions] = useState({});
 
-
-  const [selectedOptions, setSelectedOptions] = useState(
-    specialties.reduce((acc, speciality) => {
-      acc[speciality] = "1month";
-      return acc;
-    }, {})
-  );
+  useEffect(() => {
+    if (specialties.length) {
+      setSelectedOptions(
+        specialties.reduce((acc, speciality) => {
+          acc[speciality.name] = "1month";
+          return acc;
+        }, {})
+      );
+    }
+  }, [specialties]);
 
   const handleSelectChange = (speciality, value) => {
     setSelectedOptions((prevState) => ({
@@ -125,7 +63,7 @@ getAllSubjects()
     setGlobalDuration(duration);
     setSelectedOptions((prevState) =>
       specialties.reduce((acc, speciality) => {
-        acc[speciality] = duration;
+        acc[speciality.name] = duration;
         return acc;
       }, {})
     );
@@ -144,15 +82,15 @@ getAllSubjects()
           <ul className="space-y-2 px-4">
             {specialties.map((item) => (
               <li
-                key={item}
+                key={item.id}
                 className={`cursor-pointer p-2 rounded ${
-                  selectedSpeciality === item
+                  selectedSpeciality === item.name
                     ? "bg-blue-600 text-white"
                     : "hover:bg-blue-200"
                 }`}
-                onClick={() => setSelectedSpeciality(item)}
+                onClick={() => setSelectedSpeciality(item.name)}
               >
-                {item}
+                {item.name}
               </li>
             ))}
           </ul>
@@ -206,16 +144,16 @@ getAllSubjects()
             <div className="flex flex-row flex-wrap gap-6">
               {specialties.map((speciality) => (
                 <div
-                  key={speciality}
+                  key={speciality.id}
                   className="bg-white shadow-lg rounded-md p-6 max-w-[300px]"
                   style={{
                     boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
                   }}
                 >
                   <h3 className="text-lg lg:text-xl font-semibold text-gray-700 mb-4">
-                    Choose Your Plan - {speciality}
+                    Choose Your Plan - {speciality.name}
                   </h3>
-
+<div><img src={speciality.banner.secure_url}/></div>
                   {/* Dropdown for Duration */}
                   <div className="mb-6">
                     <label className="block text-gray-600 text-sm font-medium mb-2">
@@ -223,9 +161,9 @@ getAllSubjects()
                     </label>
                     <select
                       className="border border-gray-300 rounded-md w-full p-3 text-gray-700 text-base focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                      value={selectedOptions[speciality]}
+                      value={selectedOptions[speciality.name]}
                       onChange={(e) =>
-                        handleSelectChange(speciality, e.target.value)
+                        handleSelectChange(speciality.name, e.target.value)
                       }
                     >
                       {selectMonth.map((item) => (
@@ -241,13 +179,13 @@ getAllSubjects()
                     <p className="text-base lg:text-lg text-gray-700 mb-2">
                       Selected Plan:{" "}
                       <strong className="text-blue-600">
-                        {selectedOptions[speciality]}
+                        {selectedOptions[speciality.name]}
                       </strong>
                     </p>
                     <p className="text-base lg:text-lg text-gray-700">
                       Price:{" "}
                       <strong className="text-green-600">
-                        ₹{Month[selectedOptions[speciality]].rupees}
+                        ₹{Month[selectedOptions[speciality.name]]?.rupees || 0}
                       </strong>
                     </p>
                   </div>
