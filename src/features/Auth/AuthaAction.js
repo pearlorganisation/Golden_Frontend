@@ -3,7 +3,7 @@ import axiosInstance from "../../axiosInstance";
 
 
 export const registerUser = createAsyncThunk(
-    "/auth/register",
+    "v1/auth/register",
     async ({ name, email, phoneNumber, password }, { rejectWithValue }) => {
       try {
         const config = {
@@ -12,7 +12,7 @@ export const registerUser = createAsyncThunk(
           },
         };
         const { data } = await axiosInstance.post(
-          "/auth/register",
+          "v1/auth/register",
           { name, email,  phoneNumber,password },
           config
         );
@@ -34,7 +34,7 @@ export const registerUser = createAsyncThunk(
 
 
   export const userLogin = createAsyncThunk(
-    "/auth/login",
+    "v1/auth/login",
     async ({ email, password }, { rejectWithValue }) => {
       try {
         const config = {
@@ -43,7 +43,7 @@ export const registerUser = createAsyncThunk(
           },
         };
         const { data } = await axiosInstance.post(
-          "/auth/login", // No need to repeat backendURL
+          "v1/auth/login", // No need to repeat backendURL
           { email, password },
           config
         );
@@ -65,7 +65,7 @@ export const registerUser = createAsyncThunk(
     }
   );
   export const getUserProfile = createAsyncThunk(
-    "/auth/profile",
+    "v1/auth/profile",
     async (_, { rejectWithValue }) => {
       try {
         const config = {
@@ -90,7 +90,7 @@ export const registerUser = createAsyncThunk(
 
 
   export const userLogout = createAsyncThunk(
-    "/auth/logout",
+    "v1/auth/logout",
     async (_, { rejectWithValue }) => {
       try {
         const config = {

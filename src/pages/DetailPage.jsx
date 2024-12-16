@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa";
 import { IoIosClose } from "react-icons/io";
+import { useSelector } from "react-redux";
+import { getAllSubjects } from "../features/Subject/SubjectAction";
 
 const DetailPage = () => {
   const [selectedSpeciality, setSelectedSpeciality] = useState("Overview");
@@ -86,6 +88,12 @@ const DetailPage = () => {
       description: "Pages: 17. Faculty: Praveen sir (Cerebellum).",
     },
   };
+  const subject=useSelector((state)=>state.subject)
+
+  useEffect(()=>{
+getAllSubjects()
+  },[])
+  console.log("sub",subject)
 
   const selectMonth = ["1month", "6month"];
   const Month = {
@@ -96,6 +104,8 @@ const DetailPage = () => {
       rupees: 1499,
     },
   };
+
+
 
   const [selectedOptions, setSelectedOptions] = useState(
     specialties.reduce((acc, speciality) => {

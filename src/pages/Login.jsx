@@ -132,12 +132,13 @@ const Login = () => {
 const navigate=useNavigate()
   const { register, handleSubmit, formState: { errors } } = useForm();
 
-  // Handle form submission based on login method (email/password or phone)
+
   const handleLoginSubmit = async (data) => {
   dispatch(userLogin(data))
 navigate('/')
   
   }
+
 
   return (
     <div className="flex min-h-screen">

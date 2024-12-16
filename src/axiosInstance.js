@@ -7,7 +7,7 @@ export const injectStore = (_store) => {
 };
 
 // Set the base URL based on environment variables
-const baseURL ="http://localhost:5000/v1/"
+const baseURL ="http://localhost:5000/"
   // ? import.meta.env.VITE_APP_BACKEND_DEV_BASE_URL
   // : import.meta.env.VITE_APP_BACKEND_PROD_BASE_URL || ""; // Fallback to an empty string or prod URL
 
