@@ -3,6 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { persistStore,persistReducer } from "redux-persist";
 import AuthReducer from "./Auth/AuthSlice";
 import subjectReducer from "./Subject/SubjectSlice"
+import notesReducer from "./notes/notesSlice";
 import  storage from "redux-persist/lib/storage"
 
 
@@ -22,7 +23,8 @@ const persistConfig ={
 
 const combineReducer= combineReducers({
 auth:AuthReducer ,
-subject:subjectReducer
+subject:subjectReducer,
+notes:notesReducer
 })
 
 
