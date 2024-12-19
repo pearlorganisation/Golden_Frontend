@@ -1,51 +1,71 @@
-/* eslint-disable react/prop-types */
 import { useRef, useState } from "react";
 import gsap from "gsap";
+import { FaAward, FaCheckCircle } from "react-icons/fa";
+import { GrNotes } from "react-icons/gr";
 import TextAnimation from "../components/TextAnimation";
 
 const PricingPage = () => {
   const plans = [
     {
-      title: "Free",
-      price: "$0",
-      description: "Free Forever",
+      title: "NEET PG Guidance Pack",
+      price: "₹149/month",
+      description: "Updated monthly PDFs, daily tips & personal guidance",
       features: [
-        "1 user",
-        "100 storage minutes",
-        "250GB bandwidth",
-        "$0.5/GB streaming overage",
+        { text: "NEET PG Guidance PDFs (updated every month)", icon: <GrNotes /> },
+        { text: "Group chat access for daily tips and updates", icon: <FaCheckCircle /> },
+        { text: "Daily MCQs to strengthen your preparation", icon: <FaCheckCircle /> },
+        { text: "No access to Golden Med Notes PDFs", icon: <FaAward /> },
+        { text: "Exclusive discounts on premium resources", icon: <FaCheckCircle /> },
       ],
-      keyFeatures: ["Video chapters and SEO", "Engagement analytics"],
-      button: "Free Forever",
-      highlight: false,
-    },
-    {
-      title: "Growth",
-      price: "$40/month",
-      description: "$59 billed monthly",
-      features: [
-        "5 users",
-        "4000 storage minutes",
-        "2 TB bandwidth / month",
-        "$0.10 / GB streaming overage",
+      keyFeatures: [
+        "Updated PDFs every month",
+        "1:1 personal guidance",
+        "Group discussions and updates",
+        "Exclusive discounts on GOLDEN MED NOTES PDFs",
       ],
-      keyFeatures: ["Advertising integrations", "API access (+ Zapier)"],
-      button: "Get Growth",
+      button: "Get NEET PG Guidance",
       highlight: true,
     },
     {
-      title: "Starter",
-      price: "$10/month",
-      description: "$19 billed monthly",
+      title: "Golden With Elite Plan",
+      price: "₹2999/month",
+      description: "6 Months Subscription",
       features: [
-        "2 users",
-        "1200 storage minutes",
-        "2 TB bandwidth / month",
-        "$0.15 / GB streaming overage",
+        { text: "Full offline access to all Golden Med Notes PDFs for all subjects", icon: <FaAward /> },
+        { text: "Online access to integrated system-wise PDFs", icon: <FaCheckCircle /> },
+        { text: "Ability to annotate and edit the downloaded PDFs", icon: <FaCheckCircle /> },
+        { text: "Exclusive 1:1 personalized guidance via WhatsApp chat for 6 months", icon: <FaCheckCircle /> },
+        { text: "Access to active group discussions for collaborative learning", icon: <FaCheckCircle /> },
+        { text: "One monthly test with 50 high-yield questions", icon: <FaAward /> },
       ],
-      keyFeatures: ["Video engagement tools", "Player customization"],
-      button: "Get Starter",
-      highlight: false,
+      keyFeatures: [
+        "Offline access to PDFs",
+        "Personalized WhatsApp guidance",
+        "Active group discussions",
+        "Monthly high-yield test",
+      ],
+      button: "Get Golden With Elite",
+      highlight: true,
+    },
+    {
+      title: "Golden Med Notes Plan",
+      price: "₹399/month",
+      description: "Access to all GOLDEN MED resources",
+      features: [
+        { text: "Online access to all subjects (updated every 6 months)", icon: <FaCheckCircle /> },
+        { text: "Personalized guidance from mentors", icon: <FaCheckCircle /> },
+        { text: "Exclusive download option", icon: <FaCheckCircle /> },
+        { text: "Weekly MCQs and premium content for NEET PG preparation", icon: <GrNotes /> },
+        { text: "Exclusive discounts on GOLDEN MED NOTES", icon: <FaAward /> },
+      ],
+      keyFeatures: [
+        "Full access to GOLDEN MED Resources",
+        "Mentor-guided learning",
+        "Exclusive downloads",
+        "Weekly MCQs",
+      ],
+      button: "Get Golden Med Notes",
+      highlight: true,
     },
   ];
 
@@ -73,36 +93,19 @@ const PricingPage = () => {
     <div className="max-w-7xl mx-auto p-6">
       {/* Header Section */}
       <header className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-yellow-600"></h1>
         <TextAnimation
-            text="Choose Your Plan"
-            variants={{
-              hidden: { filter: "blur(10px)", opacity: 0, y: 20 },
-              visible: {
-                filter: "blur(0px)",
-                opacity: 1,
-                y: 0,
-                transition: { ease: "linear" },
-              },
-            }}
-            classname="text-4xl sm:text-5xl font-extrabold capitalize mb-10 text-yellow-600"
-          />
-        {/* <p className="text-lg text-gray-600 mt-4">
-        <TextAnimation
-            text="  Select the best plan that suits your needs."
-            variants={{
-              hidden: { filter: "blur(10px)", opacity: 0, y: 20 },
-              visible: {
-                filter: "blur(0px)",
-                opacity: 1,
-                y: 0,
-                transition: { ease: "linear" },
-              },
-            }}
-            classname="text-4xl sm:text-5xl font-extrabold capitalize mb-10"
-          />
-
-        </p> */}
+          text="Choose Your Plan"
+          variants={{
+            hidden: { filter: "blur(10px)", opacity: 0, y: 20 },
+            visible: {
+              filter: "blur(0px)",
+              opacity: 1,
+              y: 0,
+              transition: { ease: "linear" },
+            },
+          }}
+          classname="text-4xl sm:text-5xl font-extrabold capitalize mb-10 text-yellow-600"
+        />
       </header>
 
       {/* Pricing Plans Section */}
@@ -110,32 +113,32 @@ const PricingPage = () => {
         {plans.map((plan, index) => (
           <div
             key={index}
-            className={`relative flex flex-col border rounded-md shadow-lg p-6 w-72 ${
+            className={`relative flex flex-col border rounded-xl shadow-lg p-6 w-72 ${
               plan.highlight ? "border-purple-600" : "border-gray-200"
-            }`}
+            } transition-all duration-300 transform hover:scale-105`}
           >
-            {/* Highlight Badge */}
             {plan.highlight && (
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-purple-100 text-purple-700 px-4 py-1 text-sm rounded-full">
-                Most Popular
+              <div className="absolute -top-6 left-1/2 transform w-60 text-center -translate-x-1/2 bg-purple-300 text-purple-700 font-semibold px-6 py-2 text-sm rounded-full uppercase shadow-xl">
+                {plan.title}
               </div>
             )}
-            <h3 className="text-xl font-semibold">{plan.title}</h3>
-            <p className="text-4xl font-bold mt-4">{plan.price}</p>
+
+            <p className="text-4xl font-bold text-gray-800 mt-10">{plan.price}</p>
             <p className="text-sm text-gray-500 mt-1">{plan.description}</p>
             <button
-              className={`mt-4 px-4 py-2 text-sm font-medium rounded ${
+              className={`mt-6 px-6 py-3 text-sm font-medium rounded-lg ${
                 plan.highlight
-                  ? "bg-purple-600 text-white"
-                  : "border border-purple-600 text-purple-600"
-              }`}
+                  ? "bg-purple-600 text-white hover:bg-purple-700"
+                  : "border border-purple-600 text-purple-600 hover:bg-purple-100"
+              } transition-all`}
             >
               {plan.button}
             </button>
             <ul className="mt-6 space-y-2 text-gray-600">
               {plan.features.map((feature, i) => (
                 <li key={i} className="flex items-center gap-2">
-                  <span className="text-purple-500">●</span> {feature}
+                  <span className="">{feature.icon}</span>
+                  <span>{feature.text}</span>
                 </li>
               ))}
             </ul>
@@ -143,78 +146,18 @@ const PricingPage = () => {
             <ul className="mt-2 space-y-2 text-gray-600">
               {plan.keyFeatures.map((keyFeature, i) => (
                 <li key={i} className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span> {keyFeature}
+                  <span className="text-black">✓</span> {keyFeature}
                 </li>
               ))}
             </ul>
-            <a
+            {/* <a
               href="#"
-              className="text-sm text-purple-600 underline mt-4 block"
+              className="text-sm text-purple-600 underline mt-4 block hover:text-purple-700"
             >
               View all features
-            </a>
+            </a> */}
           </div>
         ))}
-      </div>
-
-      {/* FAQ Section */}
-      <section className="mt-16">
-        <h2 className="text-3xl font-semibold text-gray-800 text-center mb-8">
-          Frequently Asked Questions
-        </h2>
-        <div className="max-w-2xl mx-auto space-y-6">
-          {faqData.map((faq, index) => (
-            <FAQ key={index} question={faq.question} answer={faq.answer} />
-          ))}
-        </div>
-      </section>
-    </div>
-  );
-};
-
-const FAQ = ({ question, answer }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const contentRef = useRef(null);
-
-  const toggleFAQ = () => {
-    setIsOpen(!isOpen);
-
-    if (!isOpen) {
-      gsap.to(contentRef.current, {
-        height: "auto",
-        duration: 0.3,
-        ease: "power1.out",
-      });
-    } else {
-      gsap.to(contentRef.current, {
-        height: 0,
-        duration: 0.3,
-        ease: "power1.in",
-      });
-    }
-  };
-
-  return (
-    <div
-      className="bg-white p-6 shadow-lg rounded-lg transition duration-300 "
-      onClick={toggleFAQ}
-    >
-      <div className="flex justify-between items-center cursor-pointer">
-        <h3 className="text-xl font-semibold text-gray-800">{question}</h3>
-        <span
-          className={`transform transition-transform duration-300 ${
-            isOpen ? "rotate-45" : "rotate-0"
-          }`}
-        >
-          +
-        </span>
-      </div>
-      <div
-        ref={contentRef}
-        style={{ height: 0, overflow: "hidden" }}
-        className="mt-4 transition-all"
-      >
-        <p className="text-gray-600">{answer}</p>
       </div>
     </div>
   );

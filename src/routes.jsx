@@ -9,8 +9,24 @@ import AboutUs from "./pages/AboutUs";
 import Layout from "./components/Layout";
 import PostPaymentPDFView from "./pages/PostPaymentPDFView";
 import DetailPage from "./pages/DetailPage";
+import RefundPolicy from "./pages/RefundPolicy";
+import PrivacyPolicy from "./pages/Privacypolicy";
+import TermsAndConditions from "./pages/Term&Condition";
+import SignUp from "./pages/signup";
+import ProtectedRoute from "./components/ProctedRoute";
+import ProfilePage from "./pages/ProfilePage";
 
 const routes = createBrowserRouter([
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <SignUp/>,
+  },
+  
+
   {
     path: "/",
     element: <Layout />,
@@ -18,7 +34,10 @@ const routes = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: 
+        <ProtectedRoute>
+        <Home />,
+        </ProtectedRoute>
       },
       {
         path: "/subject",
@@ -28,10 +47,7 @@ const routes = createBrowserRouter([
         path: "/pdf-listings",
         element: <PdfView />,
       },
-      {
-        path: "/login",
-        element: <Login />,
-      },
+    
       {
         path: "/features",
         element: <FeaturesPage />,
@@ -60,7 +76,21 @@ const routes = createBrowserRouter([
   path:"/detail",
   element:<DetailPage/>
 }
-
+,{
+  path:"/refund",
+element:<RefundPolicy/>
+},{
+  path:"/privacy",
+  element:<PrivacyPolicy/>
+},
+{
+  path:"/terms",
+  element:<TermsAndConditions/>
+},
+{
+path:"/profile",
+element:<ProfilePage/>
+}
 
   
 ]);
