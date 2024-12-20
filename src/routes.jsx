@@ -64,45 +64,33 @@ const routes = createBrowserRouter([
         path: "/postpdf",
         element: <PostPaymentPDFView />,
       },
+     
+      {
+        path: "/detail",
+        element: <DetailPage />,
+      },
+      ,{
+        path:"/refund",
+      element:<RefundPolicy/>
+      },{
+        path:"/privacy",
+        element:<PrivacyPolicy/>
+      },
+      {
+        path:"/terms",
+        element:<TermsAndConditions/>
+      },
+      {
+      path:"/profile",
+      element:<ProfilePage/>
+      }
     ],
   },
-  {
-    path: "/aboutus",
-    element: <AboutUs />,
-  },
+ 
+])
 
-  {
-    path: "/detail",
-    element: <DetailPage />,
-  },
-]);
-    path:"/aboutus",
-    element: <AboutUs/>
-
-  }
-
-,{
-  path:"/detail",
-  element:<DetailPage/>
-}
-,{
-  path:"/refund",
-element:<RefundPolicy/>
-},{
-  path:"/privacy",
-  element:<PrivacyPolicy/>
-},
-{
-  path:"/terms",
-  element:<TermsAndConditions/>
-},
-{
-path:"/profile",
-element:<ProfilePage/>
-}
 
   
-]);
 
 
 export default routes;

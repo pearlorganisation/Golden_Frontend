@@ -4,108 +4,13 @@
   import { useDispatch, useSelector } from "react-redux";
   // import { getAllSubjects } from "../features/Subject/SubjectAction";
   import { getAllnotes } from "../features/notes/notesAction";
-import { Pagination } from "../components/pagination/pagination";
 
   const DetailPage = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [globalDuration, setGlobalDuration] = useState("");
     const [selectedSpeciality, setSelectedSpeciality] = useState("Overview");
 
-  [
-    {
-      subjects: [
-        {
-          subject: "Biochem",
-          pages: 25,
-          faculty: ["Zainab ma'am (Cerebellum)", "Smily ma'am (Cerebellum)"],
-        },
-        {
-          subject: "Physiology",
-          pages: 30,
-          faculty: ["Soumen sir (Prepladder)", "Krishna Kumar sir (Marrow)"],
-        },
-        {
-          subject: "Pathology",
-          pages: 39,
-          faculty: ["Sparsh sir (Cerebellum)", "Preeti ma'am (Prepladder)"],
-        },
-        {
-          subject: "Micro",
-          pages: 32,
-          faculty: [
-            "Sonu Panwar sir (Prev Prepladder)",
-            "Preeti ma'am (Prepladder)",
-          ],
-        },
-        {
-          subject: "Pharma",
-          pages: 37,
-          faculty: [
-            "Govind Garg sir (Cerebellum)",
-            "Nikita ma'am",
-            "Zainab ma'am",
-          ],
-        },
-        {
-          subject: "Forensic",
-          pages: 20,
-          faculty: ["JP sir (Marrow)", "Nikita ma'am"],
-        },
-        {
-          subject: "ENT",
-          pages: 22,
-          faculty: ["Manisha Budhiraja (Marrow)"],
-        },
-        {
-          subject: "Ophthal",
-          pages: 21,
-          faculty: ["Ruchi Rai"],
-        },
-        {
-          subject: "PSM",
-          pages: 50,
-          faculty: ["Vivek Jain (Cerebellum)", "Neha Taneja (Prepladder)"],
-        },
-        {
-          subject: "Medicine",
-          pages: 107,
-          faculty: ["Deepak Marwah (Prepladder)", "Zainab ma'am"],
-        },
-        {
-          subject: "Surgery",
-          pages: 92,
-          faculty: ["Prithesh Singh (Prepladder)", "Rohan sir (Marrow)"],
-        },
-        {
-          subject: "OBG",
-          pages: 58,
-          faculty: ["Sakshi ma'am (Marrow)", "Prassan Viji (Prepladder)"],
-        },
-        {
-          subject: "Anesthesia",
-          pages: 14,
-          faculty: ["Swati ma'am (Prev Prepladder)"],
-        },
-        {
-          subject: "Derm",
-          pages: 20,
-          faculty: ["Chestna Agarwal (DAMS)", "Zainab ma'am"],
-        },
-        {
-          subject: "Ortho",
-          pages: 48,
-          faculty: ["Apurv sir (Cerebellum)"],
-        },
-        {
-          subject: "Psychiatry",
-          pages: 17,
-          faculty: ["Praveen sir (Cerebellum)"],
-        },
-      ],
-      totalSubjects: 16,
-      totalPages: 632,
-    },
-  ];
+  
 
   const dispatch = useDispatch();
   const { notes } = useSelector((state) => state.notes);
@@ -131,11 +36,7 @@ import { Pagination } from "../components/pagination/pagination";
     "1month": { rupees: 399 },
     "6month": { rupees: 1499 },
   };
-  const selectMonth = ["1month", "6month"];
-  const Month = {
-    "1month": { rupees: 399 },
-    "6month": { rupees: 1499 },
-  };
+;
 
     const [selectedOptions, setSelectedOptions] = useState({});
 
@@ -322,6 +223,7 @@ import { Pagination } from "../components/pagination/pagination";
                 </button>
               </div>
             ))}
+            </div>
           </div>
         </div>
       </div>
