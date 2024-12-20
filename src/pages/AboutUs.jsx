@@ -61,119 +61,121 @@ const AboutUs = () => {
         </section> */}
 
         {/* Vision Section */}
-        <div className="py-20 flex flex-col gap-12">
-          <TextAnimation
-            text=" Our Vision"
-            direction="left"
-            lineAnime={true}
-            classname="text-4xl font-semibold capitalize  text-white"
-          />
+{/* Main Container */}
+<div className="text-gray-800 flex-col flex gap-12 py-20 px-4 sm:px-10">
 
-          <TextAnimation
-            as="p"
-            direction="left"
-            letterAnime={true}
-            text=" To be the premier resource for medical students and professionals, fostering a community where learning meets excellence through innovative tools and techniques, including memory-boosting strategies."
-            classname="text-xl w-3/5 leading-8 lowercase text-white"
-            variants={{
-              hidden: { filter: "blur(4px)", opacity: 0, y: 20 },
-              visible: {
-                filter: "blur(0px)",
-                opacity: 1,
-                y: 0,
-                transition: {
-                  duration: 0.2,
-                },
-              },
-            }}
-          />
-        </div>
+  {/* Our Vision Section */}
+  <div className="flex flex-col bg-white items-center gap-12 text-center py-16 px-4 sm:px-10 rounded-lg shadow-lg">
+    <TextAnimation
+      text="Our Vision"
+      direction="center"
+      lineAnime={true}
+      classname="text-4xl sm:text-5xl font-semibold capitalize text-gray-800 mb-6"
+    />
+    <TextAnimation
+      as="p"
+      direction="center"
+      letterAnime={true}
+      text="To be the premier resource for medical students and professionals, fostering a community where learning meets excellence through innovative tools and techniques, including memory-boosting strategies."
+      classname="text-lg sm:text-xl w-full sm:w-4/5 lg:w-3/5 lowercase leading-8 text-center text-gray-800 mx-auto"
+      variants={{
+        hidden: { filter: "blur(4px)", opacity: 0, y: 20 },
+        visible: {
+          filter: "blur(0px)",
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.2 },
+        },
+      }}
+    />
+  </div>
 
-        {/* Our Commitment */}
-        <div className="py-32  text-right flex flex-col gap-12">
-          <TextAnimation
-            text="Our Commitment"
-            direction="right"
-            lineAnime={true}
-            classname="text-4xl font-semibold capitalize  text-white"
-          />
-<TextAnimation
-  as="p"
-  direction="right"
-  letterAnime={true}
-  text="We are dedicated to your success, whether you’re preparing for an exam or refreshing your knowledge for clinical practice. With Golden Med Notes, you’re not just learning—you’re building a foundation for excellence."
-  classname="text-xl w-full md:w-3/5 leading-8 text-center md:text-right lg:text-right text-white lowercase"
-  variants={{
-    hidden: { filter: "blur(4px)", opacity: 0, y: 20, x: 50 }, // Reduced x value for better visibility on smaller screens
-    visible: {
-      filter: "blur(0px)",
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.2,
-      },
-    },
-  }}
-/>
-
-        </div>
-
-        {/* Mission Section */}
-        <section className="bg-gray-200 p-6 sm:p-10 rounded-xl shadow-md mb-16">
-  <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 text-center mb-6">
-    Our Mission
-  </h2>
-  <p className="text-gray-700 text-base sm:text-lg text-center max-w-2xl mx-auto mb-8">
-    “We’ve helped 5000+ aspirants by making preparation simpler. Our notes save time, remove the useless, and focus on what truly matters. This year, they’re even better.”
-  </p>
-
-  <div className="flex flex-col space-y-6 max-w-3xl mx-auto">
-    {/* Simplify Medical Learning */}
-    <div className="flex flex-row items-center space-x-4">
-      <span className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full">
-        <PiBookFill className="text-blue-900" size={28} />
-      </span>
-      <div>
-        <h1 className="text-gray-800 font-semibold text-lg sm:text-xl mb-1">
-          Simplify Medical Learning
-        </h1>
-        <p className="text-gray-700 text-base sm:text-lg">
-          Provide concise, comprehensive, and easy-to-understand notes.
-        </p>
-      </div>
-    </div>
-
-    {/* Optimize Retention */}
-    <div className="flex flex-row items-center space-x-4">
-      <span className="flex items-center justify-center w-12 h-12 bg-green-100 rounded-full">
-        <PiBrainFill className="text-green-900" size={28} />
-      </span>
-      <div>
-        <h1 className="text-gray-800 font-semibold text-lg sm:text-xl mb-1">
-          Optimize Retention
-        </h1>
-        <p className="text-gray-700 text-base sm:text-lg">
-          Integrate techniques inspired by photographic memory and advanced recall strategies to help users retain more in less time.
-        </p>
-      </div>
-    </div>
-
-    {/* Empower Excellence */}
-    <div className="flex flex-row items-center space-x-4">
-      <span className="flex items-center justify-center w-12 h-12 bg-purple-100 rounded-full">
-        <PiTrophyFill className="text-purple-900" size={28} />
-      </span>
-      <div>
-        <h1 className="text-gray-800 font-semibold text-lg sm:text-xl mb-1">
-          Empower Excellence
-        </h1>
-        <p className="text-gray-700 text-base sm:text-lg">
-          Equip students and professionals with resources that enhance understanding and performance, from exams to clinical practice.
-        </p>
-      </div>
+  {/* Our Commitment Section */}
+  <div className="py-32 text-center flex flex-col items-center gap-12 bg-white rounded-lg shadow-lg">
+    <TextAnimation
+      text="Our Commitment"
+      direction="center"
+      lineAnime={true}
+      classname="text-4xl sm:text-5xl font-semibold capitalize text-gray-800 mb-6"
+    />
+    <div className="flex justify-center items-center">
+      <TextAnimation
+        as="p"
+        direction="center"
+        letterAnime={true}
+        text="We are dedicated to your success, whether you’re preparing for an exam or refreshing your knowledge for clinical practice. With Golden Med Notes, you’re not just learning—you’re building a foundation for excellence."
+        classname="text-lg sm:text-xl w-full sm:w-4/5 lg:w-3/5 lowercase leading-8 text-center text-gray-800 mx-auto"
+        variants={{
+          hidden: { filter: "blur(4px)", opacity: 0, y: 20, x: 50 },
+          visible: {
+            filter: "blur(0px)",
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.2 },
+          },
+        }}
+      />
     </div>
   </div>
-</section>
+
+  {/* Our Mission Section */}
+  <section className="bg-white text-gray-800 rounded-lg shadow-lg p-6 sm:p-10 my-16">
+    <h2 className="text-3xl sm:text-4xl font-bold text-center mb-6 text-gray-800">
+      Our Mission
+    </h2>
+    <p className="text-base sm:text-lg text-center max-w-3xl mx-auto mb-8 text-gray-700">
+      “We’ve helped 5000+ aspirants by making preparation simpler. Our notes save time, remove the useless, and focus on what truly matters. This year, they’re even better.”
+    </p>
+
+    <div className="flex flex-col space-y-8 max-w-4xl mx-auto">
+      {/* Simplify Medical Learning */}
+      <div className="flex items-center gap-6">
+        <div className="flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full">
+          <PiBookFill className="text-blue-900" size={32} />
+        </div>
+        <div>
+          <h3 className="text-lg sm:text-xl font-semibold mb-2 text-gray-800">
+            Simplify Medical Learning
+          </h3>
+          <p className="text-gray-700 text-base sm:text-lg">
+            Provide concise, comprehensive, and easy-to-understand notes.
+          </p>
+        </div>
+      </div>
+
+      {/* Optimize Retention */}
+      <div className="flex items-center gap-6">
+        <div className="flex items-center justify-center w-16 h-16 bg-green-100 rounded-full">
+          <PiBrainFill className="text-green-900" size={32} />
+        </div>
+        <div>
+          <h3 className="text-lg sm:text-xl font-semibold mb-2 text-gray-800">
+            Optimize Retention
+          </h3>
+          <p className="text-gray-700 text-base sm:text-lg">
+            Integrate techniques inspired by photographic memory and advanced recall strategies to help users retain more in less time.
+          </p>
+        </div>
+      </div>
+
+      {/* Empower Excellence */}
+      <div className="flex items-center gap-6">
+        <div className="flex items-center justify-center w-16 h-16 bg-purple-100 rounded-full">
+          <PiTrophyFill className="text-purple-900" size={32} />
+        </div>
+        <div>
+          <h3 className="text-lg sm:text-xl font-semibold mb-2 text-gray-800">
+            Empower Excellence
+          </h3>
+          <p className="text-gray-700 text-base sm:text-lg">
+            Equip students and professionals with resources that enhance understanding and performance, from exams to clinical practice.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
 
         {/* What we Offer */}
         <section className="bg-gray-200 p-6 sm:p-10 rounded-xl shadow-md mb-16">
