@@ -3,18 +3,26 @@ import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import AuthReducer from "./Auth/AuthSlice";
 import subjectReducer from "./Subject/SubjectSlice";
+import notesReducer from "./notes/notesSlice";
 import storage from "redux-persist/lib/storage";
-import facultyReducer from "./Faculty/FacultySlice";
 
 const persistConfig = {
   key: "golden",
   storage,
 };
 
+// const abcReducer = (state = {}, action) => {
+//     switch (action.type) {
+//         case "SET_ABC":
+//             return { ...state, ...action.payload };
+//         default:
+//             return state;
+//     }}
+
 const combineReducer = combineReducers({
   auth: AuthReducer,
   subject: subjectReducer,
-  faculty: facultyReducer,
+  notes: notesReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, combineReducer);
