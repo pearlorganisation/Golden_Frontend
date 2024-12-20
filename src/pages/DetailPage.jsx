@@ -11,107 +11,104 @@ import { Pagination } from "../components/pagination/pagination";
     const [globalDuration, setGlobalDuration] = useState("");
     const [selectedSpeciality, setSelectedSpeciality] = useState("Overview");
 
-  //   [{
-  //     "subjects": [
-  //       {
-  //         "subject": "Biochem",
-  //         "pages": 25,
-  //         "faculty": ["Zainab ma'am (Cerebellum)", "Smily ma'am (Cerebellum)"]
-  //       },
-  //       {
-  //         "subject": "Physiology",
-  //         "pages": 30,
-  //         "faculty": ["Soumen sir (Prepladder)", "Krishna Kumar sir (Marrow)"]
-  //       },
-  //       {
-  //         "subject": "Pathology",
-  //         "pages": 39,
-  //         "faculty": ["Sparsh sir (Cerebellum)", "Preeti ma'am (Prepladder)"]
-  //       },
-  //       {
-  //         "subject": "Micro",
-  //         "pages": 32,
-  //         "faculty": ["Sonu Panwar sir (Prev Prepladder)", "Preeti ma'am (Prepladder)"]
-  //       },
-  //       {
-  //         "subject": "Pharma",
-  //         "pages": 37,
-  //         "faculty": ["Govind Garg sir (Cerebellum)", "Nikita ma'am", "Zainab ma'am"]
-  //       },
-  //       {
-  //         "subject": "Forensic",
-  //         "pages": 20,
-  //         "faculty": ["JP sir (Marrow)", "Nikita ma'am"]
-  //       },
-  //       {
-  //         "subject": "ENT",
-  //         "pages": 22,
-  //         "faculty": ["Manisha Budhiraja (Marrow)"]
-  //       },
-  //       {
-  //         "subject": "Ophthal",
-  //         "pages": 21,
-  //         "faculty": ["Ruchi Rai"]
-  //       },
-  //       {
-  //         "subject": "PSM",
-  //         "pages": 50,
-  //         "faculty": ["Vivek Jain (Cerebellum)", "Neha Taneja (Prepladder)"]
-  //       },
-  //       {
-  //         "subject": "Medicine",
-  //         "pages": 107,
-  //         "faculty": ["Deepak Marwah (Prepladder)", "Zainab ma'am"]
-  //       },
-  //       {
-  //         "subject": "Surgery",
-  //         "pages": 92,
-  //         "faculty": ["Prithesh Singh (Prepladder)", "Rohan sir (Marrow)"]
-  //       },
-  //       {
-  //         "subject": "OBG",
-  //         "pages": 58,
-  //         "faculty": ["Sakshi ma'am (Marrow)", "Prassan Viji (Prepladder)"]
-  //       },
-  //       {
-  //         "subject": "Anesthesia",
-  //         "pages": 14,
-  //         "faculty": ["Swati ma'am (Prev Prepladder)"]
-  //       },
-  //       {
-  //         "subject": "Derm",
-  //         "pages": 20,
-  //         "faculty": ["Chestna Agarwal (DAMS)", "Zainab ma'am"]
-  //       },
-  //       {
-  //         "subject": "Ortho",
-  //         "pages": 48,
-  //         "faculty": ["Apurv sir (Cerebellum)"]
-  //       },
-  //       {
-  //         "subject": "Psychiatry",
-  //         "pages": 17,
-  //         "faculty": ["Praveen sir (Cerebellum)"]
-  //       }
-  //     ],
-  //     "totalSubjects": 16,
-  //     "totalPages": 632
-  //   }
-  // ]  
+  [
+    {
+      subjects: [
+        {
+          subject: "Biochem",
+          pages: 25,
+          faculty: ["Zainab ma'am (Cerebellum)", "Smily ma'am (Cerebellum)"],
+        },
+        {
+          subject: "Physiology",
+          pages: 30,
+          faculty: ["Soumen sir (Prepladder)", "Krishna Kumar sir (Marrow)"],
+        },
+        {
+          subject: "Pathology",
+          pages: 39,
+          faculty: ["Sparsh sir (Cerebellum)", "Preeti ma'am (Prepladder)"],
+        },
+        {
+          subject: "Micro",
+          pages: 32,
+          faculty: [
+            "Sonu Panwar sir (Prev Prepladder)",
+            "Preeti ma'am (Prepladder)",
+          ],
+        },
+        {
+          subject: "Pharma",
+          pages: 37,
+          faculty: [
+            "Govind Garg sir (Cerebellum)",
+            "Nikita ma'am",
+            "Zainab ma'am",
+          ],
+        },
+        {
+          subject: "Forensic",
+          pages: 20,
+          faculty: ["JP sir (Marrow)", "Nikita ma'am"],
+        },
+        {
+          subject: "ENT",
+          pages: 22,
+          faculty: ["Manisha Budhiraja (Marrow)"],
+        },
+        {
+          subject: "Ophthal",
+          pages: 21,
+          faculty: ["Ruchi Rai"],
+        },
+        {
+          subject: "PSM",
+          pages: 50,
+          faculty: ["Vivek Jain (Cerebellum)", "Neha Taneja (Prepladder)"],
+        },
+        {
+          subject: "Medicine",
+          pages: 107,
+          faculty: ["Deepak Marwah (Prepladder)", "Zainab ma'am"],
+        },
+        {
+          subject: "Surgery",
+          pages: 92,
+          faculty: ["Prithesh Singh (Prepladder)", "Rohan sir (Marrow)"],
+        },
+        {
+          subject: "OBG",
+          pages: 58,
+          faculty: ["Sakshi ma'am (Marrow)", "Prassan Viji (Prepladder)"],
+        },
+        {
+          subject: "Anesthesia",
+          pages: 14,
+          faculty: ["Swati ma'am (Prev Prepladder)"],
+        },
+        {
+          subject: "Derm",
+          pages: 20,
+          faculty: ["Chestna Agarwal (DAMS)", "Zainab ma'am"],
+        },
+        {
+          subject: "Ortho",
+          pages: 48,
+          faculty: ["Apurv sir (Cerebellum)"],
+        },
+        {
+          subject: "Psychiatry",
+          pages: 17,
+          faculty: ["Praveen sir (Cerebellum)"],
+        },
+      ],
+      totalSubjects: 16,
+      totalPages: 632,
+    },
+  ];
 
-
-    const dispatch = useDispatch();
-    const { notes, pagination } = useSelector((state) => state.notes);
-    console.log(pagination,"page")
-    const [page, setPage] = useState(0);
-
-  const totalPages = Math.ceil((pagination?.count || 1) / (pagination?.limit || 1));
-
-  const handlePageChange = (newPage) => {
-    if (newPage >0 && newPage <=totalPages) {
-      setPage(newPage);
-    }
-  };
+  const dispatch = useDispatch();
+  const { notes } = useSelector((state) => state.notes);
 
   useEffect(() => {
     dispatch(getAllnotes({ page }));
@@ -129,11 +126,16 @@ import { Pagination } from "../components/pagination/pagination";
       return acc;
     }, {});
 
-    const selectMonth = ["1month", "6month"];
-    const Month = {
-      "1month": { rupees: 399 },
-      "6month": { rupees: 1499 },
-    };
+  const selectMonth = ["1month", "6month"];
+  const Month = {
+    "1month": { rupees: 399 },
+    "6month": { rupees: 1499 },
+  };
+  const selectMonth = ["1month", "6month"];
+  const Month = {
+    "1month": { rupees: 399 },
+    "6month": { rupees: 1499 },
+  };
 
     const [selectedOptions, setSelectedOptions] = useState({});
 
@@ -280,50 +282,48 @@ import { Pagination } from "../components/pagination/pagination";
                     </select>
                   </div> */}
 
-                  {/* Display Selected Price */}
-                  <div className="bg-gray-100 p-4 rounded-lg border border-gray-200">
-                    <p className="text-base lg:text-lg text-gray-700 mb-2">
-                      Selected Plan:{" "}
-                      <strong className="text-blue-600">
-                        {selectedOptions[speciality.name]}
-                      </strong>
-                    </p>
-                    <p className="text-base lg:text-lg text-gray-700">
-                      Price:{" "}
-                      <strong className="text-green-600">
-                        ₹
-                        {Month[selectedOptions[speciality.name]]?.rupees || 0}
-                      </strong>
-                    </p>
-                    <p className="text-base lg:text-lg text-gray-700">
-                    Discounted Price:   
-                    <strong className="text-green-600">{speciality.discountedPrice}</strong></p>
-                  </div>
-                  <button
-    className="bg-gradient-to-r from-blue-500 to-green-400 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:from-blue-600 hover:to-green-500 transform hover:scale-105 transition-all duration-300 ease-in-out flex items-center justify-center mt-4 w-full "
-  >
-    <span className="mr-2">Buy Now</span>
-    <svg
-      className="w-5 h-5"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7"></path>
-    </svg>
-  </button>
-
-
+                {/* Display Selected Price */}
+                <div className="bg-gray-100 p-4 rounded-lg border border-gray-200">
+                  <p className="text-base lg:text-lg text-gray-700 mb-2">
+                    Selected Plan:{" "}
+                    <strong className="text-blue-600">
+                      {selectedOptions[speciality.name]}
+                    </strong>
+                  </p>
+                  <p className="text-base lg:text-lg text-gray-700">
+                    Price:{" "}
+                    <strong className="text-green-600">
+                      ₹{Month[selectedOptions[speciality.name]]?.rupees || 0}
+                    </strong>
+                  </p>
+                  <p className="text-base lg:text-lg text-gray-700">
+                    Discounted Price:
+                    <strong className="text-green-600">
+                      {speciality.discountedPrice}
+                    </strong>
+                  </p>
                 </div>
-                
-              ))}
-            </div>
+                <button className="bg-gradient-to-r from-blue-500 to-green-400 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:from-blue-600 hover:to-green-500 transform hover:scale-105 transition-all duration-300 ease-in-out flex items-center justify-center mt-4 w-full ">
+                  <span className="mr-2">Buy Now</span>
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M5 12h14M12 5l7 7-7 7"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            ))}
           </div>
-            <div>         <Pagination  paginate={pagination }  currentPage={page}     totalPages={totalPages} handlePageClick={handlePageChange} /></div>
         </div>
-      
       </div>
     
          </>

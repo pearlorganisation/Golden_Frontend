@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from "react";
 
 import TermsOfService from "../components/TermsOfService";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+const RAZORPAY_KEY_ID = import.meta.env.VITE_APP_RAZORPAY_KEY_ID;
 
 const PdfView = () => {
   const [unlocked, setUnlocked] = useState([true, false, false]);
@@ -15,7 +17,87 @@ const PdfView = () => {
 
   const [devToolsModal, setDevToolsModal] = useState(false);
 
-  const modalRef = useRef(null);
+  /**   razorpay  */
+  const [loading, setLoading] = useState(false);
+  const handlePayment = async () => {
+    setLoading(true);
+    try {
+      // Step 1: Create order on the backend
+      const response = await axios.post(
+        "http://localhost:5000/bookings",
+        {
+          totalPrice: 7000,
+          name:"Manish",
+          title:"Golden Med Notes",
+         }
+      );
+      console.log(`response:: ${JSON.stringify(response, null, 2)}`);
+
+      const { order } = response.data;
+
+      // Step 2: Set up Razorpay options
+      const options = {
+        key: RAZORPAY_KEY_ID,
+        amount: order.amount,
+        currency: "INR",
+        name: "Med Notes",
+        description: `Payment for Med Notes`,
+        order_id: order.id,
+        handler: async function (response) {
+          // Step 3: Verify payment on the backend
+          try {
+            // Step 3: Verify payment on the backend
+            const verifyPayment = await axios.post(
+              "http://localhost:5000/bookings/verify-payment",
+              response
+            );
+            if (verifyPayment?.data?.success === true) {
+              toast.success("🦄Payment Successfull");
+              setTimeout(() => {
+                navigate("/");
+              }, 400);
+            }
+          } catch (error) {
+            console.log("ERR: ", error);
+            if (error.response && error.response.status === 404) {
+              // alert("Verification route not found. Please contact support.");
+              toast.error(
+                "🦄Verification route not found. Please contact support"
+              );
+            } else {
+              // alert("Payment verification failed. Please try again.");
+              toast.error("🦄Payment verification failed. Please try again");
+            }
+            console.error("Error in payment verification:", error);
+          }
+        },
+        prefill: {
+          name: `Manish`,
+          email: `pearl@gmail.com`,
+          contact: "9876543210",
+        },
+        theme: {
+          color: "#3399cc",
+        },
+        modal: {
+          ondismiss: function () {
+            alert("Payment cancelled");
+          },
+        },
+      };
+     
+      // Step 4: Open Razorpay checkout
+      const razorpay = new window.Razorpay(options);
+      razorpay.open();
+    } catch (error) {
+      console.error("Error in payment process:", error);
+      alert("Error occurred during payment. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+    const modalRef = useRef(null);
 
   // useEffect(() => {
   //   const handleKeyDown = (event) => {
@@ -70,7 +152,8 @@ const PdfView = () => {
   };
 
   const openPurchaseAllModal = () => {
-    setPurchaseAllModal(true);
+    // setPurchaseAllModal(true);
+    handlePayment()
   };
 
   const closePurchaseAllModal = () => {
@@ -86,6 +169,7 @@ const PdfView = () => {
 
   const handleAccept = () => {
     setShowTerms(false);
+  
     openModal();
   };
 
@@ -101,6 +185,12 @@ const PdfView = () => {
     setUnlocked(allUnlocked);
     closePurchaseAllModal();
   };
+
+ 
+
+
+
+
 
   // useEffect(() => {
   //   if (showModal) {
