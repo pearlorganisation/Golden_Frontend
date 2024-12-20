@@ -3,6 +3,7 @@ import { FaBars } from "react-icons/fa";
 import { IoIosClose } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllSubjects } from "../features/Subject/SubjectAction";
+import { getAllFaculties } from "../features/Faculty/FacultyAction";
 
 const DetailPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // For mobile sidebar toggle
@@ -12,10 +13,18 @@ const DetailPage = () => {
   const dispatch = useDispatch();
   const { subject } = useSelector((state) => state.subject);
 
+  const { faculties } = useSelector((state) => state.faculty);
+
   // Fetch subjects data on mount
   useEffect(() => {
     dispatch(getAllSubjects());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getAllFaculties());
+  }, [dispatch]);
+
+  console.log("Faculties", faculties);
 
   const specialties = subject?.data || []; // Use fetched data
   const content = specialties.reduce((acc, speciality) => {
@@ -153,7 +162,9 @@ const DetailPage = () => {
                   <h3 className="text-lg lg:text-xl font-semibold text-gray-700 mb-4">
                     Choose Your Plan - {speciality.name}
                   </h3>
-<div><img src={speciality.banner.secure_url}/></div>
+                  <div>
+                    <img src={speciality.banner.secure_url} />
+                  </div>
                   {/* Dropdown for Duration */}
                   <div className="mb-6">
                     <label className="block text-gray-600 text-sm font-medium mb-2">
