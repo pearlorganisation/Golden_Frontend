@@ -4,17 +4,18 @@ import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import LoadingIndicator from "./LoadingIndicator";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { registerUser, userLogin } from "../features/Auth/AuthaAction";
 
 const Header = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
+  
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [isSigningUp, setIsSigningUp] = useState(false);
-const dispatch=useDispatch();
+  const { isUserLoggedIn } = useSelector(state=>state.auth)
+  const dispatch=useDispatch();
   const {
     register: registerLogin,
     handleSubmit: handleLoginSubmit,
@@ -169,23 +170,24 @@ const dispatch=useDispatch();
         </ul>
 
         {/* Right Section */}
-        <div className="hidden md:flex space-x-4">
+        {!isUserLoggedIn ? <div className="hidden md:flex space-x-4">
           <Link to="/login">
-          <button
-            // onClick={openLoginModal}
-          
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-          >
-            Login
-          </button></Link>
+            <button
+              // onClick={openLoginModal}
+
+              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+            >
+              Login
+            </button></Link>
           <Link to="/signup">
-          <button
-           href="/signup"
-            className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
-          >
-            Sign-Up
-          </button></Link>
-        </div>
+            <button
+              href="/signup"
+              className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+            >
+              Sign-Up
+            </button></Link>
+        </div>:<div><button className="bg-blue-200 rounded-md p-2 h-10 w-16">Profile</button></div> }
+       
       </nav>
 
       {/* Login Modal */}

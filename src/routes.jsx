@@ -15,6 +15,7 @@ import TermsAndConditions from "./pages/Term&Condition";
 import SignUp from "./pages/signup";
 import ProtectedRoute from "./components/ProctedRoute";
 import ProfilePage from "./pages/ProfilePage";
+import IpAddress from "./pages/IpAddress";
 
 const routes = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ const routes = createBrowserRouter([
         path: "/postpdf",
         element: <PostPaymentPDFView />,
       },
+      {
+        path:"/ip-address",
+        element:<IpAddress />
+      }
     ],
   },
   {
