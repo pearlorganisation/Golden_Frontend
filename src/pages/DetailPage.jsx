@@ -2,8 +2,8 @@
   import { FaBars } from "react-icons/fa";
   import { IoIosClose } from "react-icons/io";
   import { useDispatch, useSelector } from "react-redux";
-  // import { getAllSubjects } from "../features/Subject/SubjectAction";
   import { getAllnotes } from "../features/notes/notesAction";
+import { Pagination } from "../components/pagination/pagination";
 
   const DetailPage = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -16,8 +16,8 @@
   const { notes } = useSelector((state) => state.notes);
 
   useEffect(() => {
-    dispatch(getAllnotes({ page }));
-  }, [dispatch, page]);
+    dispatch(getAllnotes());
+  }, [dispatch]);
 
 
     const specialties = notes || [];
@@ -224,6 +224,8 @@
               </div>
             ))}
             </div>
+
+            
           </div>
         </div>
       </div>
