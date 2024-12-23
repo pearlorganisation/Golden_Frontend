@@ -5,13 +5,16 @@ import WhyChooseUs from "../components/WhyChooseUs";
 import SubscriptionSection from "../components/SubscriptionsSection";
 import FreePDFsSection from "../components/FreePDFs";
 import Testimonials from "../components/Testimonials";
-import Footer from "../components/Footer";
+import LandingPageImg from "../assets/landing_page.jpg";
 
 const Home = () => {
   return (
     <div>
       <HeroSection />
       <WhyChooseUs />
+      <div className="">
+        <img src={LandingPageImg} className="w-full h-full" />
+      </div>
       <SubscriptionSection />
       <FreePDFsSection />
       <Testimonials />

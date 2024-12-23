@@ -1,16 +1,14 @@
-  import React, { useEffect, useState } from "react";
-  import { FaBars } from "react-icons/fa";
-  import { IoIosClose } from "react-icons/io";
-  import { useDispatch, useSelector } from "react-redux";
-  import { getAllnotes } from "../features/notes/notesAction";
+import React, { useEffect, useState } from "react";
+import { FaBars } from "react-icons/fa";
+import { IoIosClose } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllnotes } from "../features/notes/notesAction";
 import { Pagination } from "../components/pagination/pagination";
 
-  const DetailPage = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const [globalDuration, setGlobalDuration] = useState("");
-    const [selectedSpeciality, setSelectedSpeciality] = useState("Overview");
-
-  
+const DetailPage = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [globalDuration, setGlobalDuration] = useState("");
+  const [selectedSpeciality, setSelectedSpeciality] = useState("Overview");
 
   const dispatch = useDispatch();
   const { notes } = useSelector((state) => state.notes);
@@ -19,57 +17,54 @@ import { Pagination } from "../components/pagination/pagination";
     dispatch(getAllnotes());
   }, [dispatch]);
 
-
-    const specialties = notes || [];
-    const content = specialties.reduce((acc, speciality) => {
-      acc[speciality.name] = {
-        title: speciality.name,
-        description: `Pages: ${speciality.pages || "N/A"}. Faculty: ${
-          speciality.faculty.map(f=> f.name) || "N/A"
-        }.`,
-      };
-      return acc;
-    }, {});
+  const specialties = notes || [];
+  const content = specialties.reduce((acc, speciality) => {
+    acc[speciality.name] = {
+      title: speciality.name,
+      description: `Pages: ${speciality.pages || "N/A"}. Faculty: ${
+        speciality.faculty.map((f) => f.name) || "N/A"
+      }.`,
+    };
+    return acc;
+  }, {});
 
   const selectMonth = ["1month", "6month"];
   const Month = {
     "1month": { rupees: 399 },
     "6month": { rupees: 1499 },
   };
-;
+  const [selectedOptions, setSelectedOptions] = useState({});
 
-    const [selectedOptions, setSelectedOptions] = useState({});
-
-    useEffect(() => {
-      if (specialties.length) {
-        setSelectedOptions(
-          specialties.reduce((acc, speciality) => {
-            acc[speciality.name] = "1month";
-            return acc;
-          }, {})
-        );
-      }
-    }, [specialties]);
-
-    const handleSelectChange = (speciality, value) => {
-      setSelectedOptions((prevState) => ({
-        ...prevState,
-        [speciality]: value,
-      }));
-    };
-
-    const handleGlobalDurationChange = (duration) => {
-      setGlobalDuration(duration);
-      setSelectedOptions(() =>
+  useEffect(() => {
+    if (specialties.length) {
+      setSelectedOptions(
         specialties.reduce((acc, speciality) => {
-          acc[speciality.name] = duration;
+          acc[speciality.name] = "1month";
           return acc;
         }, {})
       );
-    };
+    }
+  }, [specialties]);
 
-    return (
-      <>
+  const handleSelectChange = (speciality, value) => {
+    setSelectedOptions((prevState) => ({
+      ...prevState,
+      [speciality]: value,
+    }));
+  };
+
+  const handleGlobalDurationChange = (duration) => {
+    setGlobalDuration(duration);
+    setSelectedOptions(() =>
+      specialties.reduce((acc, speciality) => {
+        acc[speciality.name] = duration;
+        return acc;
+      }, {})
+    );
+  };
+
+  return (
+    <>
       <div className="flex flex-col lg:flex-row h-screen">
         {/* Sidebar */}
         <div
@@ -141,29 +136,32 @@ import { Pagination } from "../components/pagination/pagination";
               PDF Plans
             </div>
             <div className="flex flex-row flex-wrap gap-6">
-              {specialties.map((speciality) => (
-                <div
-                  key={speciality.id}
-                  className="bg-white shadow-lg rounded-md p-6 max-w-[300px]"
-                  style={{
-                    boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
-                  }}
-                >
-                  <h3 className="text-lg lg:text-xl font-semibold text-gray-700 mb-4">
-                    Choose Your Plan - {speciality.name}
-                  </h3>
-                  {speciality?.banner?.secure_url && (
-                    <div>
-                      <img
-                        src={speciality.banner.secure_url}
-                        alt={speciality.name}
-                        className="w-full h-32 object-cover rounded-md mb-4"
-                      />
-                    </div>
-                  )}
-                  <h1></h1>
+              {Array.isArray(specialties) &&
+                specialties.map((speciality) => (
+                  <div
+                    key={speciality.id}
+                    className="bg-white shadow-lg rounded-md p-6 max-w-[300px]"
+                    style={{
+                      boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+                    }}
+                  >
+                    <h3 className="text-lg lg:text-xl font-semibold text-gray-700 mb-4">
+                      Choose Your Plan - {speciality?.name}
+                    </h3>
+                    {speciality?.subject?.banner?.secure_url && (
+                      <div>
+                        <img
+                          src={speciality?.subject?.banner?.secure_url}
+                          alt={speciality.name}
+                          className="w-full h-64 object-cover rounded-md mb-4"
+                        />
 
-                  {/* Dropdown for Duration
+                        {/* <h1> Shubham </h1> */}
+                      </div>
+                    )}
+                    <h1></h1>
+
+                    {/* Dropdown for Duration
                   <div className="mb-6">
                     <label className="block text-gray-600 text-sm font-medium mb-2">
                       Select Duration
@@ -183,55 +181,54 @@ import { Pagination } from "../components/pagination/pagination";
                     </select>
                   </div> */}
 
-                {/* Display Selected Price */}
-                <div className="bg-gray-100 p-4 rounded-lg border border-gray-200">
-                  <p className="text-base lg:text-lg text-gray-700 mb-2">
-                    Selected Plan:{" "}
-                    <strong className="text-blue-600">
-                      {selectedOptions[speciality.name]}
-                    </strong>
-                  </p>
-                  <p className="text-base lg:text-lg text-gray-700">
-                    Price:{" "}
-                    <strong className="text-green-600">
-                      ₹{Month[selectedOptions[speciality.name]]?.rupees || 0}
-                    </strong>
-                  </p>
-                  <p className="text-base lg:text-lg text-gray-700">
-                    Discounted Price:
-                    <strong className="text-green-600">
-                      {speciality.discountedPrice}
-                    </strong>
-                  </p>
-                </div>
-                <button className="bg-gradient-to-r from-blue-500 to-green-400 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:from-blue-600 hover:to-green-500 transform hover:scale-105 transition-all duration-300 ease-in-out flex items-center justify-center mt-4 w-full ">
-                  <span className="mr-2">Buy Now</span>
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M5 12h14M12 5l7 7-7 7"
-                    ></path>
-                  </svg>
-                </button>
-              </div>
-            ))}
+                    {/* Display Selected Price */}
+                    <div className="bg-gray-100 p-4 rounded-lg border border-gray-200">
+                      <p className="text-base lg:text-lg text-gray-700 mb-2">
+                        Selected Plan:{" "}
+                        <strong className="text-blue-600">
+                          {selectedOptions[speciality.name]}
+                        </strong>
+                      </p>
+                      <p className="text-base lg:text-lg text-gray-700">
+                        Price:{" "}
+                        <strong className="text-green-600">
+                          ₹
+                          {/* {Month[selectedOptions[speciality.name]]?.rupees || 0} */}
+                          {speciality.subject.price}
+                        </strong>
+                      </p>
+                      <p className="text-base lg:text-lg text-gray-700">
+                        Discounted Price:
+                        <strong className="text-green-600">
+                          {speciality.subject.discountedPrice}
+                        </strong>
+                      </p>
+                    </div>
+                    <button className="bg-gradient-to-r from-blue-500 to-green-400 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:from-blue-600 hover:to-green-500 transform hover:scale-105 transition-all duration-300 ease-in-out flex items-center justify-center mt-4 w-full ">
+                      <span className="mr-2">Buy Now</span>
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M5 12h14M12 5l7 7-7 7"
+                        ></path>
+                      </svg>
+                    </button>
+                  </div>
+                ))}
             </div>
-
-            
           </div>
         </div>
       </div>
-    
-         </>
-    );
-  };
+    </>
+  );
+};
 
-  export default DetailPage;
+export default DetailPage;

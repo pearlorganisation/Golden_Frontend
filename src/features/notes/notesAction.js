@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axiosInstance from "../../axiosInstance"; 
+import axiosInstance from "../../axiosInstance";
 
 export const getAllnotes = createAsyncThunk(
-  "/notes",  // Action type
+  "notes/get-all", // Action type
   async (_, { rejectWithValue }) => {
     try {
       const config = {
@@ -12,9 +12,9 @@ export const getAllnotes = createAsyncThunk(
       };
 
       // Send GET request to fetch all subjects
-      const { data } = await axiosInstance.get(`/notes`, config);  
+      const { data } = await axiosInstance.get(`/notes`, config);
 
-      return data; 
+      return data;
     } catch (error) {
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
