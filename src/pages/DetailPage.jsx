@@ -65,7 +65,7 @@ const DetailPage = () => {
 
   return (
     <>
-      <div className="flex flex-col lg:flex-row h-screen">
+      <div className="flex flex-col lg:flex-row min-h-screen">
         {/* Sidebar */}
         <div
           className={`lg:w-1/4 bg-gray-100 border-r lg:block ${
