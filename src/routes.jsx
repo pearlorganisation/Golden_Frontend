@@ -15,6 +15,7 @@ import TermsAndConditions from "./pages/Term&Condition";
 import SignUp from "./pages/signup";
 import ProtectedRoute from "./components/ProctedRoute";
 import ProfilePage from "./pages/ProfilePage";
+import IpAddress from "./pages/IpAddress";
 
 const routes = createBrowserRouter([
   {
@@ -23,9 +24,8 @@ const routes = createBrowserRouter([
   },
   {
     path: "/signup",
-    element: <SignUp/>,
+    element: <SignUp />,
   },
-  
 
   {
     path: "/",
@@ -34,10 +34,11 @@ const routes = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: 
-        <ProtectedRoute>
-        <Home />,
-        </ProtectedRoute>
+        element: (
+          <ProtectedRoute>
+            <Home />,
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/subject",
@@ -47,7 +48,7 @@ const routes = createBrowserRouter([
         path: "/pdf-listings",
         element: <PdfView />,
       },
-    
+
       {
         path: "/features",
         element: <FeaturesPage />,
@@ -64,33 +65,32 @@ const routes = createBrowserRouter([
         path: "/postpdf",
         element: <PostPaymentPDFView />,
       },
-     
+      {
+        path: "/ip-address",
+        element: <IpAddress />,
+      },
       {
         path: "/detail",
         element: <DetailPage />,
       },
-      ,{
-        path:"/refund",
-      element:<RefundPolicy/>
-      },{
-        path:"/privacy",
-        element:<PrivacyPolicy/>
+      {
+        path: "/refund",
+        element: <RefundPolicy />,
       },
       {
-        path:"/terms",
-        element:<TermsAndConditions/>
+        path: "/privacy",
+        element: <PrivacyPolicy />,
       },
       {
-      path:"/profile",
-      element:<ProfilePage/>
-      }
+        path: "/terms",
+        element: <TermsAndConditions />,
+      },
+      {
+        path: "/profile",
+        element: <ProfilePage />,
+      },
     ],
   },
- 
-])
-
-
-  
-
+]);
 
 export default routes;

@@ -49,8 +49,14 @@ const SubscriptionSection = () => {
     });
   }, []);
 
-  const handlePayment = async ({ price, title, name }) => {
+  /** card id is this is to only show loading indicator on the plan you have clicked to pay */
+  const [cardId,setCardId] = useState(null)
+  console.log('-----------cardid', cardId)
+  const handlePayment = async ({id, price, title, name }) => {
+
+    //  e.preventDefault()
     setLoading(true);
+    setCardId(id);
     try {
       // Step 1: Create order on the backend
       const response = await axios.post("http://localhost:5000/bookings", {
@@ -180,7 +186,7 @@ const SubscriptionSection = () => {
                   disabled={loading}
                   className="bg-yellow-400  text-blue-900 py-3 px-6 rounded-full text-lg font-semibold hover:bg-yellow-500 transition duration-300"
                 >
-                  {loading ? <LoadingIndicator /> : "Pay Now"}
+                  {loading && cardId === card.id ? <LoadingIndicator /> : "Pay Now"}
                 </button>
               </motion.div>
             </motion.div>

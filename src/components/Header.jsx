@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import LoadingIndicator from "./LoadingIndicator";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { registerUser, userLogin } from "../features/Auth/AuthaAction";
 
 import LogoName from "../assets/logo.jpg";
@@ -16,6 +16,7 @@ const Header = () => {
 
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [isSigningUp, setIsSigningUp] = useState(false);
+  const { isUserLoggedIn } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const {
     register: registerLogin,
@@ -169,25 +170,33 @@ const Header = () => {
         </ul>
 
         {/* Right Section */}
-        <div className="hidden md:flex space-x-4">
-          <Link to="/login">
-            <button
-              // onClick={openLoginModal}
+        {!isUserLoggedIn ? (
+          <div className="hidden md:flex space-x-4">
+            <Link to="/login">
+              <button
+                // onClick={openLoginModal}
 
-              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-            >
-              Login
+                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+              >
+                Login
+              </button>
+            </Link>
+            <Link to="/signup">
+              <button
+                href="/signup"
+                className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+              >
+                Sign-Up
+              </button>
+            </Link>
+          </div>
+        ) : (
+          <div>
+            <button className="bg-blue-200 rounded-md p-2 h-10 w-16">
+              Profile
             </button>
-          </Link>
-          <Link to="/signup">
-            <button
-              href="/signup"
-              className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
-            >
-              Sign-Up
-            </button>
-          </Link>
-        </div>
+          </div>
+        )}
       </nav>
 
       {/* Login Modal */}

@@ -134,8 +134,8 @@ const navigate=useNavigate()
 
 
   const handleLoginSubmit = async (data) => {
-  dispatch(userLogin(data))
-navigate('/')
+    dispatch(userLogin(data))
+    navigate('/')
   
   }
 

@@ -19,14 +19,14 @@ const PdfView = () => {
 
   /**   razorpay  */
   const [loading, setLoading] = useState(false);
-  const handlePayment = async () => {
+  const handlePayment = async (unlockAllPdfs) => {
     setLoading(true);
     try {
       // Step 1: Create order on the backend
       const response = await axios.post(
         "http://localhost:5000/bookings",
         {
-          totalPrice: 7000,
+          totalPrice: 30,
           name:"Manish",
           title:"Golden Med Notes",
          }
@@ -53,8 +53,13 @@ const PdfView = () => {
             );
             if (verifyPayment?.data?.success === true) {
               toast.success("🦄Payment Successfull");
-              setTimeout(() => {
-                navigate("/");
+              // setTimeout(()=>{
+              //   unlockAllPdfs() 
+              // },1000)
+            
+                
+                setTimeout(() => {
+                 navigate("/");
               }, 400);
             }
           } catch (error) {
@@ -153,7 +158,7 @@ const PdfView = () => {
 
   const openPurchaseAllModal = () => {
     // setPurchaseAllModal(true);
-    handlePayment()
+    handlePayment(unlockAllPdfs())
   };
 
   const closePurchaseAllModal = () => {
