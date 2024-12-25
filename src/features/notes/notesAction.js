@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../axiosInstance"; 
+
 export const getAllnotes = createAsyncThunk(
   "/notes",  // Action type
   async ({page}, { rejectWithValue }) => {

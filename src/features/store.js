@@ -5,7 +5,7 @@ import AuthReducer from "./Auth/AuthSlice";
 import subjectReducer from "./Subject/SubjectSlice"
 import notesReducer from "./notes/notesSlice";
 import  storage from "redux-persist/lib/storage"
-
+import orderReducer from "./order/PaymentSlice"
 
 
 const persistConfig ={
@@ -24,7 +24,8 @@ const persistConfig ={
 const combineReducer= combineReducers({
 auth:AuthReducer ,
 subject:subjectReducer,
-notes:notesReducer
+notes:notesReducer,
+order:orderReducer
 })
 
 
@@ -35,7 +36,7 @@ const store = configureStore({
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: {
-          ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"], // Ignore persist-related actions
+          ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"], 
         },
       }),
   });
