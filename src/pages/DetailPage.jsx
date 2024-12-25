@@ -298,7 +298,7 @@ import { CreatePayment, VerifyPayment } from "../features/order/PaymentAction";
             ))}
             </div>
           </div>
-          <Pagination paginate={pagination} currentPage={pagination.current_page} totalPages={pagination.pages.length} handlePageClick={handlePageclick} />
+          {/* <Pagination paginate={pagination} currentPage={pagination.current_page} totalPages={pagination.pages.length} handlePageClick={handlePageclick} /> */}
         </div>
       </div>
     

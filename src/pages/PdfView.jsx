@@ -34,7 +34,7 @@ const PdfView = () => {
       console.log(`response:: ${JSON.stringify(response, null, 2)}`);
 
       const { order } = response.data;
-
+      console.log('--------------order is', order)
       // Step 2: Set up Razorpay options
       const options = {
         key: RAZORPAY_KEY_ID,

@@ -13,7 +13,7 @@ export const getAllnotes = createAsyncThunk(
 
       // Send GET request to fetch all subjects
       const { data } = await axiosInstance.get(`/notes?page=${page}`, config);  
-
+      
       return data; 
     } catch (error) {
       if (error.response && error.response.data.message) {
