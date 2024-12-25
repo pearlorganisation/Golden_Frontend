@@ -85,12 +85,12 @@ const FreePDFsSection = () => {
     {
       title: "INR 149 Plan Sample",
       description: "Get a glimpse of the essential resources we offer.",
-      link: "https://res.cloudinary.com/dapjyizvj/raw/upload/v1731996423/Bazar91/zxfwyverrsb4fc5qhrpw.pdf",
+      link: "https://res.cloudinary.com/dapjyizvj/raw/upload/v1734936975/uploads/hohobrpj76glk7kapslt.pdf",
     },
     {
-      title: "Golden Med Notes Sample",
+      title: "Biochem Sample PDF",
       description: "Preview premium content designed for success.",
-      link: "https://res.cloudinary.com/dapjyizvj/raw/upload/v1731995581/Bazar91/szw9i42udrcsfjifxwye.pdf",
+      link: "https://res.cloudinary.com/dapjyizvj/raw/upload/v1734936788/uploads/hv7e0zpgdtwgnpwpcv6a.pdf",
     },
   ];
 

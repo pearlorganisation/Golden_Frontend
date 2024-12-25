@@ -1,77 +1,7 @@
-// import React, { useEffect } from "react";
-// import { motion } from "framer-motion";
-// import gsap from "gsap";
-
-// const testimonials = [
-//   {
-//     id: 1,
-//     name: "John Doe",
-//     review: "This course helped me land my dream job! Highly recommended.",
-//     role: "Software Engineer",
-//   },
-//   {
-//     id: 2,
-//     name: "Jane Smith",
-//     review:
-//       "The hands-on projects were a game-changer for my learning journey.",
-//     role: "Web Developer",
-//   },
-//   {
-//     id: 3,
-//     name: "Sam Wilson",
-//     review:
-//       "Excellent teaching methods and engaging content. Worth every penny!",
-//     role: "Data Scientist",
-//   },
-// ];
-
-// const Testimonials = () => {
-//   useEffect(() => {
-//     gsap.from(".testimonial-title", {
-//       opacity: 0,
-//       y: 50,
-//       duration: 1,
-//       ease: "power3.out",
-//     });
-//   }, []);
-
-//   return (
-//     <section className="bg-gray-200 py-20">
-//       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-//         <h2 className="text-3xl font-bold text-center text-red-800 mb-10">
-//           What Our Students Say
-//         </h2>
-//         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-//           {testimonials.map((testimonial) => (
-//             <motion.div
-//               key={testimonial.id}
-//               className="bg-white p-6 shadow-md rounded-lg hover:shadow-lg"
-//               initial={{ opacity: 0, y: 50 }}
-//               whileInView={{ opacity: 1, y: 0 }}
-//               viewport={{ once: true }}
-//               transition={{ duration: 0.5, delay: testimonial.id * 0.2 }}
-//             >
-//               <p className="text-gray-600 text-sm mb-4">
-//                 "{testimonial.review}"
-//               </p>
-//               <div className="mt-4">
-//                 <h4 className="text-lg font-bold text-gray-800">
-//                   {testimonial.name}
-//                 </h4>
-//                 <p className="text-sm text-gray-500">{testimonial.role}</p>
-//               </div>
-//             </motion.div>
-//           ))}
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default Testimonials;
-
 import { useEffect } from "react";
 import gsap from "gsap";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllReviews } from "../features/Review/reviewAction";
 
 const testimonialsGroup1 = [
   {
@@ -152,6 +82,16 @@ const testimonialsGroup2 = [
 ];
 
 const Testimonials = () => {
+  const dispatch = useDispatch();
+
+  const { reviews } = useSelector((state) => state.reviews);
+
+  console.log(reviews, "reviews fetched");
+
+  useEffect(() => {
+    dispatch(getAllReviews());
+  }, []);
+
   useEffect(() => {
     gsap.to(".group-1", {
       x: "-100%",
@@ -177,41 +117,42 @@ const Testimonials = () => {
         </h2>
         <div className="relative space-y-12">
           <div className="group-1 flex space-x-6">
-            {testimonialsGroup1.map((testimonial) => (
-              <div
-                key={testimonial.id}
-                className="bg-blue-200 p-6 shadow-md rounded-lg w-80 flex-shrink-0"
-              >
-                <p className="text-gray-600 text-sm mb-4">
-                  "{testimonial.review}"
-                </p>
-                <div className="mt-4">
-                  <h4 className="text-lg font-bold text-gray-800">
-                    {testimonial.name}
-                  </h4>
-                  <p className="text-sm text-gray-500">{testimonial.role}</p>
+            {Array.isArray(reviews) &&
+              reviews.map((testimonial) => (
+                <div
+                  key={testimonial.id}
+                  className="bg-blue-200 p-6 shadow-md rounded-lg w-80 flex-shrink-0"
+                >
+                  <p className="text-gray-600 text-sm mb-4">
+                    "{testimonial.review}"
+                  </p>
+                  <div className="mt-4">
+                    <h4 className="text-lg font-bold text-gray-800">
+                      {testimonial.name}
+                    </h4>
+                    {/* <p className="text-sm text-gray-500">{testimonial.role}</p> */}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
 
           <div className="group-2 flex space-x-6">
-            {testimonialsGroup2.map((testimonial) => (
-              <div
-                key={testimonial.id}
-                className="bg-blue-200 p-6 shadow-md rounded-lg w-80 flex-shrink-0"
-              >
-                <p className="text-gray-600 text-sm mb-4">
-                  "{testimonial.review}"
-                </p>
-                <div className="mt-4">
-                  <h4 className="text-lg font-bold text-gray-800">
-                    {testimonial.name}
-                  </h4>
-                  <p className="text-sm text-gray-500">{testimonial.role}</p>
+            {Array.isArray(reviews) &&
+              reviews.map((testimonial) => (
+                <div
+                  key={testimonial.id}
+                  className="bg-blue-200 p-6 shadow-md rounded-lg w-80 flex-shrink-0"
+                >
+                  <p className="text-gray-600 text-sm mb-4">
+                    "{testimonial.review}"
+                  </p>
+                  <div className="mt-4">
+                    <h4 className="text-lg font-bold text-gray-800">
+                      {testimonial.name}
+                    </h4>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       </div>

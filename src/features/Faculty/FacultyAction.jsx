@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../axiosInstance"; // Adjust the path to your axios instance
 
-export const getAllSubjects = createAsyncThunk(
-  "subjects/get-all", // Action type
+export const getAllFaculties = createAsyncThunk(
+  "all-faculty/get", // Action type
   async (_, { rejectWithValue }) => {
     try {
       const config = {
@@ -11,9 +11,8 @@ export const getAllSubjects = createAsyncThunk(
         },
       };
 
-      // Send GET request to fetch all subjects
-      const { data } = await axiosInstance.get(`/subject`, config); // Adjust endpoint for fetching all subjects
-
+      // Send GET request to fetch all faculties
+      const { data } = await axiosInstance.get(`/faculty`, config);
       return data;
     } catch (error) {
       if (error.response && error.response.data.message) {
@@ -24,3 +23,5 @@ export const getAllSubjects = createAsyncThunk(
     }
   }
 );
+
+export const getFacultyBySubject = createAsyncThunk();

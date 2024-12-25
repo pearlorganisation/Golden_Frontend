@@ -28,9 +28,8 @@ const routes = createBrowserRouter([
   },
   {
     path: "/signup",
-    element: <SignUp/>,
+    element: <SignUp />,
   },
-  
 
   {
     path: "/",
@@ -39,10 +38,11 @@ const routes = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: 
-        <ProtectedRoute>
-        <Home />,
-        </ProtectedRoute>
+        element: (
+          <ProtectedRoute>
+            <Home />,
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/subject",
@@ -52,7 +52,7 @@ const routes = createBrowserRouter([
         path: "/pdf-listings",
         element: <PdfView />,
       },
-    
+
       {
         path: "/features",
         element: <FeaturesPage />,

@@ -1,5 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from "react";
+import FeatureImg from "../assets/Features.jpg";
+
+import UnlockSuccess from "../assets/unlocksuccess.png";
 
 const featuresData = [
   {
@@ -40,39 +43,47 @@ const featuresData = [
 ];
 
 const FeaturesPage = () => {
-
   return (
     <div className="bg-black">
-    <div className="max-w-7xl mx-auto p-6 ">
-      <header className="text-center mb-16">
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-yellow-600 mb-4">
-          Smart Notes for Smarter Minds: Save Time, Ace Faster
-        </h1>
-        <p className="text-lg sm:text-xl text-white">
-          Unlock the power of efficient learning with our expertly designed notes, tailored for NEET PG aspirants.
-        </p>
-      </header>
+      <div className="max-w-7xl mx-auto p-6 ">
+        <header className="text-center mb-16">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-yellow-600 mb-4">
+            Smart Notes for Smarter Minds: Save Time, Ace Faster
+          </h1>
+          <p className="text-lg sm:text-xl text-white">
+            Unlock the power of efficient learning with our expertly designed
+            notes, tailored for NEET PG aspirants.
+          </p>
+        </header>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {featuresData.map((feature, index) => (
-          <Feature
-            key={index}
-            title={feature.title}
-            description={feature.description}
-            icon={feature.icon}
-          />
-        ))}
-      </div>
+        <div className="mt-12 mb-12">
+          <img src={FeatureImg} className="w-full h-full" />
+        </div>
 
-      <div className="text-center mt-16 mb-12">
-        <a
-          href="/pricing-faq"
-          className="bg-yellow-500 text-white px-8 py-4 rounded-lg text-xl font-semibold hover:bg-yellow-600 transition-all duration-300 "
-        >
-          Subscribe Now
-        </a>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {featuresData.map((feature, index) => (
+            <Feature
+              key={index}
+              title={feature.title}
+              description={feature.description}
+              icon={feature.icon}
+            />
+          ))}
+        </div>
+
+        <div className="mt-12">
+          <img src={UnlockSuccess} className="w-full h-full" />
+        </div>
+
+        <div className="text-center mt-16 mb-12">
+          <a
+            href="/pricing"
+            className="bg-yellow-500 text-white px-8 py-4 rounded-lg text-xl font-semibold hover:bg-yellow-600 transition-all duration-300 "
+          >
+            Subscribe Now
+          </a>
+        </div>
       </div>
-    </div>
     </div>
   );
 };

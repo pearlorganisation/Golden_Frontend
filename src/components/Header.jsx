@@ -7,15 +7,17 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser, userLogin } from "../features/Auth/AuthaAction";
 
+import LogoName from "../assets/logo.jpg";
+
 const Header = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  
+
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [isSigningUp, setIsSigningUp] = useState(false);
-  const { isUserLoggedIn } = useSelector(state=>state.auth)
-  const dispatch=useDispatch();
+  const { isUserLoggedIn } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const {
     register: registerLogin,
     handleSubmit: handleLoginSubmit,
@@ -65,23 +67,19 @@ const Header = () => {
     setIsLoggingIn(true);
     console.log("Login Data:", data);
     // await new Promise((resolve) => setTimeout(resolve, 5000));
-    dispatch(userLogin(data))
+    dispatch(userLogin(data));
     setIsLoggingIn(false);
     closeLoginModal();
   };
 
   const onSignupSubmit = async (data) => {
-
     setIsSigningUp(true);
     console.log("Signup Data:", data);
-    // await new Promise((resolve) => setTimeout(resolve, 5000)); 
-    
-    dispatch(registerUser(data))// Simulate API call
+    // await new Promise((resolve) => setTimeout(resolve, 5000));
+
+    dispatch(registerUser(data)); // Simulate API call
     setIsSigningUp(false);
     closeSignupModal();
-
-
-  
   };
 
   const pages = [
@@ -108,21 +106,20 @@ const Header = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-md">
+    <header className="sticky top-0 z-50 bg-[#21211f] shadow-md">
       <nav className="flex items-center justify-between px-6 py-0">
         {/* Logo */}
         <Link to={`/`} className="flex flex-col gap-0 mt-0 pt-0">
-          <h1 className="text-2xl font-bold text-yellow-600 mt-0 pt-0">
-            Golden
-          </h1>
-
-          <h1 className="text-sm font-bold mt-0">Med Notes</h1>
+          <div className="flex flex-row gap-3 items-center justify-center">
+            <img src={LogoName} className="w-20 h-20" />
+            <h1 className="text-white text-xl">GOLDEN MED NOTES</h1>
+          </div>
         </Link>
         {/* Hamburger Icon */}
         <div className="md:hidden">
           <button
             onClick={toggleMobileMenu}
-            className="text-gray-700 hover:text-blue-600 focus:outline-none"
+            className="text-white hover:text-blue-600 focus:outline-none"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -161,7 +158,7 @@ const Header = () => {
             >
               <Link
                 to={`${item.path}`}
-                className="block md:inline px-6 py-2 text-gray-700 hover:text-blue-600"
+                className="block md:inline px-6 py-2 text-white hover:text-blue-600"
               >
                 {item.name}
               </Link>
@@ -170,24 +167,33 @@ const Header = () => {
         </ul>
 
         {/* Right Section */}
-        {!isUserLoggedIn ? <div className="hidden md:flex space-x-4">
-          <Link to="/login">
-            <button
-              // onClick={openLoginModal}
+        {!isUserLoggedIn ? (
+          <div className="hidden md:flex space-x-4">
+            <Link to="/login">
+              <button
+                // onClick={openLoginModal}
 
-              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-            >
-              Login
-            </button></Link>
-          <Link to="/signup">
-            <button
-              href="/signup"
-              className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
-            >
-              Sign-Up
-            </button></Link>
-        </div>:<div><button className="bg-blue-200 rounded-md p-2 h-10 w-16">Profile</button></div> }
-       
+                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+              >
+                Login
+              </button>
+            </Link>
+            <Link to="/signup">
+              <button
+                href="/signup"
+                className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+              >
+                Sign-Up
+              </button>
+            </Link>
+          </div>
+        ) : (
+          <div>
+            <button className="bg-blue-200 rounded-md p-2 h-10 w-16">
+              Profile
+            </button>
+          </div>
+        )}
       </nav>
 
       {/* Login Modal */}
@@ -247,8 +253,7 @@ const Header = () => {
         </motion.div>
       )} */}
 
-
-{isLoginModalOpen && (
+      {isLoginModalOpen && (
         <motion.div
           className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
           initial={{ opacity: 0 }}
@@ -262,7 +267,7 @@ const Header = () => {
           >
             <h2 className="text-xl font-semibold mb-4">Login</h2>
             <form onSubmit={handleLoginSubmit(onLoginSubmit)}>
-            <div className="mb-4">
+              <div className="mb-4">
                 <label className="block text-gray-700 font-medium mb-2">
                   Email
                 </label>
@@ -289,16 +294,15 @@ const Header = () => {
                   </p>
                 )}
               </div>
-            <div className="mb-4">
+              <div className="mb-4">
                 <label className="block text-gray-700 font-medium mb-2">
-              Password
+                  Password
                 </label>
                 <input
                   type="text"
                   placeholder="password"
                   {...registerLogin("password", {
                     required: "Password  is required",
-                 
                   })}
                   className={`w-full px-4 py-2 border rounded-md focus:outline-none ${
                     loginErrors.Password
@@ -328,7 +332,6 @@ const Header = () => {
                   {/* {isLoggingIn ? <LoadingIndicator /> : "Send OTP"} */}
                   submit
                 </button>
-                
               </div>
             </form>
           </motion.div>
@@ -424,14 +427,13 @@ const Header = () => {
               </div>
               <div className="mb-4">
                 <label className="block text-gray-700 font-medium mb-2">
-              Password
+                  Password
                 </label>
                 <input
                   type="text"
                   placeholder="password"
                   {...registerSignup("password", {
                     required: "Password  is required",
-                 
                   })}
                   className={`w-full px-4 py-2 border rounded-md focus:outline-none ${
                     signupErrors.Password
