@@ -61,7 +61,7 @@ const DetailPage = () => {
       title: speciality.name,
       pages: speciality.subject.pages,
       price: speciality.subject.discountedPrice,
-      image: speciality.subject.banner[0].secure_url,
+      image: speciality?.subject?.banner[0]?.secure_url,
       description: speciality?.subject?.description,
     };
     return acc;
