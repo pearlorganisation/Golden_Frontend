@@ -5,7 +5,7 @@ import Logo from "../assets/logo.jpg";
 const Footer = () => {
   return (
     <footer className="text-slate-500">
-      <div className="pt-16 pb-12 text-sm border-t border-slate-200 bg-slate-100">
+      <div className="pt-16 pb-12 text-sm border-t border-slate-200 bg-[#21211f]">
         <div className="container px-6 mx-auto">
           <div className="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12">
             <div
@@ -16,7 +16,7 @@ const Footer = () => {
                 id="WindUI-5-logo"
                 aria-label="WindUI logo"
                 aria-current="page"
-                className="flex items-center gap-2 mb-6 text-base font-medium leading-6 whitespace-nowrap text-slate-700 focus:outline-none"
+                className="flex items-center gap-2 mb-6 text-base font-medium leading-6 whitespace-nowrap text-s focus:outline-none"
                 href="javascript:void(0)"
               >
                 <img src={Logo} className="w-20 h-20" />

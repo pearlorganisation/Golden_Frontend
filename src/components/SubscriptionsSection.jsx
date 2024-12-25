@@ -1,36 +1,23 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import axios from "axios";
 import LoadingIndicator from "./LoadingIndicator";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import PricingPlans from "../pages/PricingPlan";
+
+import PlanImage from "../assets/2999.jpeg";
 const RAZORPAY_KEY_ID = import.meta.env.VITE_APP_RAZORPAY_KEY_ID;
 
 const cards = [
   {
     id: 1,
-    name: "INR 149 Plan",
-    title: "Access essential NEET PG resources for one low price!",
-    price: "149",
-    duration: "1",
-  },
-  {
-    id: 2,
-    name: "INR 399 Plan",
+    name: "INR 2999 Plan",
     title:
       "Unlock access to Golden Med Notes and other premium content for a comprehensive NEET PG experience for a limited time.",
-    price: "399",
-    duration: "1",
-  },
-  {
-    id: 3,
-    name: "INR 1499 Plan",
-    title: "Limited Time Offer for Yearly Subscription",
-    price: "1499",
-    duration: "12",
+    price: "2999",
+    duration: "6",
   },
 ];
 
@@ -49,17 +36,14 @@ const SubscriptionSection = () => {
     });
   }, []);
 
-  /** card id is this is to only show loading indicator on the plan you have clicked to pay */
-  const [cardId,setCardId] = useState(null)
-  console.log('-----------cardid', cardId)
-  const handlePayment = async ({id, price, title, name }) => {
-
+  // console.log("-----------cardid", cardId);
+  const handlePayment = async ({ id, price, title, name }) => {
     //  e.preventDefault()
     setLoading(true);
-    setCardId(id);
+    // setCardId(id);
     try {
       // Step 1: Create order on the backend
-      const response = await axios.post("http://localhost:5000/bookings", {
+      const response = await axios.post("http://localhost:5000/order/create", {
         totalPrice: +price,
         title: title,
         name: name,
@@ -79,7 +63,7 @@ const SubscriptionSection = () => {
         handler: async function (response) {
           try {
             const verifyPayment = await axios.post(
-              "http://localhost:5000/bookings/verify-payment",
+              "http://localhost:5000/order/verify-payment",
               response
             );
             if (verifyPayment?.data?.success === true) {
@@ -127,7 +111,6 @@ const SubscriptionSection = () => {
       setLoading(false);
     }
   };
-  //  Gradient Background    bg-gradient-to-r from-purple-500 to-green-500
 
   return (
     <section className="bg-black text-white py-20">
@@ -151,11 +134,31 @@ const SubscriptionSection = () => {
           that suits you best!
         </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="">
+          <img src={PlanImage} alt="" />
+        </div>
+
+        <button
+          onClick={() =>
+            handlePayment({
+              id: 1,
+              name: "INR 2999 Plan",
+              title:
+                "Unlock access to Golden Med Notes and other premium content for a comprehensive NEET PG experience for a limited time.",
+              price: "2999",
+            })
+          }
+          disabled={loading}
+          className="bg-yellow-400 mt-8 text-blue-900 py-3 px-6 rounded-full text-lg font-semibold hover:bg-yellow-500 transition duration-300"
+        >
+          {loading ? <LoadingIndicator /> : <h1>Pay Now </h1>}
+        </button>
+
+        {/* <div className="flex justify-center items-center">
           {cards.map((card, index) => (
             <motion.div
               key={card.id}
-              className="group relative bg-white text-blue-900 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-transform duration-800 transform"
+              className="group relative w-72 bg-white text-blue-900 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-transform duration-800 transform"
               ref={(el) => (cardsRef.current[index] = el)}
               whileHover={{ scale: 1.1 }}
             >
@@ -186,12 +189,16 @@ const SubscriptionSection = () => {
                   disabled={loading}
                   className="bg-yellow-400  text-blue-900 py-3 px-6 rounded-full text-lg font-semibold hover:bg-yellow-500 transition duration-300"
                 >
-                  {loading && cardId === card.id ? <LoadingIndicator /> : "Pay Now"}
+                  {loading && cardId === card.id ? (
+                    <LoadingIndicator />
+                  ) : (
+                    "Pay Now"
+                  )}
                 </button>
               </motion.div>
             </motion.div>
           ))}
-        </div>
+        </div> */}
       </div>
 
       {/* <PricingPlans /> */}

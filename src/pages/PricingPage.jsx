@@ -6,37 +6,55 @@ import TextAnimation from "../components/TextAnimation";
 
 const PricingPage = () => {
   const plans = [
-    {
-      title: "NEET PG Guidance Pack",
-      price: "₹149/month",
-      description: "Updated monthly PDFs, daily tips & personal guidance",
-      features: [
-        { text: "NEET PG Guidance PDFs (updated every month)", icon: <GrNotes /> },
-        { text: "Group chat access for daily tips and updates", icon: <FaCheckCircle /> },
-        { text: "Daily MCQs to strengthen your preparation", icon: <FaCheckCircle /> },
-        { text: "No access to Golden Med Notes PDFs", icon: <FaAward /> },
-        { text: "Exclusive discounts on premium resources", icon: <FaCheckCircle /> },
-      ],
-      keyFeatures: [
-        "Updated PDFs every month",
-        "1:1 personal guidance",
-        "Group discussions and updates",
-        "Exclusive discounts on GOLDEN MED NOTES PDFs",
-      ],
-      button: "Get NEET PG Guidance",
-      highlight: true,
-    },
+    // {
+    //   title: "NEET PG Guidance Pack",
+    //   price: "₹149/month",
+    //   description: "Updated monthly PDFs, daily tips & personal guidance",
+    //   features: [
+    //     { text: "NEET PG Guidance PDFs (updated every month)", icon: <GrNotes /> },
+    //     { text: "Group chat access for daily tips and updates", icon: <FaCheckCircle /> },
+    //     { text: "Daily MCQs to strengthen your preparation", icon: <FaCheckCircle /> },
+    //     { text: "No access to Golden Med Notes PDFs", icon: <FaAward /> },
+    //     { text: "Exclusive discounts on premium resources", icon: <FaCheckCircle /> },
+    //   ],
+    //   keyFeatures: [
+    //     "Updated PDFs every month",
+    //     "1:1 personal guidance",
+    //     "Group discussions and updates",
+    //     "Exclusive discounts on GOLDEN MED NOTES PDFs",
+    //   ],
+    //   button: "Get NEET PG Guidance",
+    //   highlight: true,
+    // },
     {
       title: "Golden With Elite Plan",
       price: "₹2999/month",
       description: "6 Months Subscription",
       features: [
-        { text: "Full offline access to all Golden Med Notes PDFs for all subjects", icon: <FaAward /> },
-        { text: "Online access to integrated system-wise PDFs", icon: <FaCheckCircle /> },
-        { text: "Ability to annotate and edit the downloaded PDFs", icon: <FaCheckCircle /> },
-        { text: "Exclusive 1:1 personalized guidance via WhatsApp chat for 6 months", icon: <FaCheckCircle /> },
-        { text: "Access to active group discussions for collaborative learning", icon: <FaCheckCircle /> },
-        { text: "One monthly test with 50 high-yield questions", icon: <FaAward /> },
+        {
+          text: "Full offline access to all Golden Med Notes PDFs for all subjects",
+          icon: <FaAward />,
+        },
+        {
+          text: "Online access to integrated system-wise PDFs",
+          icon: <FaCheckCircle />,
+        },
+        {
+          text: "Ability to annotate and edit the downloaded PDFs",
+          icon: <FaCheckCircle />,
+        },
+        {
+          text: "Exclusive 1:1 personalized guidance via WhatsApp chat for 6 months",
+          icon: <FaCheckCircle />,
+        },
+        {
+          text: "Access to active group discussions for collaborative learning",
+          icon: <FaCheckCircle />,
+        },
+        {
+          text: "One monthly test with 50 high-yield questions",
+          icon: <FaAward />,
+        },
       ],
       keyFeatures: [
         "Offline access to PDFs",
@@ -47,26 +65,26 @@ const PricingPage = () => {
       button: "Get Golden With Elite",
       highlight: true,
     },
-    {
-      title: "Golden Med Notes Plan",
-      price: "₹399/month",
-      description: "Access to all GOLDEN MED resources",
-      features: [
-        { text: "Online access to all subjects (updated every 6 months)", icon: <FaCheckCircle /> },
-        { text: "Personalized guidance from mentors", icon: <FaCheckCircle /> },
-        { text: "Exclusive download option", icon: <FaCheckCircle /> },
-        { text: "Weekly MCQs and premium content for NEET PG preparation", icon: <GrNotes /> },
-        { text: "Exclusive discounts on GOLDEN MED NOTES", icon: <FaAward /> },
-      ],
-      keyFeatures: [
-        "Full access to GOLDEN MED Resources",
-        "Mentor-guided learning",
-        "Exclusive downloads",
-        "Weekly MCQs",
-      ],
-      button: "Get Golden Med Notes",
-      highlight: true,
-    },
+    // {
+    //   title: "Golden Med Notes Plan",
+    //   price: "₹399/month",
+    //   description: "Access to all GOLDEN MED resources",
+    //   features: [
+    //     { text: "Online access to all subjects (updated every 6 months)", icon: <FaCheckCircle /> },
+    //     { text: "Personalized guidance from mentors", icon: <FaCheckCircle /> },
+    //     { text: "Exclusive download option", icon: <FaCheckCircle /> },
+    //     { text: "Weekly MCQs and premium content for NEET PG preparation", icon: <GrNotes /> },
+    //     { text: "Exclusive discounts on GOLDEN MED NOTES", icon: <FaAward /> },
+    //   ],
+    //   keyFeatures: [
+    //     "Full access to GOLDEN MED Resources",
+    //     "Mentor-guided learning",
+    //     "Exclusive downloads",
+    //     "Weekly MCQs",
+    //   ],
+    //   button: "Get Golden Med Notes",
+    //   highlight: true,
+    // },
   ];
 
   const faqData = [
@@ -123,7 +141,9 @@ const PricingPage = () => {
               </div>
             )}
 
-            <p className="text-4xl font-bold text-gray-800 mt-10">{plan.price}</p>
+            <p className="text-4xl font-bold text-gray-800 mt-10">
+              {plan.price}
+            </p>
             <p className="text-sm text-gray-500 mt-1">{plan.description}</p>
             <button
               className={`mt-6 px-6 py-3 text-sm font-medium rounded-lg ${
@@ -142,7 +162,9 @@ const PricingPage = () => {
                 </li>
               ))}
             </ul>
-            <p className="text-sm text-gray-800 mt-4 font-medium">Key Features</p>
+            <p className="text-sm text-gray-800 mt-4 font-medium">
+              Key Features
+            </p>
             <ul className="mt-2 space-y-2 text-gray-600">
               {plan.keyFeatures.map((keyFeature, i) => (
                 <li key={i} className="flex items-center gap-2">

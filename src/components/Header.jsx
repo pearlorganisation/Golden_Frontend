@@ -110,13 +110,10 @@ const Header = () => {
       <nav className="flex items-center justify-between px-6 py-0">
         {/* Logo */}
         <Link to={`/`} className="flex flex-col gap-0 mt-0 pt-0">
-          {/* <h1 className="text-2xl font-bold text-yellow-600 mt-0 pt-0">
-            Golden
-          </h1>
-
-          <h1 className="text-sm font-bold mt-0">Med Notes</h1> */}
-
-          <img src={LogoName} className="w-20 h-20" />
+          <div className="flex flex-row gap-3 items-center justify-center">
+            <img src={LogoName} className="w-20 h-20" />
+            <h1 className="text-white text-xl">GOLDEN MED NOTES</h1>
+          </div>
         </Link>
         {/* Hamburger Icon */}
         <div className="md:hidden">
