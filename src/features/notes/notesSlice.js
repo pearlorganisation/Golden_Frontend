@@ -7,6 +7,7 @@ const initialState = {
   notes: [], 
   error: null,
   success: false, 
+  pagination: null
 };
 
 const notesSlice = createSlice({
@@ -24,7 +25,8 @@ const notesSlice = createSlice({
 
       .addCase(getAllnotes.fulfilled, (state, action) => {
         state.loading = false;
-        state.notes = action.payload; 
+        state.notes = action.payload.data;
+        state.pagination = action.payload.pagination; 
         state.success = true;
         toast.success("notess fetched successfully!", {
           position: "top-right",

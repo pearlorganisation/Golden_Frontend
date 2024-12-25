@@ -16,6 +16,10 @@ import SignUp from "./pages/signup";
 import ProtectedRoute from "./components/ProctedRoute";
 import ProfilePage from "./pages/ProfilePage";
 import IpAddress from "./pages/IpAddress";
+import CopyrightPolicy from "./pages/copyrightPolicy";
+import DeliveryPolicy from "./pages/DeliveryPage";
+import DisclaimerPolicy from "./pages/DesclaimerPolicy";
+import CancellationPolicy from "./pages/cancelationPolicy";
 
 const routes = createBrowserRouter([
   {
@@ -95,6 +99,23 @@ element:<RefundPolicy/>
 {
 path:"/profile",
 element:<ProfilePage/>
+}
+
+,{
+  path:"/copyright",
+  element:<CopyrightPolicy/>
+},
+{
+  path:"/delivery",
+  element:<DeliveryPolicy/>
+},
+{
+  path:"/disclaimer",
+  element:<DisclaimerPolicy/>
+},
+{
+  path:"/cancelPolicy",
+  element:<CancellationPolicy/>
 }
 
   
