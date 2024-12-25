@@ -1,13 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { getAllnotes} from "./notesAction.js"; // Import API actions or thunks
+import { getAllnotes, getNotesById} from "./notesAction.js"; // Import API actions or thunks
 
 const initialState = {
   loading: false,
   notes: [], 
   error: null,
   success: false, 
-  pagination: null
+  pagination: null,
+  singleNote:{}
 };
 
 const notesSlice = createSlice({
@@ -52,7 +53,41 @@ const notesSlice = createSlice({
           draggable: true,
           theme: "colored",
         });
-      });
+      })
+      .addCase(getNotesById.pending,(state)=>{
+        state.loading= true
+        state.error= false
+        state.success= false
+      })
+      .addCase(getNotesById.rejected,(state,action)=>{
+        state.loading= false
+        state.success = false
+        state.error= true
+        toast.error(action.payload, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "colored",
+        })
+      })
+      .addCase(getNotesById.fulfilled,(state,action)=>{
+        state.loading= false
+        state.error= false
+        state.success= true
+        state.singleNote = action.payload
+        toast.success("Note is retrieved", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "colored",
+        })
+      })
   },
 });
 

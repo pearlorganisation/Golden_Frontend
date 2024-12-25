@@ -20,6 +20,7 @@ import CopyrightPolicy from "./pages/copyrightPolicy";
 import DeliveryPolicy from "./pages/DeliveryPage";
 import DisclaimerPolicy from "./pages/DesclaimerPolicy";
 import CancellationPolicy from "./pages/cancelationPolicy";
+import BuyPdf from "./pages/BuyPdf/BuyPdf";
 
 const routes = createBrowserRouter([
   {
@@ -73,6 +74,11 @@ const routes = createBrowserRouter([
         path:"/ip-address",
         element:<IpAddress />
       }
+      ,
+      {
+        path: "/buy-pdf/:id",
+        element: <BuyPdf />
+      }
     ],
   },
   {
@@ -116,7 +122,8 @@ element:<ProfilePage/>
 {
   path:"/cancelPolicy",
   element:<CancellationPolicy/>
-}
+},
+ 
 
   
 ]);

@@ -9,6 +9,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
+import { Link } from "react-router-dom";
 
 // import { Pagination } from "swiper";
 
@@ -67,7 +68,7 @@ const DetailPage = () => {
     return acc;
   }, {});
 
-  console.log(content, "my contenrt");
+  console.log(specialties, "my specialties");
 
   // const selectMonth = ["1month", "6month"];
   // const Month = {
@@ -354,12 +355,13 @@ const DetailPage = () => {
                         </strong>
                       </p>
                     </div>
+                    <Link to={`/buy-pdf/${speciality?._id}`}> 
                     <button
                       className="bg-gradient-to-r from-blue-500 to-green-400 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:from-blue-600 hover:to-green-500 transform hover:scale-105 transition-all duration-300 ease-in-out flex items-center justify-center mt-4 w-full "
-                      onClick={() => {
-                        handlePay(speciality);
-                      }}
-                    >
+                      // onClick={() => {
+                      //   handlePay(speciality);
+                      // }}
+                    >                       
                       <span className="mr-2">Buy Now</span>
                       <svg
                         className="w-5 h-5"
@@ -376,7 +378,7 @@ const DetailPage = () => {
                         ></path>
                       </svg>
                     </button>
-
+                    </Link>
                     {loading && (
                       <div className="flex justify-center items-center mt-6">
                         <h1 className=""> Fetching More Subjects </h1>
