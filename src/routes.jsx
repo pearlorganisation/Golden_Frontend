@@ -23,14 +23,7 @@ import CancellationPolicy from "./pages/cancelationPolicy";
 import BuyPdf from "./pages/BuyPdf/BuyPdf";
 
 const routes = createBrowserRouter([
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/signup",
-    element: <SignUp />,
-  },
+   
 
   {
     path: "/",
@@ -39,11 +32,8 @@ const routes = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: (
-          <ProtectedRoute>
-            <Home />,
-          </ProtectedRoute>
-        ),
+        index:true,
+        element: <Home />,  
       },
       {
         path: "/subject",
@@ -79,50 +69,108 @@ const routes = createBrowserRouter([
         path: "/buy-pdf/:id",
         element: <BuyPdf />
       }
+      , {
+        path: "/aboutus",
+        element: <AboutUs />
+
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/signup",
+        element: <SignUp />,
+      },
+
+      , {
+        path: "/detail",
+        element: <DetailPage />
+      }
+      , {
+        path: "/refund",
+        element: <RefundPolicy />
+      }, {
+        path: "/privacy",
+        element: <PrivacyPolicy />
+      },
+      {
+        path: "/terms",
+        element: <TermsAndConditions />
+      },
+      {
+        path: "/profile",
+        element: <ProfilePage />
+      }
+
+      , {
+        path: "/copyright",
+        element: <CopyrightPolicy />
+      },
+      {
+        path: "/delivery",
+        element: <DeliveryPolicy />
+      },
+      {
+        path: "/disclaimer",
+        element: <DisclaimerPolicy />
+      },
+      {
+        path: "/cancelPolicy",
+        element: <CancellationPolicy />
+      },
     ],
   },
-  {
-    path:"/aboutus",
-    element: <AboutUs/>
+//   {
+//     path:"/aboutus",
+//     element: <AboutUs/>
 
-  }
+//   },
+//   {
+//     path: "/login",
+//     element: <Login />,
+//   },
+//   {
+//     path: "/signup",
+//     element: <SignUp />,
+//   },
 
-,{
-  path:"/detail",
-  element:<DetailPage/>
-}
-,{
-  path:"/refund",
-element:<RefundPolicy/>
-},{
-  path:"/privacy",
-  element:<PrivacyPolicy/>
-},
-{
-  path:"/terms",
-  element:<TermsAndConditions/>
-},
-{
-path:"/profile",
-element:<ProfilePage/>
-}
+// ,{
+//   path:"/detail",
+//   element:<DetailPage/>
+// }
+// ,{
+//   path:"/refund",
+// element:<RefundPolicy/>
+// },{
+//   path:"/privacy",
+//   element:<PrivacyPolicy/>
+// },
+// {
+//   path:"/terms",
+//   element:<TermsAndConditions/>
+// },
+// {
+// path:"/profile",
+// element:<ProfilePage/>
+// }
 
-,{
-  path:"/copyright",
-  element:<CopyrightPolicy/>
-},
-{
-  path:"/delivery",
-  element:<DeliveryPolicy/>
-},
-{
-  path:"/disclaimer",
-  element:<DisclaimerPolicy/>
-},
-{
-  path:"/cancelPolicy",
-  element:<CancellationPolicy/>
-},
+// ,{
+//   path:"/copyright",
+//   element:<CopyrightPolicy/>
+// },
+// {
+//   path:"/delivery",
+//   element:<DeliveryPolicy/>
+// },
+// {
+//   path:"/disclaimer",
+//   element:<DisclaimerPolicy/>
+// },
+// {
+//   path:"/cancelPolicy",
+//   element:<CancellationPolicy/>
+// },
  
 
   
