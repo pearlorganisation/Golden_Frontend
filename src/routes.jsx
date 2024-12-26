@@ -74,14 +74,7 @@ const routes = createBrowserRouter([
         element: <AboutUs />
 
       },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/signup",
-        element: <SignUp />,
-      },
+      
 
       , {
         path: "/detail",
@@ -120,6 +113,14 @@ const routes = createBrowserRouter([
         element: <CancellationPolicy />
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <SignUp />,
   },
 //   {
 //     path:"/aboutus",
