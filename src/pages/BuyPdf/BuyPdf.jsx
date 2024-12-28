@@ -67,6 +67,7 @@ const BuyPdf = (props) => {
                                 razorpaySignature: response.razorpay_signature,
                                 buyerName:buyerName,
                                 buyerEmail:buyerEmail,
+                                buyerNumber:buyerNumber,
                                 pdfUrl:"https://res.cloudinary.com/dapjyizvj/raw/upload/v1734943843/uploads/reev5wluktdww2c0jqd3.pdf"
                             }
                         );
