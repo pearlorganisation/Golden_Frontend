@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { registerUser,getUserProfile, userLogin, userLogout } from "./AuthaAction.js";
-
+import {
+  registerUser,
+  getUserProfile,
+  userLogin,
+  userLogout,
+} from "./AuthaAction.js";
+import { toast } from "react-toastify";
 
 const initialState = {
   loading: false,
@@ -9,11 +14,11 @@ const initialState = {
   userToken: null,
   error: null,
   success: false,
-  userLoggedOut:{
-    loading:false,
-    error:false,
-    success: false
-  }
+  userLoggedOut: {
+    loading: false,
+    error: false,
+    success: false,
+  },
 };
 
 const authSlice = createSlice({
@@ -58,16 +63,16 @@ const authSlice = createSlice({
           state.userToken = action.payload.userToken;
           state.isUserLoggedIn = true;
         })
-        .addCase(userLogout.pending,(state)=>{
+        .addCase(userLogout.pending, (state) => {
           state.userLoggedOut = state.userLoggedOut ?? {};
           state.userLoggedOut.loading = true;
         })
-        .addCase(userLogout.fulfilled,(state,action)=>{
+        .addCase(userLogout.fulfilled, (state, action) => {
           state.userLoggedOut = state.userLoggedOut ?? {};
           state.userLoggedOut.error = false;
           state.userLoggedOut.success = true;
           state.userLoggedOut.loading = false;
-          toast.success("Successfully Logged Out",{
+          toast.success("Successfully Logged Out", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -76,15 +81,14 @@ const authSlice = createSlice({
             draggable: true,
             progress: undefined,
             theme: "colored",
-            
-          })
+          });
         })
-        .addCase(userLogout.rejected,(state,action)=>{
+        .addCase(userLogout.rejected, (state, action) => {
           state.userLoggedOut = state.userLoggedOut ?? {};
           state.userLoggedOut.loading = false;
           state.userLoggedOut.error = true;
           state.userLoggedOut.success = false;
-          toast.error(action.payload,{
+          toast.error(action.payload, {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -93,23 +97,21 @@ const authSlice = createSlice({
             draggable: true,
             progress: undefined,
             theme: "colored",
-             
-          })
+          });
         })
 
-
         .addCase(getUserProfile.pending, (state) => {
-            state.loading = true;
-            state.error = null;
-          })
-          .addCase(getUserProfile.fulfilled, (state, action) => {
-            state.loading = false;
-            state.userInfo = action.payload; // Update user profile in the state
-          })
-          .addCase(getUserProfile.rejected, (state, action) => {
-            state.loading = false;
-            state.error = action.payload;
-          });
+          state.loading = true;
+          state.error = null;
+        })
+        .addCase(getUserProfile.fulfilled, (state, action) => {
+          state.loading = false;
+          state.userInfo = action.payload; // Update user profile in the state
+        })
+        .addCase(getUserProfile.rejected, (state, action) => {
+          state.loading = false;
+          state.error = action.payload;
+        });
   },
 });
 

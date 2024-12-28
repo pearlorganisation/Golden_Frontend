@@ -118,27 +118,34 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../features/Auth/AuthaAction"; // Assuming userLogin action is defined
 import { Navigate, useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const [isLoggingIn, , setIsLoggingIn] = useState(false);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [isPhoneLogin, setIsPhoneLogin] = useState(false); // Track which login method to use
   const [phone, setPhone] = useState("");
   const dispatch = useDispatch();
-const navigate=useNavigate()
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const navigate = useNavigate();
 
+  const { isUserLoggedIn } = useSelector((state) => state.auth);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const handleLoginSubmit = async (data) => {
-    dispatch(userLogin(data))
-    navigate('/')
-  
-  }
+    dispatch(userLogin(data));
+    if (isUserLoggedIn) {
+      navigate("/");
+    }
+  };
 
+  console.log(isUserLoggedIn, "my user login");
 
   return (
     <div className="flex min-h-screen">
@@ -152,28 +159,41 @@ const navigate=useNavigate()
             Log in to access your account
           </p>
 
-          <form onSubmit={handleSubmit(handleLoginSubmit)} className="space-y-6">
+          <form
+            onSubmit={handleSubmit(handleLoginSubmit)}
+            className="space-y-6"
+          >
             {/* Email Input */}
             {!isPhoneLogin && (
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Email Address
                 </label>
                 <input
                   type="email"
                   id="email"
                   placeholder="Enter your email"
-                  {...register('email', { required: 'Email is required' })}
-                  className={`mt-2 w-full px-4 py-2 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+                  {...register("email", { required: "Email is required" })}
+                  className={`mt-2 w-full px-4 py-2 border ${
+                    errors.email ? "border-red-500" : "border-gray-300"
+                  } rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
                 />
-                {errors.email && <p className="text-red-500">{errors.email.message}</p>}
+                {errors.email && (
+                  <p className="text-red-500">{errors.email.message}</p>
+                )}
               </div>
             )}
 
             {/* Phone Input (conditional rendering) */}
             {isPhoneLogin && (
               <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="phone"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Phone Number
                 </label>
                 <input
@@ -190,17 +210,26 @@ const navigate=useNavigate()
             {/* Password Input */}
             {!isPhoneLogin && (
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Password
                 </label>
                 <input
                   type="password"
                   id="password"
                   placeholder="Enter your password"
-                  {...register('password', { required: 'Password is required' })}
-                  className={`mt-2 w-full px-4 py-2 border ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+                  {...register("password", {
+                    required: "Password is required",
+                  })}
+                  className={`mt-2 w-full px-4 py-2 border ${
+                    errors.password ? "border-red-500" : "border-gray-300"
+                  } rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
                 />
-                {errors.password && <p className="text-red-500">{errors.password.message}</p>}
+                {errors.password && (
+                  <p className="text-red-500">{errors.password.message}</p>
+                )}
               </div>
             )}
 
@@ -208,7 +237,9 @@ const navigate=useNavigate()
             <button
               type="submit"
               disabled={loading || isLoggingIn}
-              className={`w-full px-4 py-2 text-white font-bold bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 rounded-lg transition duration-300 ${loading || isLoggingIn ? 'opacity-70 cursor-not-allowed' : ''}`}
+              className={`w-full px-4 py-2 text-white font-bold bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 rounded-lg transition duration-300 ${
+                loading || isLoggingIn ? "opacity-70 cursor-not-allowed" : ""
+              }`}
             >
               {loading || isLoggingIn ? "Sending OTP..." : "Login"}
             </button>
@@ -216,14 +247,23 @@ const navigate=useNavigate()
 
           {/* Message Display */}
           {message && (
-            <p className={`mt-4 text-center font-medium ${message.includes("successfully") ? "text-green-600" : "text-red-600"}`}>
+            <p
+              className={`mt-4 text-center font-medium ${
+                message.includes("successfully")
+                  ? "text-green-600"
+                  : "text-red-600"
+              }`}
+            >
               {message}
             </p>
           )}
 
           <p className="mt-6 text-center text-sm text-gray-500">
             Don’t have an account?{" "}
-            <a href="/signup" className="text-indigo-500 hover:underline hover:text-indigo-600">
+            <a
+              href="/signup"
+              className="text-indigo-500 hover:underline hover:text-indigo-600"
+            >
               Sign up
             </a>
           </p>
@@ -270,4 +310,3 @@ const navigate=useNavigate()
 };
 
 export default Login;
-
