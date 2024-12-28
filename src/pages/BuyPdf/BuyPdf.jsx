@@ -80,6 +80,30 @@ const BuyPdf = (props) => {
                   "https://res.cloudinary.com/dapjyizvj/raw/upload/v1734943843/uploads/reev5wluktdww2c0jqd3.pdf",
               }
             );
+            const Orderoptions = {
+                key: import.meta.env.VITE_APP_RAZORPAY_KEY_ID, // Razorpay key
+                amount: order.order.amount, // Amount in smallest currency unit (paise)
+                currency: order.order.currency,
+                name: note.name,
+                description: `Payment for ${note.name} `,
+                image: "your_logo_url", // Optional, replace with your logo URL
+                order_id: order.order.id, // Razorpay Order ID
+                handler: async function (response) {
+                    console.log("res", response);
+                    try {
+                        // Verify the payment
+                        const verifyResponse = await axios.post(
+                            "http://localhost:5000/order/verify",
+                            {
+                                razorpayPaymentId: response.razorpay_payment_id,
+                                razorpayOrderId: response.razorpay_order_id,
+                                razorpaySignature: response.razorpay_signature,
+                                buyerName:buyerName,
+                                buyerEmail:buyerEmail,
+                                buyerNumber:buyerNumber,
+                                pdfUrl:"https://res.cloudinary.com/dapjyizvj/raw/upload/v1734943843/uploads/reev5wluktdww2c0jqd3.pdf"
+                            }
+                        );
 
             if (verifyResponse.data.success) {
               alert("Payment verified successfully!");

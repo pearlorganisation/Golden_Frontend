@@ -51,16 +51,14 @@ export const userLogin = createAsyncThunk(
       // store user's token in local storage
       console.log("login data", data);
       localStorage.setItem("isLoggedIn", true);
-      toast.success("Login successful"); // Show success toast
-      return data;
+
+      return data.data;
     } catch (error) {
       console.log("Error", error);
       // return custom error message from API if any
       if (error.response && error.response.data.message) {
-        toast.error(error.response.data.message);
         return rejectWithValue(error.response.data.message);
       } else {
-        toast.error(error.message);
         return rejectWithValue(error.message);
       }
     }
