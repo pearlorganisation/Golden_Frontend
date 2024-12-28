@@ -9,7 +9,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { getUserProfile } from "../features/Auth/AuthaAction";
 
 // import { Pagination } from "swiper";
 
@@ -24,6 +25,9 @@ const DetailPage = () => {
   const dispatch = useDispatch();
   const { notes, pagination, loading } = useSelector((state) => state.notes);
 
+  /**---userInfo---*/
+  const { userInfo, isUserLoggedIn } = useSelector(state=> state.auth)
+  
   console.log(pagination, "my pagination");
 
   useEffect(() => {
@@ -108,14 +112,20 @@ const DetailPage = () => {
   const handlePay = async (speciality) => {
     try {
       console.log(speciality, "meri speiclaity");
-      const selectedPlan = speciality.name;
+      const selectedPdf = speciality.name;
       const amount = speciality?.subject?.discountedPrice || 0;
-
+      const buyerName = userInfo.name
+      const buyerNumber = userInfo.phoneNumber
+      const buyerEmail = userInfo.email
       // Create an order on the server
       const { data: order } = await axios.post(
         "http://localhost:5000/order/create",
         {
           price: amount,
+          buyerName:buyerName,
+          buyerEmail:buyerEmail,
+          buyerNumber:buyerNumber,
+          title:selectedPdf
         }
       );
 
@@ -123,7 +133,7 @@ const DetailPage = () => {
         key: import.meta.env.VITE_APP_RAZORPAY_KEY_ID, // Razorpay key
         amount: order.order.amount, // Amount in smallest currency unit (paise)
         currency: order.order.currency,
-        name: "Anjali",
+        name: buyerName,
         description: `Payment for ${speciality.name} `,
         image: "your_logo_url", // Optional, replace with your logo URL
         order_id: order.order.id, // Razorpay Order ID
@@ -137,6 +147,10 @@ const DetailPage = () => {
                 razorpayPaymentId: response.razorpay_payment_id,
                 razorpayOrderId: response.razorpay_order_id,
                 razorpaySignature: response.razorpay_signature,
+                buyerName: buyerName,
+                buyerEmail: buyerEmail,
+                buyerNumber: buyerNumber,
+                pdfUrl: "https://res.cloudinary.com/dapjyizvj/raw/upload/v1734943843/uploads/reev5wluktdww2c0jqd3.pdf" // in future change it with the url of the pdf
               }
             );
 
@@ -177,6 +191,15 @@ const DetailPage = () => {
     }
   };
 
+  const navigate = useNavigate()
+  /**logic managing whether to move to next page for payment for the logged out user or just get the payment from this page for the pdf if the user is logged in */
+  const logicFunction = (speciality)=>{
+    if(isUserLoggedIn){
+        handlePay(speciality)
+    }else if(!isUserLoggedIn){
+     return navigate(`/buy-pdf/${speciality?._id}`)
+    }
+  }
   return (
     <>
       <div className="flex flex-col lg:flex-row min-h-screen">
@@ -355,12 +378,12 @@ const DetailPage = () => {
                         </strong>
                       </p>
                     </div>
-                    <Link to={`/buy-pdf/${speciality?._id}`}> 
+          {/*  <Link to={`/buy-pdf/${speciality?._id}`}> */} 
                     <button
                       className="bg-gradient-to-r from-blue-500 to-green-400 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:from-blue-600 hover:to-green-500 transform hover:scale-105 transition-all duration-300 ease-in-out flex items-center justify-center mt-4 w-full "
-                      // onClick={() => {
-                      //   handlePay(speciality);
-                      // }}
+                      onClick={() => {
+                        logicFunction(speciality)
+                      }}
                     >                       
                       <span className="mr-2">Buy Now</span>
                       <svg
@@ -378,7 +401,7 @@ const DetailPage = () => {
                         ></path>
                       </svg>
                     </button>
-                    </Link>
+                    {/* </Link> */}
                     {loading && (
                       <div className="flex justify-center items-center mt-6">
                         <h1 className=""> Fetching More Subjects </h1>

@@ -67,6 +67,7 @@ const authSlice = createSlice({
           state.userLoggedOut.error = false;
           state.userLoggedOut.success = true;
           state.userLoggedOut.loading = false;
+          state.isUserLoggedIn = false
           toast.success("Successfully Logged Out",{
             position: "top-right",
             autoClose: 5000,
@@ -98,18 +99,18 @@ const authSlice = createSlice({
         })
 
 
-        .addCase(getUserProfile.pending, (state) => {
-            state.loading = true;
-            state.error = null;
-          })
-          .addCase(getUserProfile.fulfilled, (state, action) => {
-            state.loading = false;
-            state.userInfo = action.payload; // Update user profile in the state
-          })
-          .addCase(getUserProfile.rejected, (state, action) => {
-            state.loading = false;
-            state.error = action.payload;
-          });
+        // .addCase(getUserProfile.pending, (state) => {
+        //     state.loading = true;
+        //     state.error = null;
+        //   })
+        //   .addCase(getUserProfile.fulfilled, (state, action) => {
+        //     state.loading = false;
+        //     state.userInfo = action.payload; // Update user profile in the state
+        //   })
+        //   .addCase(getUserProfile.rejected, (state, action) => {
+        //     state.loading = false;
+        //     state.error = action.payload;
+        //   });
   },
 });
 
