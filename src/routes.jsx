@@ -21,6 +21,7 @@ import DeliveryPolicy from "./pages/DeliveryPage";
 import DisclaimerPolicy from "./pages/DesclaimerPolicy";
 import CancellationPolicy from "./pages/cancelationPolicy";
 import BuyPdf from "./pages/BuyPdf/BuyPdf";
+import Profile from "./pages/Profile/Profile";
 
 const routes = createBrowserRouter([
    
@@ -93,7 +94,8 @@ const routes = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <ProfilePage />
+        // element: <ProfilePage />
+        element: <Profile />
       }
 
       , {

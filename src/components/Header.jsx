@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerUser, userLogin } from "../features/Auth/AuthaAction";
 
 import LogoName from "../assets/logo.jpg";
+import ProfileComponent from "./profile/ProfileComponent";
 
 const Header = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -16,7 +17,7 @@ const Header = () => {
 
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [isSigningUp, setIsSigningUp] = useState(false);
-  const { isUserLoggedIn } = useSelector((state) => state.auth);
+  const { isUserLoggedIn } = useSelector((state) => state.auth); // geeting the state for isUserLoggedIn
   const dispatch = useDispatch();
   const {
     register: registerLogin,
@@ -188,11 +189,12 @@ const Header = () => {
             </Link>
           </div>
         ) : (
-          <div>
-            <button className="bg-blue-200 rounded-md p-2 h-10 w-16">
-              Profile
-            </button>
-          </div>
+          // <div>
+          //   <button className="bg-blue-200 rounded-md p-2 h-10 w-16">
+          //     Profile
+          //   </button>
+          // </div>
+          <ProfileComponent />
         )}
       </nav>
 
