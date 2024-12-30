@@ -52,7 +52,7 @@ export const registerUser = createAsyncThunk(
         console.log("login data", data);
         localStorage.setItem("isLoggedIn", true);
   
-        return data;
+        return data.data;
       } catch (error) {
         console.log("Error", error);
         // return custom error message from API if any
