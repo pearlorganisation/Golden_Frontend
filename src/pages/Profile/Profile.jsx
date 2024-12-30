@@ -36,7 +36,7 @@ const Profile = () => {
                         </div>
                         <div className="flex-1">
                             <p className="text-sm text-gray-500">Name</p>
-                            <p className="text-lg font-medium text-gray-800">{userInfo.name}</p>
+                            <p className="text-lg font-medium text-gray-800">{userInfo?.name}</p>
                         </div>
                     </div>
 
@@ -47,7 +47,7 @@ const Profile = () => {
                         </div>
                         <div className="flex-1">
                             <p className="text-sm text-gray-500">Email</p>
-                            <p className="text-lg font-medium text-gray-800">{userInfo.email}</p>
+                            <p className="text-lg font-medium text-gray-800">{userInfo?.email}</p>
                         </div>
                     </div>
 
@@ -58,7 +58,7 @@ const Profile = () => {
                         </div>
                         <div className="flex-1">
                             <p className="text-sm text-gray-500">Phone Number</p>
-                            <p className="text-lg font-medium text-gray-800">{userInfo.phoneNumber}</p>
+                            <p className="text-lg font-medium text-gray-800">{userInfo?.phoneNumber}</p>
                         </div>
                     </div>
 
@@ -70,12 +70,12 @@ const Profile = () => {
                         <div className="flex-1">
                             <p className="text-sm text-gray-500">Verification Status</p>
                             <span
-                                className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${userInfo.isVerified
+                                className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${userInfo?.isVerified
                                         ? 'bg-green-100 text-green-800'
                                         : 'bg-red-100 text-red-800'
                                     }`}
                             >
-                                {userInfo.isVerified ? 'Verified' : 'Not Verified'}
+                                {userInfo?.isVerified ? 'Verified' : 'Not Verified'}
                             </span>
                         </div>
                     </div>
