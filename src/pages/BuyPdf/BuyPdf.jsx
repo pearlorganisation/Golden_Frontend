@@ -245,7 +245,7 @@ const BuyPdf = (props) => {
                         onClick={()=>handlePay(singleNote)}
                         disabled={disable}
                          className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-                            Buy Now
+                            {disable ? "Enter All Details" : "Buy Now"}
                         </button>
                     </div>
                 </div>
