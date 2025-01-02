@@ -75,7 +75,7 @@ export const registerUser = createAsyncThunk(
         };
   
         // Send GET request to fetch user profile
-        const { data } = await axiosInstance.get(`/auth/profile`, config);
+        const { data } = await axiosInstance.get(`/v1/auth/profile`, config);
   
         return data; // Return the user profile data
       } catch (error) {
@@ -109,4 +109,3 @@ export const registerUser = createAsyncThunk(
       }
     }
   );
-  

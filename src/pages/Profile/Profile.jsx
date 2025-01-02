@@ -2,14 +2,15 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUserProfile } from '../../features/Auth/AuthaAction'
 import { User, Mail, Phone, CheckCircle } from 'lucide-react'
+import { getPurchase } from '../../features/Previous_Purchase/purchaseAction';
 
 const Profile = () => {
     const dispatch = useDispatch();
     const { userInfo, isUserLoggedIn } = useSelector(state => state.auth);
-
+    const { purchaseData, isLoading, isSuccess} = useSelector(state=> state.purchases)
     useEffect(() => {
-        if (isUserLoggedIn && userInfo.length === 0) {
-            dispatch(getUserProfile());
+        if (isUserLoggedIn) {
+            dispatch(getPurchase({email:userInfo?.email}));
         }
     }, [isUserLoggedIn, dispatch]);
 
@@ -80,6 +81,12 @@ const Profile = () => {
                         </div>
                     </div>
                 </div>
+               
+            </div>
+            {/** previous purchase section */}
+            <div>
+                <h1 className='text-2xl text-center mt-2 font-medium'>Your Previous Purchases</h1>
+
             </div>
         </div>
     );

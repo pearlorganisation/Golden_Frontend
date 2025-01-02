@@ -7,6 +7,7 @@ import reviewsReducer from "./Review/reviewSlice";
 import notesReducer from "./notes/notesSlice";
 import  storage from "redux-persist/lib/storage"
 import orderReducer from "./order/PaymentSlice"
+import purchaseReducer from "./Previous_Purchase/purchaseSlice"
 
 
 const persistConfig = {
@@ -26,8 +27,9 @@ const combineReducer = combineReducers({
   auth: AuthReducer,
   subject: subjectReducer,
   notes: notesReducer,
-order:orderReducer,
+  order:orderReducer,
   reviews: reviewsReducer,
+  purchases: purchaseReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, combineReducer);
