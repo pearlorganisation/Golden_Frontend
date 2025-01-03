@@ -7,10 +7,13 @@ export const injectStore = (_store) => {
 };
 
 
-const baseURL ="http://localhost:5000/"
+// const baseURL ="http://localhost:5000/"
   // ? import.meta.env.VITE_APP_BACKEND_DEV_BASE_URL
   // : import.meta.env.VITE_APP_BACKEND_PROD_BASE_URL || ""; 
 
+export const baseURL =
+  import.meta.env.VITE_WORKING_ENVIRONMENT == "DEVELOPMENT" ?
+    import.meta.env.VITE_APP_BACKEND_DEV_BASE_URL: import.meta.env.VITE_APP_PRODUCTION_DEV_BASE_URL
 console.log("Base URL:", baseURL);
 
 
