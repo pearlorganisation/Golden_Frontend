@@ -84,11 +84,48 @@ const Profile = () => {
                
             </div>
             {/** previous purchase section */}
-            <div>
-                <h1 className='text-2xl text-center mt-2 font-medium'>Your Previous Purchases</h1>
+           
+                <h1 className="text-2xl text-center mt-2 font-medium">Your Previous Purchases</h1>
 
+                <div className="mt-8">
+                    {Array.isArray(purchaseData.data) && purchaseData?.data?.map((purchase) => (
+                        <div
+                            key={purchase._id}
+                            className="bg-white shadow-md rounded-lg mb-4 p-6 hover:shadow-lg transition-shadow"
+                        >
+                            <div className="flex justify-between items-start flex-wrap">
+                                <div className="space-y-2">
+                                    <h2 className="text-xl font-semibold text-gray-800">{purchase.title}</h2>
+                                    <p className="text-gray-600">Order ID: {purchase.orderId}</p>
+                                    <p className="text-gray-600">Customer: {purchase.name}</p>
+                                    <p className="text-gray-600">Email: {purchase.email}</p>
+                                    <p className="text-gray-600">Phone: {purchase.mobileNumber}</p>
+                                </div>
+
+                                <div className="space-y-2 text-right mt-4 sm:mt-0">
+                                    <p className="text-2xl font-bold text-gray-800">₹{purchase.totalPrice}</p>
+                                    <p className={`inline-block px-3 py-1 rounded-full text-sm font-medium
+                  ${purchase.orderStatus === 'Pending' ? 'bg-yellow-100 text-yellow-800' :
+                                            purchase.orderStatus === 'Completed' ? 'bg-green-100 text-green-800' :
+                                                'bg-gray-100 text-gray-800'}`}>
+                                        {purchase.orderStatus}
+                                    </p>
+                                    <p className={`inline-block px-3 py-1 rounded-full text-sm font-medium
+                  ${purchase.paymentStatus === 'Unpaid' ? 'bg-red-100 text-red-800' :
+                                            purchase.paymentStatus === 'Paid' ? 'bg-green-100 text-green-800' :
+                                                'bg-gray-100 text-gray-800'}`}>
+                                        {purchase.paymentStatus}
+                                    </p>
+                                    <p className="text-sm text-gray-500">
+                                        {new Date(purchase.updatedAt).toLocaleDateString()}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
-        </div>
+        
     );
 };
 export default Profile
