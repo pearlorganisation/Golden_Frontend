@@ -22,6 +22,7 @@ import DisclaimerPolicy from "./pages/DesclaimerPolicy";
 import CancellationPolicy from "./pages/cancelationPolicy";
 import BuyPdf from "./pages/BuyPdf/BuyPdf";
 import Profile from "./pages/Profile/Profile";
+import BuyAllPdf from "./pages/BuyPdf/BuyAllPdf";
 
 const routes = createBrowserRouter([
    
@@ -114,6 +115,10 @@ const routes = createBrowserRouter([
         path: "/cancelPolicy",
         element: <CancellationPolicy />
       },
+      {
+        path:"/buy-all-notes",
+        element:<BuyAllPdf />
+      }
     ],
   },
   {

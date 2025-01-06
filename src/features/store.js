@@ -25,7 +25,7 @@ const persistConfig = {
 
 const combineReducer = combineReducers({
   auth: AuthReducer,
-  subject: subjectReducer,
+  subjects: subjectReducer,
   notes: notesReducer,
   order:orderReducer,
   reviews: reviewsReducer,

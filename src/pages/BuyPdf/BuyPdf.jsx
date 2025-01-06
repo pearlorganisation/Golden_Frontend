@@ -28,6 +28,7 @@ const BuyPdf = (props) => {
 
     console.log('-----------------buyer details', buyerName, buyerEmail, buyerNumber)
     
+    const isAll = false;
     /**---------------------payment handler--------------------*/
     const handlePay = async (note) => {
         try {
@@ -69,7 +70,8 @@ const BuyPdf = (props) => {
                                 buyerName:buyerName,
                                 buyerEmail:buyerEmail,
                                 buyerNumber:buyerNumber,
-                                pdfUrl:"https://res.cloudinary.com/dapjyizvj/raw/upload/v1734943843/uploads/reev5wluktdww2c0jqd3.pdf"
+                                pdfUrl:"https://res.cloudinary.com/dapjyizvj/raw/upload/v1734943843/uploads/reev5wluktdww2c0jqd3.pdf",
+                                isAll:isAll
                             }
                         );
 

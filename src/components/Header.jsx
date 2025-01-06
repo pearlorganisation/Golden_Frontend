@@ -100,7 +100,12 @@ const Header = () => {
       path: "/pricing",
     },
     {
-      id: 4,
+      id:4,
+      name:"Buy All Notes",
+      path:"/buy-all-notes"
+    },
+    {
+      id: 5,
       name: "About Us",
       path: "/about",
     },

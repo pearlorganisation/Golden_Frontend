@@ -24,7 +24,7 @@ const subjectSlice = createSlice({
 
       .addCase(getAllSubjects.fulfilled, (state, action) => {
         state.loading = false;
-        state.subject = action.payload; 
+        state.subject = action.payload.data; 
         state.success = true;
         toast.success("Subjects fetched successfully!", {
           position: "top-right",
