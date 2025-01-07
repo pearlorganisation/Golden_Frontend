@@ -45,6 +45,12 @@ const BuyAllPdf = () => {
     console.log("final buyer is",finalBuyerName, finalBuyerNumber,finalBuyerEmail)
     /** preparing user data for what details to use when he is logged in and what details to get from form when he is logged out */
 
+    let disable = true
+    if(finalBuyerName && finalBuyerEmail && finalBuyerNumber){
+        disable = false
+    }else{
+        disable = true
+    }
     
     const handlePayAllPdf = async (allPdfUrl) => {
         try {
@@ -172,44 +178,61 @@ const BuyAllPdf = () => {
                   </div>
               ))}
           </div>
-          <div>
-              {!isUserLoggedIn && (
-                  <div>
-                      <form>
-                          <div>
-                              <label htmlFor="name">Name</label>
-                              <input
-                                  id="name"
-                                  type="text"
-                                  {...register("name")}
-                                  placeholder="Enter your name"
-                              />
+          {!isUserLoggedIn && <div className="w-full px-4 py-8 bg-gray-50">
+              <div className="max-w-7xl mx-auto">
+                  <div className="bg-white shadow-md rounded-lg px-4 py-6 sm:px-6 lg:px-8">
+                      <form className="space-y-6">
+                          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                              <div>
+                                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                                      Name
+                                  </label>
+                                  <div className="mt-1">
+                                      <input
+                                          id="name"
+                                          type="text"
+                                          placeholder="Enter your name"
+                                          className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border"
+                                      />
+                                  </div>
+                              </div>
+
+                              <div>
+                                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                                      Email
+                                  </label>
+                                  <div className="mt-1">
+                                      <input
+                                          id="email"
+                                          type="email"
+                                          placeholder="Enter your email"
+                                          className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border"
+                                      />
+                                  </div>
+                              </div>
+
+                              <div>
+                                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+                                      Phone Number
+                                  </label>
+                                  <div className="mt-1">
+                                      <input
+                                          id="phone"
+                                          type="tel"
+                                          placeholder="Enter your phone number"
+                                          className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border"
+                                      />
+                                  </div>
+                              </div>
                           </div>
-                          <div>
-                              <label htmlFor="email">Email</label>
-                              <input
-                                  id="email"
-                                  type="email"
-                                  {...register("email")}
-                                  placeholder="Enter your email"
-                              />
-                          </div>
-                          <div>
-                              <label htmlFor="phone">Phone Number</label>
-                              <input
-                                  id="phone"
-                                  type="tel"
-                                  {...register("phone")}
-                                  placeholder="Enter your phone number"
-                              />
-                          </div>
-                          
                       </form>
                   </div>
-              )}
-          </div>
+              </div>
+          </div>}
+          
           <div className='flex justify-center items-center w-full mt-2 bg-gray-100 hover:bg-gray-200 transition-colors duration-300 h-12 rounded-md shadow-sm'>
-              <button onClick={()=>handlePayAllPdf(allPdfUrl)} className='font-semibold text-gray-700 hover:text-gray-900 transition-colors duration-300 tracking-wide w-full h-full'>
+              <button onClick={()=>handlePayAllPdf(allPdfUrl)} disabled={disable}
+               className='font-semibold text-gray-700 hover:text-gray-900 transition-colors duration-300 tracking-wide w-full h-full'>
                   Buy All for ₹2999
               </button>
           </div>
