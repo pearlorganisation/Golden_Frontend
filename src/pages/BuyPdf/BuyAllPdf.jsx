@@ -10,6 +10,8 @@ const BuyAllPdf = () => {
     const { subject } = useSelector(state=> state.subjects);
     const { isUserLoggedIn, userInfo } = useSelector((state)=> state.auth);
     const { register, handleSubmit, formState:{errors}, watch } = useForm()
+    
+    
     /** getting all the pdf urls from the subject object */
     let allPdfUrl = []
     if(subject){subject?.map((sub)=>(
@@ -178,6 +180,7 @@ const BuyAllPdf = () => {
                   </div>
               ))}
           </div>
+          {/**----------form section-----------*/}
           {!isUserLoggedIn && <div className="w-full px-4 py-8 bg-gray-50">
               <div className="max-w-7xl mx-auto">
                   <div className="bg-white shadow-md rounded-lg px-4 py-6 sm:px-6 lg:px-8">
