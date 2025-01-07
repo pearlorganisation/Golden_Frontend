@@ -6,7 +6,7 @@ import axios from "axios";
 import LoadingIndicator from "./LoadingIndicator";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { Link } from "react-router-dom";
 import PlanImage from "../assets/2999.jpeg";
 const RAZORPAY_KEY_ID = import.meta.env.VITE_APP_RAZORPAY_KEY_ID;
 
@@ -138,7 +138,7 @@ const SubscriptionSection = () => {
           <img src={PlanImage} alt="" />
         </div>
 
-        <button
+        {/* <button
           onClick={() =>
             handlePayment({
               id: 1,
@@ -150,9 +150,15 @@ const SubscriptionSection = () => {
           }
           disabled={loading}
           className="bg-yellow-400 mt-8 text-blue-900 py-3 px-6 rounded-full text-lg font-semibold hover:bg-yellow-500 transition duration-300"
-        >
-          {loading ? <LoadingIndicator /> : <h1>Pay Now </h1>}
-        </button>
+        > */}
+        <div className="bg-black flex items-center justify-center">
+          <Link to={"/buy-all-notes"}>
+            <h1 className="min-w-max bg-orange-400 px-4 py-2 rounded-lg">Buy Now</h1>
+          </Link>
+        </div>
+      
+            
+        {/* </button> */}
 
         {/* <div className="flex justify-center items-center">
           {cards.map((card, index) => (

@@ -79,7 +79,7 @@ const routes = createBrowserRouter([
       
 
       , {
-        path: "/detail",
+        path: "/notes", //  "/detail"
         element: <DetailPage />
       }
       , {
