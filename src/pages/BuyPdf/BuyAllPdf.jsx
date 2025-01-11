@@ -147,13 +147,13 @@ const BuyAllPdf = () => {
                   <div key={item._id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
                       {/* Banner Image */}
                       {item.banner?.[0]?.secure_url && (
-                          <div className="w-full h-48 overflow-hidden">
-                              <img
-                                  src={item.banner[0].secure_url}
-                                  alt={item.name}
-                                  className="w-full h-full object-cover"
-                              />
-                          </div>
+                          <div
+                              className="relative w-full h-96 overflow-hidden rounded-lg bg-gray-100 bg-cover bg-center"
+                              style={{
+                                  backgroundImage: `url(${item.banner[0].secure_url})`,
+                              }}
+                              aria-label={item.name}
+                          ></div>
                       )}
 
                       {/* Content */}
@@ -182,6 +182,7 @@ const BuyAllPdf = () => {
           </div>
           {/**----------form section-----------*/}
           {!isUserLoggedIn && <div className="w-full px-4 py-8 bg-gray-50">
+              <div className='flex justify-center items-center'><h1 className='text-2xl'>Fill the Details for continuing with the purchase</h1></div>
               <div className="max-w-7xl mx-auto">
                   <div className="bg-white shadow-md rounded-lg px-4 py-6 sm:px-6 lg:px-8">
                       <form className="space-y-6">
@@ -194,6 +195,7 @@ const BuyAllPdf = () => {
                                       <input
                                           id="name"
                                           type="text"
+                                          {...register("name")}
                                           placeholder="Enter your name"
                                           className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border"
                                       />
@@ -208,6 +210,7 @@ const BuyAllPdf = () => {
                                       <input
                                           id="email"
                                           type="email"
+                                          {...register("email")}
                                           placeholder="Enter your email"
                                           className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border"
                                       />
@@ -222,6 +225,7 @@ const BuyAllPdf = () => {
                                       <input
                                           id="phone"
                                           type="tel"
+                                          {...register("phone")}
                                           placeholder="Enter your phone number"
                                           className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border"
                                       />
@@ -235,8 +239,12 @@ const BuyAllPdf = () => {
           
           <div className='flex justify-center items-center w-full mt-2 bg-gray-100 hover:bg-gray-200 transition-colors duration-300 h-12 rounded-md shadow-sm'>
               <button onClick={()=>handlePayAllPdf(allPdfUrl)} disabled={disable}
-               className='font-semibold text-gray-700 hover:text-gray-900 transition-colors duration-300 tracking-wide w-full h-full'>
-                  Buy All for ₹2999
+                  className={`w-full py-4 px-6 rounded-xl font-semibold text-lg transition-all duration-200 ${disable
+                      ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                      : 'bg-blue-600 hover:bg-blue-700 text-white transform hover:-translate-y-0.5'
+                      }`}
+              >
+                  {disable ? "Please Fill All Details" : "Purchase Now"}
               </button>
           </div>
       </div>
