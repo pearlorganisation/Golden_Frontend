@@ -261,18 +261,18 @@ const BuyPdf = (props) => {
                 <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
                     {/* Hero Section */}
                     <div className="relative">
-                        {singleNote.subject?.banner?.[0]?.secure_url && (
-                            <div className="h-72 overflow-hidden">
+                        {singleNote?.subject?.banner?.[0]?.secure_url && (
+                            <div className="h-72 overflow-hidden bg-gray-200 relative">
                                 <img
-                                    src={singleNote.subject.banner[0].secure_url}
+                                    src={singleNote?.subject?.banner[0].secure_url}
                                     alt="Subject Banner"
-                                    className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
+                                    className="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
                                 />
                             </div>
                         )}
                         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
-                            <h1 className="text-4xl font-bold text-white mb-2">{singleNote.name}</h1>
-                            <p className="text-xl text-gray-200">{singleNote.subject?.name}</p>
+                            <h1 className="text-4xl font-bold text-white mb-2">{singleNote?.name}</h1>
+                            <p className="text-xl text-gray-200">{singleNote?.subject?.name}</p>
                         </div>
                     </div>
 
@@ -283,16 +283,16 @@ const BuyPdf = (props) => {
                                 <div>
                                     <p className="text-sm text-blue-600 font-semibold">Special Price</p>
                                     <div className="flex items-baseline space-x-3 mt-1">
-                                        <span className="text-3xl font-bold text-gray-900">₹{singleNote.discountedPrice}</span>
-                                        <span className="text-xl text-gray-500 line-through">₹{singleNote.price}</span>
+                                        <span className="text-3xl font-bold text-gray-900">₹{singleNote?.discountedPrice}</span>
+                                        <span className="text-xl text-gray-500 line-through">₹{singleNote?.price}</span>
                                         <span className="text-sm font-medium text-green-600 bg-green-100 px-2 py-1 rounded-full">
-                                            {Math.round(((singleNote.price - singleNote.discountedPrice) / singleNote.price) * 100)}% OFF
+                                            {Math.round(((singleNote?.price - singleNote?.discountedPrice) / singleNote?.price) * 100)}% OFF
                                         </span>
                                     </div>
                                 </div>
                                 <div className="text-right">
                                     <p className="text-sm text-gray-600">Total Pages</p>
-                                    <p className="text-2xl font-semibold text-gray-900">{singleNote.pages}</p>
+                                    <p className="text-2xl font-semibold text-gray-900">{singleNote?.pages}</p>
                                 </div>
                             </div>
                         </div>
@@ -300,22 +300,22 @@ const BuyPdf = (props) => {
                         {/* Description */}
                         <div className="mb-8">
                             <h2 className="text-xl font-semibold text-gray-900 mb-3">About this Note</h2>
-                            <p className="text-gray-600 leading-relaxed">{singleNote.subject?.description}</p>
+                            <p className="text-gray-600 leading-relaxed">{singleNote?.subject?.description}</p>
                         </div>
 
                         {/* Faculty Section */}
                         <div className="mb-8">
                             <h2 className="text-xl font-semibold text-gray-900 mb-4">Faculty</h2>
                             <div className="space-y-3">
-                                {singleNote.faculty?.map((faculty, index) => (
+                                {singleNote?.faculty?.map((faculty, index) => (
                                     <div key={index} className="bg-gray-50 rounded-lg p-4">
                                         <div className="flex items-center space-x-3">
                                             <div className="h-10 w-10 bg-blue-100 rounded-full flex items-center justify-center">
-                                                <span className="text-blue-600 font-semibold">{faculty.name.charAt(0)}</span>
+                                                <span className="text-blue-600 font-semibold">{faculty?.name.charAt(0)}</span>
                                             </div>
                                             <div>
-                                                <p className="font-medium text-gray-900">{faculty.name}</p>
-                                                <p className="text-sm text-gray-500">{faculty.institute}</p>
+                                                <p className="font-medium text-gray-900">{faculty?.name}</p>
+                                                <p className="text-sm text-gray-500">{faculty?.institute}</p>
                                             </div>
                                         </div>
                                     </div>
