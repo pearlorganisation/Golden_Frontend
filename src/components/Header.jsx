@@ -96,16 +96,21 @@ const Header = () => {
     },
     {
       id: 3,
-      name: "Pricing/FAQ",
+      name: "Pricing",
       path: "/pricing",
     },
     {
-      id:4,
-      name:"Buy All Notes",
-      path:"/buy-all-notes"
+      id: 4,
+      name: "Notes",
+      path: "/notes",
     },
     {
       id: 5,
+      name: "Buy All Notes",
+      path: "/buy-all-notes",
+    },
+    {
+      id: 6,
       name: "About Us",
       path: "/about",
     },
@@ -113,74 +118,71 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-[#21211f] shadow-md">
-      <nav className="flex items-center justify-between px-6 py-0">
+      <nav className="flex items-center  px-0 py-0">
         {/* Logo */}
-        <Link to={`/`} className="flex flex-col gap-0 mt-0 pt-0">
-          <div className="flex flex-row gap-3 items-center justify-center">
-            <img src={LogoName} className="w-20 h-20" />
-            <h1 className="text-white text-xl">GOLDEN MED NOTES</h1>
-          </div>
-        </Link>
-        {/* Hamburger Icon */}
-        <div className="md:hidden">
-          <button
-            onClick={toggleMobileMenu}
-            className="text-white hover:text-blue-600 focus:outline-none"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+        <div className="flex flex-row gap-1 items-center justify-center">
+          <Link to={`/`} className="flex flex-col gap-0 mt-0 pt-0">
+            <div className="flex flex-row gap-3 items-center justify-center">
+              <img src={LogoName} className="w-20 h-20" />
+              <h1 className="text-yellow-600 text-xl hidden lg:block">
+                GOLDEN MED NOTES
+              </h1>
+            </div>
+          </Link>
+          {/* Hamburger Icon */}
+          <div className="md:hidden">
+            <button
+              onClick={toggleMobileMenu}
+              className="text-white hover:text-blue-600 focus:outline-none"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d={
-                  isMobileMenuOpen
-                    ? "M6 18L18 6M6 6l12 12"
-                    : "M4 6h16M4 12h16M4 18h16"
-                }
-              />
-            </svg>
-          </button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d={
+                    isMobileMenuOpen
+                      ? "M6 18L18 6M6 6l12 12"
+                      : "M4 6h16M4 12h16M4 18h16"
+                  }
+                />
+              </svg>
+            </button>
+          </div>
         </div>
 
         {/* Navigation Links */}
         <ul
-          className={`absolute md:static top-16 left-0 w-full md:w-auto md:flex bg-white md:bg-transparent md:space-x-6 items-center transform md:transform-none transition-all duration-300 ease-in-out mobile-menu ${
+          className={`absolute md:static text-center top-20 left-0 w-full md:w-auto md:flex bg-white md:bg-transparent md:space-x-6 items-center transform md:transform-none transition-all duration-300 ease-in-out mobile-menu ${
             isMobileMenuOpen ? "block" : "hidden"
           }`}
         >
           {pages.map((item) => (
-            <motion.li
+            <li
               key={item.id}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3 }}
-              className="border-b md:border-none"
+              className="border-b md:border-none lg:ml-8 md:ml-6 ml-12"
             >
               <Link
                 to={`${item.path}`}
-                className="block md:inline px-6 py-2 text-white hover:text-blue-600"
+                className="block md:inline md:px-1 text-xs md:text-sm lg:text-base lg:px-1 py-2 text-yellow-600 hover:text-blue-600"
               >
                 {item.name}
               </Link>
-            </motion.li>
+            </li>
           ))}
         </ul>
 
         {/* Right Section */}
         {!isUserLoggedIn ? (
-          <div className="hidden md:flex space-x-4">
+          <div className=" absolute right-4 md:flex flex-row space-x-2">
             <Link to="/login">
-              <button
-                // onClick={openLoginModal}
-
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-              >
+              <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
                 Login
               </button>
             </Link>
@@ -189,7 +191,7 @@ const Header = () => {
                 href="/signup"
                 className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
               >
-                Sign-Up
+                Signup
               </button>
             </Link>
           </div>
