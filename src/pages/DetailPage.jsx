@@ -63,9 +63,9 @@ const DetailPage = () => {
   const specialties = notes || [];
   const content = specialties.reduce((acc, speciality) => {
     acc[speciality.name] = {
-      title: speciality.name,
-      pages: speciality.subject.pages,
-      price: speciality.subject.discountedPrice,
+      title: speciality?.name,
+      pages: speciality?.subject?.pages,
+      price: speciality?.subject?.discountedPrice,
       image: speciality?.subject?.banner[0]?.secure_url,
       description: speciality?.subject?.description,
     };
@@ -372,9 +372,9 @@ const DetailPage = () => {
                         Price:{" "}
                         <strong className="text-green-600">
                           <strike className="font-bold mr-3 text-red-500">
-                            ₹{speciality.subject.price}
+                            ₹{speciality?.subject?.price}
                           </strike>
-                          ₹{speciality.subject.discountedPrice}
+                          ₹{speciality?.subject?.discountedPrice}
                         </strong>
                       </p>
                     </div>
