@@ -101,12 +101,12 @@ const Header = () => {
     },
     {
       id: 4,
-      name: "Notes",
+      name: "Subjects",
       path: "/notes",
     },
     {
       id: 5,
-      name: "Buy All Notes",
+      name: "Buy All Subjects",
       path: "/buy-all-notes",
     },
     {

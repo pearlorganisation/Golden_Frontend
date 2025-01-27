@@ -11,10 +11,11 @@ const Home = () => {
   return (
     <div>
       <HeroSection />
-      <WhyChooseUs />
+
       <div className="">
         <img src={LandingPageImg} className="w-full h-full" />
       </div>
+      <WhyChooseUs />
       <SubscriptionSection />
       <FreePDFsSection />
       <Testimonials />
