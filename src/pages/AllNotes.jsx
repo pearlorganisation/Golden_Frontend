@@ -8,26 +8,24 @@ import { PiChatTextFill } from "react-icons/pi";
 import { getAllSubjects } from '../features/Subject/SubjectAction';
 
 const AllNotes = () => {
-  const { subject, pagination, loading } = useSelector((state) => state.subject);
+  const {loading, subject, pagination } = useSelector((state) => state.subject);
   const dispatch = useDispatch();
+  const [page, setPage] = useState(1);
   const [isFetching, setIsFetching] = useState(false);
 
-  // Fetch initial data
   useEffect(() => {
     dispatch(getAllSubjects({ page: 1 }));
-  }, [dispatch]);
-
-  // Infinite Scroll
+  }, [dispatch, page]);
   useEffect(() => {
     const handleScroll = () => {
       if (
         window.innerHeight + document.documentElement.scrollTop >=
         document.documentElement.offsetHeight - 100
       ) {
-        // Only fetch more data if there's a next page and we're not already fetching
+        // Trigger fetch for the next page
         if (pagination?.next && !isFetching) {
           setIsFetching(true);
-          dispatch(getAllSubjects({ page: pagination.next }))
+          dispatch(getAll({ page: pagination.next }))
             .then(() => setIsFetching(false))
             .catch(() => setIsFetching(false));
         }
@@ -36,7 +34,8 @@ const AllNotes = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [pagination, isFetching, dispatch]);
+  }, [dispatch, pagination, isFetching]);
+
 
   return (
     <div className="font-sans">
@@ -54,7 +53,7 @@ const AllNotes = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="bg-cover bg-center h-96 relative" style={{ backgroundImage: "url('/path-to-banner-image.jpg')" }}>
+      <section className="bg-cover bg-center h-96 relative" style={{ backgroundImage: "url('public/ad.jpg')" }}>
         <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center">
           <h2 className="text-white text-5xl font-bold">Golden Med Notes</h2>
           <p className="text-yellow-400 mt-4 text-lg">NEET PG Subscription Plans</p>
@@ -102,6 +101,7 @@ const AllNotes = () => {
 
       {/* Subjects Section */}
       <section className="py-16 bg-gray-50">
+        {console.log("pagination 123", pagination)}
         <div className="container mx-auto">
           <h3 className="text-center text-blue-800 text-2xl font-bold">
             Total {pagination?.count || 0} Subjects - {pagination?.count * 30 || 0} Pages

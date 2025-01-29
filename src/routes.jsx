@@ -21,6 +21,7 @@ import DeliveryPolicy from "./pages/DeliveryPage";
 import DisclaimerPolicy from "./pages/DesclaimerPolicy";
 import CancellationPolicy from "./pages/cancelationPolicy";
 import BuyPdf from "./pages/BuyPdf/BuyPdf";
+import AllNotes from "./pages/AllNotes";
 
 const routes = createBrowserRouter([
    
@@ -122,6 +123,10 @@ const routes = createBrowserRouter([
     path: "/signup",
     element: <SignUp />,
   },
+  {
+    path:"/all-notes",
+    element:<AllNotes/>
+  }
 //   {
 //     path:"/aboutus",
 //     element: <AboutUs/>

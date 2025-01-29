@@ -4,7 +4,7 @@ import { getAllSubjects } from "./SubjectAction"; // Import API actions or thunk
 
 const initialState = {
   loading: false,
-  subject: [], 
+  subjects: [], 
   error: null,
   success: false, 
 };
@@ -24,7 +24,8 @@ const subjectSlice = createSlice({
 
       .addCase(getAllSubjects.fulfilled, (state, action) => {
         state.loading = false;
-        state.subject = action.payload; 
+        state.subjects = action.payload.data;
+        state.pagination = action.payload.pagination;  
         state.success = true;
         toast.success("Subjects fetched successfully!", {
           position: "top-right",
