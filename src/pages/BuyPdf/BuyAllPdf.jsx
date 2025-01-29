@@ -18,7 +18,7 @@ const BuyAllPdf = () => {
         allPdfUrl.push(sub?.pdfUrl)
       ))
     };
-
+   allPdfUrl = allPdfUrl.filter(el=> el !== undefined)
     console.log("---------all urls", allPdfUrl)
     /** just for backend */
     const isAll = true;
