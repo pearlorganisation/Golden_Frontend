@@ -6,17 +6,25 @@ import SubscriptionSection from "../components/SubscriptionsSection";
 import FreePDFsSection from "../components/FreePDFs";
 import Testimonials from "../components/Testimonials";
 import LandingPageImg from "../assets/landing_page.jpg";
+import HomeSubject from "../components/HomeSubject";
+
+import PricesImage from "../assets/Prices.png";
 
 const Home = () => {
   return (
     <div>
-      <HeroSection />
+      {/* <HeroSection /> */}
 
       <div className="">
         <img src={LandingPageImg} className="w-full h-full" />
       </div>
+
+      <div className="mt-[-200px]">
+        <img src={PricesImage} className="w-full h-full" />
+      </div>
       <WhyChooseUs />
-      <SubscriptionSection />
+      {/* <SubscriptionSection /> */}
+      <HomeSubject />
       <FreePDFsSection />
       <Testimonials />
     </div>

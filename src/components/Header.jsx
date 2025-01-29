@@ -85,11 +85,6 @@ const Header = () => {
 
   const pages = [
     {
-      id: 1,
-      name: "Home",
-      path: "/",
-    },
-    {
       id: 2,
       name: "Features",
       path: "/features",
@@ -97,20 +92,16 @@ const Header = () => {
     {
       id: 3,
       name: "Pricing",
-      path: "/pricing",
+      path: "/buy-all-notes",
     },
     {
       id: 4,
       name: "Subjects",
       path: "/notes",
     },
+
     {
       id: 5,
-      name: "Buy All Subjects",
-      path: "/buy-all-notes",
-    },
-    {
-      id: 6,
       name: "About Us",
       path: "/about",
     },
@@ -118,15 +109,13 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-[#21211f] shadow-md">
-      <nav className="flex items-center  px-0 py-0">
+      <nav className="flex items-center  px-0 py-2">
         {/* Logo */}
         <div className="flex flex-row gap-1 items-center justify-center">
           <Link to={`/`} className="flex flex-col gap-0 mt-0 pt-0">
             <div className="flex flex-row gap-3 items-center justify-center">
-              <img src={LogoName} className="w-20 h-20" />
-              <h1 className="text-yellow-600 text-xl hidden lg:block">
-                GOLDEN MED NOTES
-              </h1>
+              <img src={LogoName} className="w-12 h-12" />
+              <h1 className="text-yellow-600 text-base">GOLDEN MED NOTES</h1>
             </div>
           </Link>
           {/* Hamburger Icon */}
@@ -163,14 +152,14 @@ const Header = () => {
             isMobileMenuOpen ? "block" : "hidden"
           }`}
         >
-          {pages.map((item) => (
+          {pages.slice(0, 4).map((item) => (
             <li
               key={item.id}
               className="border-b md:border-none lg:ml-8 md:ml-6 ml-12"
             >
               <Link
                 to={`${item.path}`}
-                className="block md:inline md:px-1 text-xs md:text-sm lg:text-base lg:px-1 py-2 text-yellow-600 hover:text-blue-600"
+                className="block md:inline md:px-1 text-sm md:text-base lg:text-lg lg:px-1 py-2 text-yellow-600 hover:text-blue-600"
               >
                 {item.name}
               </Link>

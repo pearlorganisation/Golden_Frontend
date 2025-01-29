@@ -303,12 +303,12 @@ const DetailPage = () => {
                 specialties.map((speciality) => (
                   <div
                     key={speciality.id}
-                    className="bg-white shadow-lg rounded-md p-6 max-w-[300px] h-[520px]"
+                    className="bg-black text-white shadow-lg rounded-md px-6 py-2 max-w-[270px] h-[480px]"
                     style={{
                       boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
                     }}
                   >
-                    <h3 className="text-lg lg:text-xl font-semibold text-gray-700 mb-4 min-h-14">
+                    <h3 className="text-sm lg:text-base font-semibold text-white min-h-12">
                       {speciality.name}
                     </h3>
                     {/* {speciality?.subject?.banner[0]?.secure_url && (
@@ -323,20 +323,20 @@ const DetailPage = () => {
 
                     {Array.isArray(speciality?.subject?.banner) &&
                       speciality.subject.banner.length > 0 && (
-                        <div>
+                        <div className="relative">
                           <Swiper
                             modules={[Pagination]}
                             spaceBetween={10}
                             slidesPerView={1}
                             pagination={{ clickable: true }}
-                            className="rounded-md mb-4"
+                            className="rounded-md"
                           >
                             {speciality.subject.banner.map((image, index) => (
                               <SwiperSlide key={index}>
                                 <img
                                   src={image.secure_url}
                                   alt={`${speciality.name} ${index + 1}`}
-                                  className="w-full h-64 object-cover rounded-md"
+                                  className="  rounded-md w-full h-64"
                                 />
                               </SwiperSlide>
                             ))}
@@ -348,7 +348,7 @@ const DetailPage = () => {
                     <div className="bg-gray-100 p-4 rounded-lg border border-gray-200">
                       <p className="text-base lg:text-lg text-gray-700">
                         Price:{" "}
-                        <strong className="text-green-600">
+                        <strong className="text-yellow-600">
                           <strike className="font-bold mr-3 text-red-500">
                             ₹{speciality?.subject?.price}
                           </strike>
@@ -358,7 +358,7 @@ const DetailPage = () => {
                     </div>
                     {/*  <Link to={`/buy-pdf/${speciality?._id}`}> */}
                     <button
-                      className="bg-gradient-to-r from-blue-500 to-green-400 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:from-blue-600 hover:to-green-500 transform hover:scale-105 transition-all duration-300 ease-in-out flex items-center justify-center mt-4 w-full "
+                      className="bg-gradient-to-r from-yellow-600 to-black text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:from-yellow-700 hover:to-black transform hover:scale-105 transition-all duration-300 ease-in-out flex items-center justify-center mt-4 w-full "
                       onClick={() => {
                         logicFunction(speciality);
                       }}

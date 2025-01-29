@@ -5,43 +5,34 @@ import AuthReducer from "./Auth/AuthSlice";
 import subjectReducer from "./Subject/SubjectSlice";
 import reviewsReducer from "./Review/reviewSlice";
 import notesReducer from "./notes/notesSlice";
-import  storage from "redux-persist/lib/storage"
-import orderReducer from "./order/PaymentSlice"
-import purchaseReducer from "./Previous_Purchase/purchaseSlice"
-
+import storage from "redux-persist/lib/storage";
+import orderReducer from "./order/PaymentSlice";
+import purchaseReducer from "./Previous_Purchase/purchaseSlice";
 
 const persistConfig = {
   key: "golden",
   storage,
 };
 
-// const abcReducer = (state = {}, action) => {
-//     switch (action.type) {
-//         case "SET_ABC":
-//             return { ...state, ...action.payload };
-//         default:
-//             return state;
-//     }}
-
 const combineReducer = combineReducers({
   auth: AuthReducer,
   subjects: subjectReducer,
   notes: notesReducer,
-  order:orderReducer,
+  order: orderReducer,
   reviews: reviewsReducer,
-  purchases: purchaseReducer
+  purchases: purchaseReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, combineReducer);
 
 const store = configureStore({
-    reducer: persistedReducer,
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware({
-        serializableCheck: {
-          ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"], 
-        },
-      }),
-  });
-const persistor= persistStore(store);
-export {store,persistor}
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"],
+      },
+    }),
+});
+const persistor = persistStore(store);
+export { store, persistor };
