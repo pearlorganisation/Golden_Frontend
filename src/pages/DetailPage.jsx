@@ -26,8 +26,8 @@ const DetailPage = () => {
   const { notes, pagination, loading } = useSelector((state) => state.notes);
 
   /**---userInfo---*/
-  const { userInfo, isUserLoggedIn } = useSelector(state=> state.auth)
-  
+  const { userInfo, isUserLoggedIn } = useSelector((state) => state.auth);
+
   console.log(pagination, "my pagination");
 
   useEffect(() => {
@@ -114,18 +114,18 @@ const DetailPage = () => {
       console.log(speciality, "meri speiclaity");
       const selectedPdf = speciality.name;
       const amount = speciality?.subject?.discountedPrice || 0;
-      const buyerName = userInfo.name
-      const buyerNumber = userInfo.phoneNumber
-      const buyerEmail = userInfo.email
+      const buyerName = userInfo.name;
+      const buyerNumber = userInfo.phoneNumber;
+      const buyerEmail = userInfo.email;
       // Create an order on the server
       const { data: order } = await axios.post(
         "http://localhost:5000/order/create",
         {
           price: amount,
-          buyerName:buyerName,
-          buyerEmail:buyerEmail,
-          buyerNumber:buyerNumber,
-          title:selectedPdf
+          buyerName: buyerName,
+          buyerEmail: buyerEmail,
+          buyerNumber: buyerNumber,
+          title: selectedPdf,
         }
       );
 
@@ -150,7 +150,8 @@ const DetailPage = () => {
                 buyerName: buyerName,
                 buyerEmail: buyerEmail,
                 buyerNumber: buyerNumber,
-                pdfUrl: "https://res.cloudinary.com/dapjyizvj/raw/upload/v1734943843/uploads/reev5wluktdww2c0jqd3.pdf" // in future change it with the url of the pdf
+                pdfUrl:
+                  "https://res.cloudinary.com/dapjyizvj/raw/upload/v1734943843/uploads/reev5wluktdww2c0jqd3.pdf", // in future change it with the url of the pdf
               }
             );
 
@@ -191,25 +192,28 @@ const DetailPage = () => {
     }
   };
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   /**logic managing whether to move to next page for payment for the logged out user or just get the payment from this page for the pdf if the user is logged in */
-  const logicFunction = (speciality)=>{
-    if(isUserLoggedIn){
-        handlePay(speciality)
-    }else if(!isUserLoggedIn){
-     return navigate(`/buy-pdf/${speciality?._id}`)
+  const logicFunction = (speciality) => {
+    if (isUserLoggedIn) {
+      handlePay(speciality);
+    } else if (!isUserLoggedIn) {
+      return navigate(`/buy-pdf/${speciality?._id}`);
     }
-  }
+  };
   return (
     <>
-      <div className="flex flex-col lg:flex-row min-h-screen">
+      <div className="flex flex-col lg:flex-row ">
         {/* Sidebar */}
         <div
           className={`lg:w-1/5 bg-gray-100 border-r lg:block ${
             isSidebarOpen ? "block" : "hidden"
           }`}
         >
-          <h2 className="text-xl font-bold px-4 py-2"> Categories</h2>
+          <h2 className=" text-xl font-bold px-4  py-12 md:py-2">
+            {" "}
+            Categories
+          </h2>
           <ul className="space-y-2 px-4">
             {specialties.map((item) => (
               <li
@@ -229,10 +233,10 @@ const DetailPage = () => {
 
         {/* Sidebar Toggle Button */}
         <button
-          className="lg:hidden p-2 bg-blue-500 text-white fixed top-4 left-4 z-50 rounded"
+          className="md:hidden p-2 bg-blue-500 text-white fixed top-24 left-4 z-50 rounded"
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
         >
-          {isSidebarOpen ? <IoIosClose /> : <FaBars />}
+          {isSidebarOpen ? <IoIosClose /> : <button> Categories </button>}
         </button>
 
         {/* Content Section */}
@@ -243,25 +247,25 @@ const DetailPage = () => {
               <div className="flex flex-row gap-12">
                 <img
                   src={content[selectedSpeciality]?.image || selectedSpeciality}
-                  className="w-72 h-[80%]"
+                  className="lg:w-72 w-56 h-[80%]"
                 />
                 <div className="flex flex-col gap-4 mt-12">
-                  <h1 className="text-4xl lg:text-6xl font-bold mb-4">
+                  <h1 className="text-xl md:text-4xl lg:text-6xl font-bold mb-4">
                     {content[selectedSpeciality]?.title || selectedSpeciality}
                   </h1>
 
-                  <h1 className="text-3xl lg:text-5xl font-bold mb-4">
+                  <h1 className="text-xl md:text-3xl lg:text-5xl font-bold mb-4">
                     Pages:{" "}
                     {content[selectedSpeciality]?.pages || selectedSpeciality}
                   </h1>
 
-                  <h1 className="text-3xl lg:text-5xl font-bold mb-4">
+                  <h1 className="text-xl md:text-3xl lg:text-5xl font-bold mb-4">
                     Price: Rs.{" "}
                     {content[selectedSpeciality]?.price || selectedSpeciality}
                   </h1>
 
-                  <h1 className="underline"> Description </h1>
-                  <p className="text-base lg:text-lg mt-4">
+                  <h1 className="underline hidden md:block"> Description </h1>
+                  <p className="hidden md:block text-base lg:text-lg mt-4">
                     {content[selectedSpeciality]?.description ||
                       "Details about this specialty will appear here."}
                   </p>
@@ -294,17 +298,17 @@ const DetailPage = () => {
             <div className="text-xl lg:text-4xl font-bold text-white bg-gradient-to-r from-blue-600 via-purple-600 to-green-600 px-6 py-4 mb-6 rounded-lg shadow-lg">
               PDF Plans
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center items-center">
               {Array.isArray(specialties) &&
                 specialties.map((speciality) => (
                   <div
                     key={speciality.id}
-                    className="bg-white shadow-lg rounded-md p-6 max-w-[300px]"
+                    className="bg-black text-white shadow-lg rounded-md px-6 py-2 max-w-[270px] h-[480px]"
                     style={{
                       boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
                     }}
                   >
-                    <h3 className="text-lg lg:text-xl font-semibold text-gray-700 mb-4">
+                    <h3 className="text-sm lg:text-base font-semibold text-white min-h-12">
                       {speciality.name}
                     </h3>
                     {/* {speciality?.subject?.banner[0]?.secure_url && (
@@ -319,20 +323,20 @@ const DetailPage = () => {
 
                     {Array.isArray(speciality?.subject?.banner) &&
                       speciality.subject.banner.length > 0 && (
-                        <div>
+                        <div className="relative">
                           <Swiper
                             modules={[Pagination]}
                             spaceBetween={10}
                             slidesPerView={1}
                             pagination={{ clickable: true }}
-                            className="rounded-md mb-4"
+                            className="rounded-md"
                           >
                             {speciality.subject.banner.map((image, index) => (
                               <SwiperSlide key={index}>
                                 <img
                                   src={image.secure_url}
                                   alt={`${speciality.name} ${index + 1}`}
-                                  className="w-full h-64 object-cover rounded-md"
+                                  className="  rounded-md w-full h-64"
                                 />
                               </SwiperSlide>
                             ))}
@@ -340,37 +344,11 @@ const DetailPage = () => {
                         </div>
                       )}
 
-                    {/* Dropdown for Duration
-                <div className="mb-6">
-                  <label className="block text-gray-600 text-sm font-medium mb-2">
-                    Select Duration
-                  </label>
-                  <select
-                    className="border border-gray-300 rounded-md w-full p-3 text-gray-700 text-base focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    value={selectedOptions[speciality.name]}
-                    onChange={(e) =>
-                      handleSelectChange(speciality.name, e.target.value)
-                    }
-                  >
-                    {selectMonth.map((item) => (
-                      <option key={item} value={item}>
-                        {item}
-                      </option>
-                    ))}
-                  </select>
-                </div> */}
-
                     {/* Display Selected Price */}
                     <div className="bg-gray-100 p-4 rounded-lg border border-gray-200">
-                      {/* <p className="text-base lg:text-lg text-gray-700 mb-2">
-                  Selected Plan:{" "}
-                  <strong className="text-blue-600">
-                    {selectedOptions[speciality.name]}
-                  </strong>
-                </p> */}
                       <p className="text-base lg:text-lg text-gray-700">
                         Price:{" "}
-                        <strong className="text-green-600">
+                        <strong className="text-yellow-600">
                           <strike className="font-bold mr-3 text-red-500">
                             ₹{speciality?.subject?.price}
                           </strike>
@@ -378,13 +356,13 @@ const DetailPage = () => {
                         </strong>
                       </p>
                     </div>
-          {/*  <Link to={`/buy-pdf/${speciality?._id}`}> */} 
+                    {/*  <Link to={`/buy-pdf/${speciality?._id}`}> */}
                     <button
-                      className="bg-gradient-to-r from-blue-500 to-green-400 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:from-blue-600 hover:to-green-500 transform hover:scale-105 transition-all duration-300 ease-in-out flex items-center justify-center mt-4 w-full "
+                      className="bg-gradient-to-r from-yellow-600 to-black text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:from-yellow-700 hover:to-black transform hover:scale-105 transition-all duration-300 ease-in-out flex items-center justify-center mt-4 w-full "
                       onClick={() => {
-                        logicFunction(speciality)
+                        logicFunction(speciality);
                       }}
-                    >                       
+                    >
                       <span className="mr-2">Buy Now</span>
                       <svg
                         className="w-5 h-5"
@@ -401,12 +379,6 @@ const DetailPage = () => {
                         ></path>
                       </svg>
                     </button>
-                    {/* </Link> */}
-                    {loading && (
-                      <div className="flex justify-center items-center mt-6">
-                        <h1 className=""> Fetching More Subjects </h1>
-                      </div>
-                    )}
                   </div>
                 ))}
             </div>

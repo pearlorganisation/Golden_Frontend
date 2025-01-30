@@ -123,7 +123,7 @@ const HeroSection = () => {
           to="/notes"
           className="bg-yellow-400 text-blue-900 py-3 px-6 rounded-full text-lg font-semibold hover:bg-yellow-500 transition duration-300"
         >
-          Explore Notes
+          Explore Subjects
         </Link>
 
         <Link

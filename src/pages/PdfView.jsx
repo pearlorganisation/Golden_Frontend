@@ -23,18 +23,15 @@ const PdfView = () => {
     setLoading(true);
     try {
       // Step 1: Create order on the backend
-      const response = await axios.post(
-        "http://localhost:5000/bookings",
-        {
-          totalPrice: 30,
-          name:"Manish",
-          title:"Golden Med Notes",
-         }
-      );
+      const response = await axios.post("http://localhost:5000/bookings", {
+        totalPrice: 30,
+        name: "Manish",
+        title: "Golden Med Notes",
+      });
       console.log(`response:: ${JSON.stringify(response, null, 2)}`);
 
       const { order } = response.data;
-      console.log('--------------order is', order)
+      console.log("--------------order is", order);
       // Step 2: Set up Razorpay options
       const options = {
         key: RAZORPAY_KEY_ID,
@@ -54,12 +51,11 @@ const PdfView = () => {
             if (verifyPayment?.data?.success === true) {
               toast.success("🦄Payment Successfull");
               // setTimeout(()=>{
-              //   unlockAllPdfs() 
+              //   unlockAllPdfs()
               // },1000)
-            
-                
-                setTimeout(() => {
-                 navigate("/");
+
+              setTimeout(() => {
+                navigate("/");
               }, 400);
             }
           } catch (error) {
@@ -90,7 +86,7 @@ const PdfView = () => {
           },
         },
       };
-     
+
       // Step 4: Open Razorpay checkout
       const razorpay = new window.Razorpay(options);
       razorpay.open();
@@ -102,7 +98,7 @@ const PdfView = () => {
     }
   };
 
-    const modalRef = useRef(null);
+  const modalRef = useRef(null);
 
   // useEffect(() => {
   //   const handleKeyDown = (event) => {
@@ -158,7 +154,7 @@ const PdfView = () => {
 
   const openPurchaseAllModal = () => {
     // setPurchaseAllModal(true);
-    handlePayment(unlockAllPdfs())
+    handlePayment(unlockAllPdfs());
   };
 
   const closePurchaseAllModal = () => {
@@ -174,7 +170,7 @@ const PdfView = () => {
 
   const handleAccept = () => {
     setShowTerms(false);
-  
+
     openModal();
   };
 
@@ -190,12 +186,6 @@ const PdfView = () => {
     setUnlocked(allUnlocked);
     closePurchaseAllModal();
   };
-
- 
-
-
-
-
 
   // useEffect(() => {
   //   if (showModal) {

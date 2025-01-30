@@ -83,12 +83,22 @@ const FreePDFsSection = () => {
 
   const freePDFs = [
     {
-      title: "INR 149 Plan Sample",
+      title: "Sample PDF 1",
       description: "Get a glimpse of the essential resources we offer.",
       link: "https://res.cloudinary.com/dapjyizvj/raw/upload/v1734936975/uploads/hohobrpj76glk7kapslt.pdf",
     },
     {
-      title: "Biochem Sample PDF",
+      title: "Sample PDF 2",
+      description: "Preview premium content designed for success.",
+      link: "https://res.cloudinary.com/dapjyizvj/raw/upload/v1734936788/uploads/hv7e0zpgdtwgnpwpcv6a.pdf",
+    },
+    {
+      title: "Sample PDF 3",
+      description: "Get a glimpse of the essential resources we offer.",
+      link: "https://res.cloudinary.com/dapjyizvj/raw/upload/v1734936975/uploads/hohobrpj76glk7kapslt.pdf",
+    },
+    {
+      title: "Sample PDF 4",
       description: "Preview premium content designed for success.",
       link: "https://res.cloudinary.com/dapjyizvj/raw/upload/v1734936788/uploads/hv7e0zpgdtwgnpwpcv6a.pdf",
     },
@@ -103,7 +113,7 @@ const FreePDFsSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          Explore Free PDFs for Each Plan
+          Explore Free PDFs
         </motion.h2>
 
         <motion.p
@@ -116,7 +126,7 @@ const FreePDFsSection = () => {
           quality for yourself!
         </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {freePDFs.map((pdf, index) => (
             <div
               key={index}
@@ -142,7 +152,7 @@ const FreePDFsSection = () => {
           ))}
         </div>
 
-        <motion.div
+        {/* <motion.div
           className="mt-12"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -152,9 +162,9 @@ const FreePDFsSection = () => {
             to="/pricing-faq"
             className="bg-red-800 text-white py-3 px-6 rounded-full text-lg font-semibold hover:bg-red-700 "
           >
-            Subscribe Now
+            Pay Now
           </Link>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );

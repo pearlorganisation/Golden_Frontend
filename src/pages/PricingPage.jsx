@@ -1,31 +1,8 @@
-import { useRef, useState } from "react";
-import gsap from "gsap";
 import { FaAward, FaCheckCircle } from "react-icons/fa";
-import { GrNotes } from "react-icons/gr";
 import TextAnimation from "../components/TextAnimation";
 
 const PricingPage = () => {
   const plans = [
-    // {
-    //   title: "NEET PG Guidance Pack",
-    //   price: "₹149/month",
-    //   description: "Updated monthly PDFs, daily tips & personal guidance",
-    //   features: [
-    //     { text: "NEET PG Guidance PDFs (updated every month)", icon: <GrNotes /> },
-    //     { text: "Group chat access for daily tips and updates", icon: <FaCheckCircle /> },
-    //     { text: "Daily MCQs to strengthen your preparation", icon: <FaCheckCircle /> },
-    //     { text: "No access to Golden Med Notes PDFs", icon: <FaAward /> },
-    //     { text: "Exclusive discounts on premium resources", icon: <FaCheckCircle /> },
-    //   ],
-    //   keyFeatures: [
-    //     "Updated PDFs every month",
-    //     "1:1 personal guidance",
-    //     "Group discussions and updates",
-    //     "Exclusive discounts on GOLDEN MED NOTES PDFs",
-    //   ],
-    //   button: "Get NEET PG Guidance",
-    //   highlight: true,
-    // },
     {
       title: "Golden With Elite Plan",
       price: "₹2999/month",
@@ -65,26 +42,6 @@ const PricingPage = () => {
       button: "Get Golden With Elite",
       highlight: true,
     },
-    // {
-    //   title: "Golden Med Notes Plan",
-    //   price: "₹399/month",
-    //   description: "Access to all GOLDEN MED resources",
-    //   features: [
-    //     { text: "Online access to all subjects (updated every 6 months)", icon: <FaCheckCircle /> },
-    //     { text: "Personalized guidance from mentors", icon: <FaCheckCircle /> },
-    //     { text: "Exclusive download option", icon: <FaCheckCircle /> },
-    //     { text: "Weekly MCQs and premium content for NEET PG preparation", icon: <GrNotes /> },
-    //     { text: "Exclusive discounts on GOLDEN MED NOTES", icon: <FaAward /> },
-    //   ],
-    //   keyFeatures: [
-    //     "Full access to GOLDEN MED Resources",
-    //     "Mentor-guided learning",
-    //     "Exclusive downloads",
-    //     "Weekly MCQs",
-    //   ],
-    //   button: "Get Golden Med Notes",
-    //   highlight: true,
-    // },
   ];
 
   const faqData = [
