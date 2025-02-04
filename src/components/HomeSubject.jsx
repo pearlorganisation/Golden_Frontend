@@ -39,8 +39,8 @@
 
 // export default HomeSubject;
 
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
@@ -49,8 +49,10 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import axios from "axios";
 import Razorpay from "react-razorpay/dist/razorpay";
+import { getAllnotes } from "../features/notes/notesAction";
 
 const HomeSubject = () => {
+  const dispatch = useDispatch();
   const { notes } = useSelector((state) => state.notes);
 
   const { userInfo, isUserLoggedIn } = useSelector((state) => state.auth);
@@ -149,6 +151,9 @@ const HomeSubject = () => {
     }
   };
 
+  useEffect(()=>{
+    dispatch(getAllnotes())
+  },[dispatch])
   return (
     <div className="bg-black text-white">
       <h1 className="text-5xl flex justify-center items-center">
@@ -179,6 +184,28 @@ const HomeSubject = () => {
                     alt={note.name}
                   />
                   <h1 className="mt-2 text-center">{note.name}</h1>
+                  <button
+                    className="bg-gradient-to-r from-yellow-600 to-black text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:from-yellow-700 hover:to-black transform hover:scale-105 transition-all duration-300 ease-in-out flex items-center justify-center mt-4 w-full "
+                    onClick={() => {
+                      logicFunction(note);
+                    }}
+                  >
+                    <span className="mr-2">Buy Now</span>
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M5 12h14M12 5l7 7-7 7"
+                      ></path>
+                    </svg>
+                  </button>
                 </div>
               </SwiperSlide>
             ))}
