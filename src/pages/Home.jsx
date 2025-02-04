@@ -8,7 +8,10 @@ import Testimonials from "../components/Testimonials";
 import LandingPageImg from "../assets/landing_page.jpg";
 import HomeSubject from "../components/HomeSubject";
 
+import Price2999 from "../assets/2999.jpeg";
+
 import PricesImage from "../assets/Prices.png";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -19,9 +22,23 @@ const Home = () => {
         <img src={LandingPageImg} className="w-full h-full" />
       </div>
 
-      <div className="mt-[-200px]">
+      <div className=" lg:mt-[-200px] md:mt-[-150px] mt-[-40px]">
         <img src={PricesImage} className="w-full h-full" />
       </div>
+
+      <div className="">
+        <img src={Price2999} className="w-full h-full" />
+      </div>
+
+      <div className="bg-black text-white flex items-center justify-center">
+        <Link
+          className="mt-3 mb-3 bg-yellow-600 px-4 py-2 rounded-md"
+          to={`/buy-all-notes`}
+        >
+          Pay Now
+        </Link>{" "}
+      </div>
+
       <WhyChooseUs />
       {/* <SubscriptionSection /> */}
       <HomeSubject />

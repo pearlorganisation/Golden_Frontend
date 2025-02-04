@@ -111,7 +111,7 @@ const Header = () => {
     <header className="sticky top-0 z-50 bg-[#21211f] shadow-md">
       <nav className="flex items-center  px-0 py-2">
         {/* Logo */}
-        <div className="flex flex-row gap-1 items-center justify-center">
+        <div className="flex flex-row gap-1 md:gap-3 items-center justify-center">
           <Link to={`/`} className="flex flex-col gap-0 mt-0 pt-0">
             <div className="flex flex-row gap-1 items-center justify-center">
               <img
