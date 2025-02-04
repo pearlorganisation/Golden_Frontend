@@ -83,24 +83,14 @@ const FreePDFsSection = () => {
 
   const freePDFs = [
     {
-      title: "Sample PDF 1",
+      title: "Medicine Sample",
       description: "Get a glimpse of the essential resources we offer.",
-      link: "https://res.cloudinary.com/dapjyizvj/raw/upload/v1734936975/uploads/hohobrpj76glk7kapslt.pdf",
+      link: "https://res.cloudinary.com/dapjyizvj/raw/upload/v1738657038/uploads/npdbcpy4xqjb3ppkw4f5.pdf",
     },
     {
-      title: "Sample PDF 2",
+      title: "PSM Sample",
       description: "Preview premium content designed for success.",
-      link: "https://res.cloudinary.com/dapjyizvj/raw/upload/v1734936788/uploads/hv7e0zpgdtwgnpwpcv6a.pdf",
-    },
-    {
-      title: "Sample PDF 3",
-      description: "Get a glimpse of the essential resources we offer.",
-      link: "https://res.cloudinary.com/dapjyizvj/raw/upload/v1734936975/uploads/hohobrpj76glk7kapslt.pdf",
-    },
-    {
-      title: "Sample PDF 4",
-      description: "Preview premium content designed for success.",
-      link: "https://res.cloudinary.com/dapjyizvj/raw/upload/v1734936788/uploads/hv7e0zpgdtwgnpwpcv6a.pdf",
+      link: "https://res.cloudinary.com/dapjyizvj/raw/upload/v1738657056/uploads/kqg810pllez7tnvbab2y.pdf",
     },
   ];
 
@@ -126,7 +116,7 @@ const FreePDFsSection = () => {
           quality for yourself!
         </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
           {freePDFs.map((pdf, index) => (
             <div
               key={index}
