@@ -64,7 +64,7 @@ const BuyAllPdf = () => {
   /** getting all the pdf urls from the subject object */
   let allPdfUrl = [];
   if (subject) {
-    subject?.map((sub) => allPdfUrl.push(sub?.pdfUrl));
+    subject?.map((sub) => allPdfUrl.push(sub?.pdf?.secure_url));
   }
 
   console.log("---------all urls", allPdfUrl);

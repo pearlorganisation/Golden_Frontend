@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
 import { getNotesById } from "../../features/notes/notesAction";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import Razorpay from "react-razorpay/dist/razorpay";
 import axios from "axios";
 import { baseURL } from "../../axiosInstance"; // base url is the current used url
@@ -11,6 +11,8 @@ const BuyPdf = (props) => {
   const { id } = useParams();
   const { singleNote } = useSelector((state) => state.notes);
   const { isUserLoggedIn } = useSelector((state) => state.auth);
+
+  const [loading, isLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -46,6 +48,8 @@ const BuyPdf = (props) => {
       const selectedPlan = note.name;
       const amount = note?.discountedPrice || note?.price;
 
+      const pdfUrl = note?.subject?.pdf?.secure_url;
+
       // Create an order on the server
       const { data: order } = await axios.post(`${baseURL}order/create`, {
         price: amount,
@@ -74,8 +78,7 @@ const BuyPdf = (props) => {
               buyerName: buyerName,
               buyerEmail: buyerEmail,
               buyerNumber: buyerNumber,
-              pdfUrl:
-                "https://res.cloudinary.com/dapjyizvj/raw/upload/v1734943843/uploads/reev5wluktdww2c0jqd3.pdf",
+              pdfUrl: pdfUrl,
               isAll: isAll,
             });
 
@@ -133,7 +136,7 @@ const BuyPdf = (props) => {
         <div className="bg-black text-white rounded-2xl shadow-xl overflow-hidden">
           {/* Hero Section */}
           <div className="relative">
-            {singleNote?.subject?.banner?.[0]?.secure_url && (
+            {singleNote?.subject?.banner[0]?.secure_url && (
               <div className="h-56 lg:h-72 overflow-hidden bg-gray-200 relative">
                 <img
                   src={singleNote?.subject?.banner[0].secure_url}
@@ -188,7 +191,7 @@ const BuyPdf = (props) => {
 
             {/* Description */}
             <div className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-3">
+              <h2 className="text-xl font-semibold text-white mb-3">
                 About this Note
               </h2>
               <p className="text-gray-600 leading-relaxed">
@@ -198,9 +201,7 @@ const BuyPdf = (props) => {
 
             {/* Faculty Section */}
             <div className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                Faculty
-              </h2>
+              <h2 className="text-xl font-semibold text-white mb-4">Faculty</h2>
               <div className="space-y-3">
                 {singleNote?.faculty?.map((faculty, index) => (
                   <div key={index} className="bg-gray-50 rounded-lg p-4">
@@ -227,14 +228,14 @@ const BuyPdf = (props) => {
             {/* User Details Form */}
             {!isUserLoggedIn && (
               <div className="bg-gray-50 rounded-xl p-6 mb-8">
-                <h2 className="text-xl font-semibold text-gray-900 mb-4">
+                <h2 className="text-xl font-semibold text-black mb-4">
                   Your Details
                 </h2>
                 <form className="space-y-4">
                   <div>
                     <label
                       htmlFor="name"
-                      className="block text-sm font-medium text-gray-700 mb-1"
+                      className="block text-sm font-medium text-black mb-1"
                     >
                       Full Name
                     </label>
@@ -242,7 +243,7 @@ const BuyPdf = (props) => {
                       type="text"
                       id="name"
                       {...register("name", { required: "Name is required" })}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 rounded-lg border text-black border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                       placeholder="Enter your name"
                     />
                     {errors.name && (
@@ -254,7 +255,7 @@ const BuyPdf = (props) => {
                   <div>
                     <label
                       htmlFor="number"
-                      className="block text-sm font-medium text-gray-700 mb-1"
+                      className="block text-sm font-medium text-black mb-1"
                     >
                       Mobile Number
                     </label>
@@ -268,7 +269,7 @@ const BuyPdf = (props) => {
                           message: "Please enter a valid 10-digit number",
                         },
                       })}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 rounded-lg border text-black border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                       placeholder="Enter your mobile number"
                     />
                     {errors.mobileNumber && (
@@ -280,7 +281,7 @@ const BuyPdf = (props) => {
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-sm font-medium text-gray-700 mb-1"
+                      className="block text-sm font-medium text-black mb-1"
                     >
                       Email Address
                     </label>
@@ -294,7 +295,7 @@ const BuyPdf = (props) => {
                           message: "Please enter a valid email address",
                         },
                       })}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 rounded-lg border text-black border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                       placeholder="Enter your email address"
                     />
                     {errors.email && (
