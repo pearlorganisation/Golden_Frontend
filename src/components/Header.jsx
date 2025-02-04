@@ -113,9 +113,20 @@ const Header = () => {
         {/* Logo */}
         <div className="flex flex-row gap-1 items-center justify-center">
           <Link to={`/`} className="flex flex-col gap-0 mt-0 pt-0">
-            <div className="flex flex-row gap-3 items-center justify-center">
-              <img src={LogoName} className="w-12 h-12" />
-              <h1 className="text-yellow-600 text-base">GOLDEN MED NOTES</h1>
+            <div className="flex flex-row gap-1 items-center justify-center">
+              <img
+                src={LogoName}
+                className="lg:w-12 lg:h-12 md:h-10 md:w-10 w-8 h-8"
+              />
+              <div className="flex flex-col  md:flex-row gap-1">
+                <h1 className="text-yellow-600 text-sm md:text-base">
+                  GOLDEN{" "}
+                </h1>
+                <h1 className="text-yellow-600 text-sm md:text-base">
+                  {" "}
+                  MEDNOTES
+                </h1>
+              </div>
             </div>
           </Link>
           {/* Hamburger Icon */}

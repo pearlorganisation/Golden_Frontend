@@ -19,7 +19,7 @@ const HomeSubject = () => {
           notes?.slice(0, 6).map((note) => (
             <div className="" key={note._id}>
               <img
-                src={note.subject.banner[0].secure_url}
+                src={note?.subject?.banner[0]?.secure_url}
                 className="lg:h-64"
               />
               <h1> {note.name}</h1>
