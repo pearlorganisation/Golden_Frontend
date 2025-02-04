@@ -44,7 +44,6 @@ const BuyPdf = (props) => {
   /**---------------------payment handler--------------------*/
   const handlePay = async (note) => {
     try {
-      console.log(note, "meri speiclaity");
       const selectedPlan = note.name;
       const amount = note?.discountedPrice || note?.price;
 

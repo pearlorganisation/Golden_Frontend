@@ -211,11 +211,11 @@ const BuyAllPdf = () => {
             <div
               key={index}
               className={`relative flex flex-col border rounded-xl shadow-lg p-6 w-72 ${
-                plan.highlight ? "border-purple-600" : "border-gray-200"
+                plan.highlight ? "border-yellow-600" : "border-gray-200"
               } transition-all duration-300 transform hover:scale-105`}
             >
               {plan.highlight && (
-                <div className="absolute -top-6 left-1/2 transform w-60 text-center -translate-x-1/2 bg-purple-300 text-purple-700 font-semibold px-6 py-2 text-sm rounded-full uppercase shadow-xl">
+                <div className="absolute -top-6 left-1/2 transform w-60 text-center -translate-x-1/2 bg-yellow-300 text-yellow-700 font-semibold px-6 py-2 text-sm rounded-full uppercase shadow-xl">
                   {plan.title}
                 </div>
               )}
@@ -227,8 +227,8 @@ const BuyAllPdf = () => {
               <button
                 className={`mt-6 px-6 py-3 text-sm font-medium rounded-lg ${
                   plan.highlight
-                    ? "bg-purple-600 text-white hover:bg-purple-700"
-                    : "border border-purple-600 text-purple-600 hover:bg-purple-100"
+                    ? "bg-yellow-600 text-white hover:bg-yellow-700"
+                    : "border border-yellow-600 text-yellow-600 hover:bg-yellow-100"
                 } transition-all`}
               >
                 {plan.button}
@@ -253,7 +253,7 @@ const BuyAllPdf = () => {
               </ul>
               {/* <a
               href="#"
-              className="text-sm text-purple-600 underline mt-4 block hover:text-purple-700"
+              className="text-sm text-yellow-600 underline mt-4 block hover:text-yellow-700"
             >
               View all features
             </a> */}
