@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../axiosInstance";
 
 const SearchResults = () => {
   const [searchParams] = useSearchParams();
@@ -14,11 +14,7 @@ const SearchResults = () => {
 
     const fetchNotes = async () => {
       try {
-        const response = await axios.get(
-          `${
-            import.meta.env.VITE_APP_BACKEND_DEV_BASE_URL
-          }notes/search?query=${query}`
-        );
+        const response = await axiosInstance.get(`notes/search?query=${query}`);
 
         setNotes(response.data.data);
       } catch (err) {

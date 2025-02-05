@@ -5,7 +5,7 @@ import { getNotesById } from "../../features/notes/notesAction";
 import { set, useForm } from "react-hook-form";
 import Razorpay from "react-razorpay/dist/razorpay";
 import axios from "axios";
-import { baseURL } from "../../axiosInstance"; // base url is the current used url
+import axiosInstance, { baseURL } from "../../axiosInstance"; // base url is the current used url
 const BuyPdf = (props) => {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -50,7 +50,7 @@ const BuyPdf = (props) => {
       const pdfUrl = note?.subject?.pdf?.secure_url;
 
       // Create an order on the server
-      const { data: order } = await axios.post(`${baseURL}order/create`, {
+      const { data: order } = await axiosInstance.post(`order/create`, {
         price: amount,
         title: note.name,
         buyerName: buyerName,

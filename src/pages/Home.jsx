@@ -31,11 +31,11 @@ const Home = () => {
         <img src={LandingPageImg} className="w-full h-full" />
       </div>
 
-      <SearchSection />
-
       <div className=" lg:mt-[-200px] md:mt-[-150px] mt-[-40px]">
         <img src={PricesImage} className="w-full h-full" />
       </div>
+
+      <SearchSection />
 
       <div className="">
         <img src={Price2999} className="w-full h-full" />
