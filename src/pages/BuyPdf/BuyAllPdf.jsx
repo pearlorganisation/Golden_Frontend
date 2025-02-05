@@ -66,7 +66,7 @@ const BuyAllPdf = () => {
   if (subject) {
     subject?.map((sub) => allPdfUrl.push(sub?.pdf?.secure_url));
   }
-
+  allPdfUrl = allPdfUrl.filter((el)=> el !== undefined)
   console.log("---------all urls", allPdfUrl);
   /** just for backend */
   const isAll = true;
