@@ -51,8 +51,7 @@ import axios from "axios";
 import Razorpay from "react-razorpay/dist/razorpay";
 
 const HomeSubject = () => {
-  const {notes} = useSelector((state) => state.notes);
-
+  const { notes } = useSelector((state) => state.notes);
 
   const { userInfo, isUserLoggedIn } = useSelector((state) => state.auth);
 
@@ -168,7 +167,6 @@ const HomeSubject = () => {
           }}
           navigation
           pagination={{ clickable: true }}
-          autoplay={{ delay: 3000 }}
         >
           {Array.isArray(notes) &&
             notes?.slice(0, 6).map((note) => (
