@@ -51,7 +51,8 @@ import axios from "axios";
 import Razorpay from "react-razorpay/dist/razorpay";
 
 const HomeSubject = () => {
-  const { notes } = useSelector((state) => state.notes);
+  const {notes} = useSelector((state) => state.notes);
+
 
   const { userInfo, isUserLoggedIn } = useSelector((state) => state.auth);
 
@@ -175,7 +176,7 @@ const HomeSubject = () => {
                 <div className="bg-black rounded-lg p-4 mb-3">
                   <img
                     src={note?.subject?.banner[0]?.secure_url}
-                    className="lg:h-64 w-full object-contain rounded-md"
+                    className="lg:h-64 h-56 w-full object-contain rounded-md"
                     alt={note.name}
                   />
                   <h1 className="mt-2 text-center">{note.name}</h1>

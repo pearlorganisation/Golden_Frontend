@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
 import WhyChooseUs from "../components/WhyChooseUs";
@@ -12,8 +12,19 @@ import Price2999 from "../assets/2999.jpeg";
 
 import PricesImage from "../assets/Prices.png";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllnotes } from "../features/notes/notesAction";
 
 const Home = () => {
+  
+  const {notes} = useSelector(state=> state.notes);
+  const dispatch = useDispatch();
+
+  useEffect(()=> {
+    dispatch(getAllnotes());
+  }, [dispatch])
+
+
   return (
     <div>
       {/* <HeroSection /> */}
