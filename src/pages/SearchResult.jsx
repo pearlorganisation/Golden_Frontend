@@ -20,10 +20,9 @@ const SearchResults = () => {
           }notes/search?query=${query}`
         );
 
-        console.log("chintu", response.data.data);
         setNotes(response.data.data);
       } catch (err) {
-        setError(err.response?.data?.message || "Something went wrong");
+        setError(err?.response?.data?.message || "Something went wrong");
       } finally {
         setLoading(false);
       }
@@ -31,6 +30,9 @@ const SearchResults = () => {
 
     fetchNotes();
   }, [query]);
+
+
+
 
   return (
     <div className="container mx-auto p-4">
@@ -57,8 +59,8 @@ const SearchResults = () => {
               />
               <h2 className="text-xl font-semibold">{note?.name}</h2>
 
-              <p>Discounted Price: Rs. {note.price}</p>
-              <p>Pages: {note.pages}</p>
+              <p>Discounted Price: Rs. {note?.price}</p>
+              <p>Pages: {note?.pages}</p>
             </div>
           ))}
       </div>
