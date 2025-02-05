@@ -7,13 +7,13 @@ import FreePDFsSection from "../components/FreePDFs";
 import Testimonials from "../components/Testimonials";
 import LandingPageImg from "../assets/landing_page.jpg";
 import HomeSubject from "../components/HomeSubject";
-
 import Price2999 from "../assets/2999.jpeg";
 
 import PricesImage from "../assets/Prices.png";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllnotes } from "../features/notes/notesAction";
+import SearchSection from "../components/SearchSection";
 
 const Home = () => {
   
@@ -53,7 +53,9 @@ const Home = () => {
       <WhyChooseUs />
       {/* <SubscriptionSection /> */}
       <HomeSubject />
+      <SearchSection />
       <FreePDFsSection />
+  
       <Testimonials />
     </div>
   );

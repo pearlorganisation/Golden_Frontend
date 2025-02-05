@@ -44,7 +44,9 @@ const routes = createBrowserRouter([
         path: "/pdf-listings",
         element: <PdfView />,
       },
-      { path: "/search", element: <SearchResults /> },
+      { path: "/search",
+         element: <SearchResults />
+      },
 
       {
         path: "/features",
