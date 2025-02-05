@@ -4,23 +4,21 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 function SearchSection() {
-
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    
     try {
-  
-      if(data.search.trim() == "") return;
-      navigate(`/search?query=${data.search}`)
-
-    
+      if (data.search.trim() == "") return;
+      navigate(`/search?query=${data.search}`);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-   
   };
 
   return (
@@ -40,10 +38,12 @@ function SearchSection() {
           <input
             type="text"
             // value={search}
-      
-            {...register("search", { required: "Search field cannot be empty" })}
+
+            {...register("search", {
+              required: "Search field cannot be empty",
+            })}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Search... here?"
+            placeholder="Search Subject ?"
           />
           {errors.search && (
             <p className="text-red-500 text-sm mt-1">{errors.search.message}</p>

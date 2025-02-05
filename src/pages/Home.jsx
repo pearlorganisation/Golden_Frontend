@@ -16,14 +16,12 @@ import { getAllnotes } from "../features/notes/notesAction";
 import SearchSection from "../components/SearchSection";
 
 const Home = () => {
-  
-  const {notes} = useSelector(state=> state.notes);
+  const { notes } = useSelector((state) => state.notes);
   const dispatch = useDispatch();
 
-  useEffect(()=> {
+  useEffect(() => {
     dispatch(getAllnotes());
-  }, [dispatch])
-
+  }, [dispatch]);
 
   return (
     <div>
@@ -32,6 +30,8 @@ const Home = () => {
       <div className="">
         <img src={LandingPageImg} className="w-full h-full" />
       </div>
+
+      <SearchSection />
 
       <div className=" lg:mt-[-200px] md:mt-[-150px] mt-[-40px]">
         <img src={PricesImage} className="w-full h-full" />
@@ -53,9 +53,9 @@ const Home = () => {
       <WhyChooseUs />
       {/* <SubscriptionSection /> */}
       <HomeSubject />
-      <SearchSection />
+
       <FreePDFsSection />
-  
+
       <Testimonials />
     </div>
   );
