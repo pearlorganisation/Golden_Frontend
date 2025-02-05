@@ -20,7 +20,7 @@ const SearchResults = () => {
           }notes/search?query=${query}`
         );
 
-        console.log("chintu", response.data.data);
+        console.log("search results", response.data.data);
         setNotes(response.data.data);
       } catch (err) {
         setError(err.response?.data?.message || "Something went wrong");
