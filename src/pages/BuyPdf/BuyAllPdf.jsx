@@ -4,7 +4,7 @@ import { getAllSubjects } from "../../features/Subject/SubjectAction";
 import { useForm } from "react-hook-form";
 import Razorpay from "react-razorpay/dist/razorpay";
 import axios from "axios";
-import { baseURL } from "../../axiosInstance";
+import axiosInstance, { baseURL } from "../../axiosInstance";
 import { FaAward, FaCheckCircle } from "react-icons/fa";
 import TextAnimation from "../../components/TextAnimation";
 
@@ -114,7 +114,7 @@ const BuyAllPdf = () => {
       const amount = 2999;
 
       // Create an order on the server
-      const { data: order } = await axios.post(`${baseURL}order/create`, {
+      const { data: order } = await axiosInstance.post(`order/create`, {
         price: amount,
         title: packageName,
         buyerName: finalBuyerName,
@@ -134,7 +134,7 @@ const BuyAllPdf = () => {
           console.log("res", response);
           try {
             // Verify the payment
-            const verifyResponse = await axios.post(`${baseURL}order/verify`, {
+            const verifyResponse = await axiosInstance.post(`order/verify`, {
               razorpayPaymentId: response.razorpay_payment_id,
               razorpayOrderId: response.razorpay_order_id,
               razorpaySignature: response.razorpay_signature,
@@ -143,7 +143,7 @@ const BuyAllPdf = () => {
               buyerNumber: finalBuyerNumber,
               pdfUrl: allPdfUrl, // for sending all the url
               isAll: isAll,
-            });
+            } );
 
             if (verifyResponse.data.success) {
               alert("Payment verified successfully!");

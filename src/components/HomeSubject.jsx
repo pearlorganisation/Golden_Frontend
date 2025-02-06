@@ -50,6 +50,7 @@ import "swiper/css/pagination";
 import axios from "axios";
 import Razorpay from "react-razorpay/dist/razorpay";
 import { getAllnotes } from "../features/notes/notesAction";
+import axiosInstance from "../axiosInstance";
 
 const HomeSubject = () => {
   const dispatch = useDispatch();
@@ -68,8 +69,8 @@ const HomeSubject = () => {
       const buyerNumber = userInfo.phoneNumber;
       const buyerEmail = userInfo.email;
       // Create an order on the server
-      const { data: order } = await axios.post(
-        "http://localhost:5000/order/create",
+      const { data: order } = await axiosInstance.post(
+        `order/create`,
         {
           price: amount,
           buyerName: buyerName,
@@ -91,8 +92,8 @@ const HomeSubject = () => {
           console.log("res", response);
           try {
             // Verify the payment
-            const verifyResponse = await axios.post(
-              "http://localhost:5000/order/verify",
+            const verifyResponse = await axiosInstance.post(
+              `order/verify`,
               {
                 razorpayPaymentId: response.razorpay_payment_id,
                 razorpayOrderId: response.razorpay_order_id,
@@ -115,9 +116,9 @@ const HomeSubject = () => {
           }
         },
         prefill: {
-          name: "Anjali",
-          email: "anjali@gmail.com",
-          contact: "909086098",
+          name: {buyerName},
+          email: {buyerEmail},
+          contact: {buyerNumber},
         },
         theme: {
           color: "#3399cc",
