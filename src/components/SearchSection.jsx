@@ -23,7 +23,7 @@ function SearchSection() {
 
   return (
     <div
-      className="relative bg-cover object-contain bg-center h-[600px] flex items-center justify-center px-4"
+      className="relative bg-cover object-contain bg-center h-[300px]  lg:h-[600px] flex items-center justify-center px-4"
       style={{
         backgroundImage: `url('https://5.imimg.com/data5/SELLER/Default/2023/9/343504636/WM/ZR/OQ/27729467/medical-books-printing-services-500x500.jpg')`,
       }}
@@ -32,7 +32,7 @@ function SearchSection() {
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="relative bg-white p-4 rounded-lg shadow-lg w-full md:w-[50%] max-w-sm flex items-center gap-3"
+        className="relative bg-white p-4 rounded-lg shadow-lg md:w-[50%] w-[80%] flex items-center gap-3"
       >
         <div className="flex-row">
           <input

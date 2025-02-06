@@ -112,7 +112,13 @@ const Header = () => {
       <nav className="flex items-center  px-0 py-2">
         {/* Logo */}
         <div className="flex flex-row gap-1 md:gap-3 items-center justify-center">
-          <Link to={`/`} className="flex flex-col gap-0 mt-0 pt-0">
+          <Link
+            to={`/`}
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+            className="flex flex-col gap-0 mt-0 pt-0"
+          >
             <div className="flex flex-row gap-1 items-center justify-center">
               <img
                 src={LogoName}
@@ -159,17 +165,21 @@ const Header = () => {
 
         {/* Navigation Links */}
         <ul
-          className={`absolute md:static text-center top-20 left-0 w-full md:w-auto md:flex bg-white md:bg-transparent md:space-x-6 items-center transform md:transform-none transition-all duration-300 ease-in-out mobile-menu ${
+          className={`absolute md:static text-center top-16 left-0 w-full md:w-auto md:flex bg-white md:bg-transparent md:space-x-6 items-center transform md:transform-none transition-all duration-300 ease-in-out mobile-menu ${
             isMobileMenuOpen ? "block" : "hidden"
           }`}
         >
           {pages.slice(0, 4).map((item) => (
             <li
               key={item.id}
-              className="border-b md:border-none lg:ml-8 md:ml-6 ml-12"
+              className="border-b md:border-none lg:ml-8 md:ml-6 ml-0"
             >
               <Link
                 to={`${item.path}`}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
                 className="block md:inline md:px-1 text-sm md:text-base lg:text-lg lg:px-1 py-2 text-yellow-600 hover:text-blue-600"
               >
                 {item.name}
