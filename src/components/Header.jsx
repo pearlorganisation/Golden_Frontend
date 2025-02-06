@@ -211,7 +211,9 @@ const Header = () => {
           //     Profile
           //   </button>
           // </div>
-          <ProfileComponent />
+          <div className="absolute right-4 md:flex flex-row space-x-2">
+            <ProfileComponent />
+          </div>
         )}
       </nav>
 

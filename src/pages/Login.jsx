@@ -120,7 +120,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../features/Auth/AuthaAction"; // Assuming userLogin action is defined
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Background from "../assets/logoname.jpg";
 
 const Login = () => {
@@ -138,8 +138,22 @@ const Login = () => {
   } = useForm();
 
   const handleLoginSubmit = async (data) => {
-    dispatch(userLogin(data));
-    navigate("/");
+    setIsLoggingIn(true);
+    setMessage("");
+
+    // dispatch(userLogin(data));
+    // navigate("/");
+
+    try {
+      const response = await dispatch(userLogin(data)).unwrap(); // Unwrap the promise to check result
+      console.log("Login Successful", response);
+      navigate("/"); // Navigate only on success
+    } catch (error) {
+      console.log("Login Failed", error);
+      setMessage(error); // Show error message
+    } finally {
+      setIsLoggingIn(false);
+    }
   };
 
   return (
