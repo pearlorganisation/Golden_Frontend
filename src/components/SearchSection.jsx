@@ -15,6 +15,8 @@ function SearchSection() {
   const onSubmit = (data) => {
     try {
       if (data.search.trim() == "") return;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
       navigate(`/search?query=${data.search}`);
     } catch (error) {
       console.error("Error fetching data:", error);
