@@ -70,7 +70,7 @@ const BuyPdf = (props) => {
           console.log("res", response);
           try {
             // Verify the payment
-            const verifyResponse = await axios.post(`${baseURL}order/verify`, {
+            const verifyResponse = await axiosInstance.post(`order/verify`, {
               razorpayPaymentId: response.razorpay_payment_id,
               razorpayOrderId: response.razorpay_order_id,
               razorpaySignature: response.razorpay_signature,

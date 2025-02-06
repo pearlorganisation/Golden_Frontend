@@ -114,7 +114,7 @@ const BuyAllPdf = () => {
       const amount = 2999;
 
       // Create an order on the server
-      const { data: order } = await axios.post(`${baseURL}order/create`, {
+      const { data: order } = await axiosInstance.post(`order/create`, {
         price: amount,
         title: packageName,
         buyerName: finalBuyerName,
@@ -143,7 +143,7 @@ const BuyAllPdf = () => {
               buyerNumber: finalBuyerNumber,
               pdfUrl: allPdfUrl, // for sending all the url
               isAll: isAll,
-            });
+            } );
 
             if (verifyResponse.data.success) {
               alert("Payment verified successfully!");
