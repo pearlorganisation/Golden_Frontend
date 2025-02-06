@@ -173,7 +173,6 @@ const HomeSubject = () => {
           }}
           navigation
           pagination={{ clickable: true }}
-          autoplay={{ delay: 3000 }}
         >
           {Array.isArray(notes) &&
             notes?.slice(0, 6).map((note) => (
@@ -181,7 +180,7 @@ const HomeSubject = () => {
                 <div className="bg-black rounded-lg p-4 mb-3">
                   <img
                     src={note?.subject?.banner[0]?.secure_url}
-                    className="lg:h-64 w-full object-contain rounded-md"
+                    className="lg:h-64 h-56 w-full object-contain rounded-md"
                     alt={note.name}
                   />
                   <h1 className="mt-2 text-center">{note.name}</h1>

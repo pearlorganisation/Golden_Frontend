@@ -23,6 +23,7 @@ import CancellationPolicy from "./pages/cancelationPolicy";
 import BuyPdf from "./pages/BuyPdf/BuyPdf";
 import Profile from "./pages/Profile/Profile";
 import BuyAllPdf from "./pages/BuyPdf/BuyAllPdf";
+import SearchResults from "./pages/SearchResult";
 
 const routes = createBrowserRouter([
   {
@@ -42,6 +43,9 @@ const routes = createBrowserRouter([
       {
         path: "/pdf-listings",
         element: <PdfView />,
+      },
+      { path: "/search",
+         element: <SearchResults />
       },
 
       {
