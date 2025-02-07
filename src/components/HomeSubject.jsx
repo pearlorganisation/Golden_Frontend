@@ -5,9 +5,9 @@
 // const HomeSubject = () => {
 //   const dispatch = useDispatch();
 
-//   const { notes } = useSelector((state) => state.notes);
+//   const { subjects } = useSelector((state) => state.subjects);
 
-//   console.log(notes);
+//   console.log(subjects);
 //   return (
 //     <div className=" bg-black text-white">
 //       <h1 className="text-5xl flex justify-center items-center">
@@ -15,20 +15,20 @@
 //         Our Subjects
 //       </h1>
 //       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 container mx-auto my-10 px-4">
-//         {Array.isArray(notes) &&
-//           notes?.slice(0, 6).map((note) => (
-//             <div className="" key={note._id}>
+//         {Array.isArray(subjects) &&
+//           subjects?.slice(0, 6).map((subject) => (
+//             <div className="" key={subject._id}>
 //               <img
-//                 src={note?.subject?.banner[0]?.secure_url}
+//                 src={subject?.subject?.banner[0]?.secure_url}
 //                 className="lg:h-64"
 //               />
-//               <h1> {note.name}</h1>
+//               <h1> {subject.name}</h1>
 //             </div>
 //           ))}
 //       </div>
 
 //       <div className="flex justify-end items-center px-10 py-2">
-//         <Link to={`/notes`} className="px-4 py-2 bg-yellow-700 rounded-md">
+//         <Link to={`/subjects`} className="px-4 py-2 bg-yellow-700 rounded-md">
 //           {" "}
 //           View All{" "}
 //         </Link>
@@ -49,12 +49,12 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import axios from "axios";
 import Razorpay from "react-razorpay/dist/razorpay";
-import { getAllnotes } from "../features/notes/notesAction";
 import axiosInstance from "../axiosInstance";
+import { getAllSubjects } from "../features/Subject/SubjectAction";
 
 const HomeSubject = () => {
   const dispatch = useDispatch();
-  const { notes } = useSelector((state) => state.notes);
+  const { subjects } = useSelector((state) => state.subjects);
 
   const { userInfo, isUserLoggedIn } = useSelector((state) => state.auth);
 
@@ -62,23 +62,20 @@ const HomeSubject = () => {
     try {
       console.log(speciality, "meri speiclaity");
       const selectedPdf = speciality.name;
-      const amount = speciality?.subject?.discountedPrice || 0;
+      const amount = speciality?.discountedPrice || 0;
 
-      const pdfUrl = speciality?.subject?.pdf?.secure_url;
+      const pdfUrl = speciality?.pdf?.secure_url;
       const buyerName = userInfo.name;
       const buyerNumber = userInfo.phoneNumber;
       const buyerEmail = userInfo.email;
       // Create an order on the server
-      const { data: order } = await axiosInstance.post(
-        `order/create`,
-        {
-          price: amount,
-          buyerName: buyerName,
-          buyerEmail: buyerEmail,
-          buyerNumber: buyerNumber,
-          title: selectedPdf,
-        }
-      );
+      const { data: order } = await axiosInstance.post(`order/create`, {
+        price: amount,
+        buyerName: buyerName,
+        buyerEmail: buyerEmail,
+        buyerNumber: buyerNumber,
+        title: selectedPdf,
+      });
 
       const Orderoptions = {
         key: import.meta.env.VITE_APP_RAZORPAY_KEY_ID, // Razorpay key
@@ -92,18 +89,15 @@ const HomeSubject = () => {
           console.log("res", response);
           try {
             // Verify the payment
-            const verifyResponse = await axiosInstance.post(
-              `order/verify`,
-              {
-                razorpayPaymentId: response.razorpay_payment_id,
-                razorpayOrderId: response.razorpay_order_id,
-                razorpaySignature: response.razorpay_signature,
-                buyerName: buyerName,
-                buyerEmail: buyerEmail,
-                buyerNumber: buyerNumber,
-                pdfUrl: pdfUrl, // in future change it with the url of the pdf
-              }
-            );
+            const verifyResponse = await axiosInstance.post(`order/verify`, {
+              razorpayPaymentId: response.razorpay_payment_id,
+              razorpayOrderId: response.razorpay_order_id,
+              razorpaySignature: response.razorpay_signature,
+              buyerName: buyerName,
+              buyerEmail: buyerEmail,
+              buyerNumber: buyerNumber,
+              pdfUrl: pdfUrl, // in future change it with the url of the pdf
+            });
 
             if (verifyResponse.data.success) {
               alert("Payment verified successfully!");
@@ -116,9 +110,9 @@ const HomeSubject = () => {
           }
         },
         prefill: {
-          name: {buyerName},
-          email: {buyerEmail},
-          contact: {buyerNumber},
+          name: { buyerName },
+          email: { buyerEmail },
+          contact: { buyerNumber },
         },
         theme: {
           color: "#3399cc",
@@ -152,9 +146,9 @@ const HomeSubject = () => {
     }
   };
 
-  useEffect(()=>{
-    dispatch(getAllnotes())
-  },[dispatch])
+  useEffect(() => {
+    dispatch(getAllSubjects());
+  }, [dispatch]);
   return (
     <div className="bg-black text-white">
       <h1 className="text-5xl flex justify-center items-center">
@@ -174,20 +168,20 @@ const HomeSubject = () => {
           navigation
           pagination={{ clickable: true }}
         >
-          {Array.isArray(notes) &&
-            notes?.slice(0, 6).map((note) => (
-              <SwiperSlide key={note._id} className="flex justify-center">
+          {Array.isArray(subjects) &&
+            subjects?.slice(0, 6).map((subject) => (
+              <SwiperSlide key={subject._id} className="flex justify-center">
                 <div className="bg-black rounded-lg p-4 mb-3">
                   <img
-                    src={note?.subject?.banner[0]?.secure_url}
+                    src={subject?.banner[0]?.secure_url}
                     className="lg:h-64 h-56 w-full object-contain rounded-md"
-                    alt={note.name}
+                    alt={subject.name}
                   />
-                  <h1 className="mt-2 text-center">{note.name}</h1>
+                  <h1 className="mt-2 text-center">{subject.name}</h1>
                   <button
                     className="bg-gradient-to-r from-yellow-600 to-black text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:from-yellow-700 hover:to-black transform hover:scale-105 transition-all duration-300 ease-in-out flex items-center justify-center mt-4 w-full "
                     onClick={() => {
-                      logicFunction(note);
+                      logicFunction(subject);
                     }}
                   >
                     <span className="mr-2">Buy Now</span>
@@ -213,7 +207,13 @@ const HomeSubject = () => {
       </div>
 
       <div className="flex justify-end items-center px-10 py-2">
-        <Link to={`/notes`} className="px-4 py-2 bg-yellow-700 rounded-md">
+        <Link
+          to={`/notes`}
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+          className="px-4 py-2 bg-yellow-700 rounded-md"
+        >
           View All
         </Link>
       </div>

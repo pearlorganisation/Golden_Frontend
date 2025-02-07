@@ -52,7 +52,7 @@ const BuyAllPdf = () => {
   ];
 
   const dispatch = useDispatch();
-  const { subject } = useSelector((state) => state.subjects);
+  const { subjects, loading } = useSelector((state) => state.subjects);
   const { isUserLoggedIn, userInfo } = useSelector((state) => state.auth);
   const {
     register,
@@ -63,8 +63,8 @@ const BuyAllPdf = () => {
 
   /** getting all the pdf urls from the subject object */
   let allPdfUrl = [];
-  if (subject) {
-    subject?.map((sub) => allPdfUrl.push(sub?.pdf?.secure_url));
+  if (subjects) {
+    subjects?.map((sub) => allPdfUrl.push(sub?.pdf?.secure_url));
   }
   allPdfUrl = allPdfUrl.filter((el) => el !== undefined);
 
@@ -143,7 +143,7 @@ const BuyAllPdf = () => {
               buyerNumber: finalBuyerNumber,
               pdfUrl: allPdfUrl, // for sending all the url
               isAll: isAll,
-            } );
+            });
 
             if (verifyResponse.data.success) {
               alert("Payment verified successfully!");
@@ -184,7 +184,7 @@ const BuyAllPdf = () => {
 
   useEffect(() => {
     dispatch(getAllSubjects());
-  }, []);
+  }, [dispatch]);
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-7xl mx-auto p-6">
@@ -351,57 +351,10 @@ const BuyAllPdf = () => {
         {" "}
         NOTES INCLUDED IN THE BUNDLE
       </h1>
-      {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {Array.isArray(subject) &&
-          subject?.map((item) => (
-            <div
-              key={item._id}
-              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
-            >
-              {item.banner?.[0]?.secure_url && (
-                <div
-                  className="lg:px-10 lg:py-10 md:px-16 md:py-16 px-20 py-20 relative w-full h-96 overflow-hidden rounded-lg bg-gray-100 bg-cover bg-center"
-                  style={{
-                    backgroundImage: `url(${item.banner[0].secure_url})`,
-                  }}
-                  aria-label={item.name}
-                ></div>
-              )}
-
-              <div className="p-4">
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                  {item.name}
-                </h3>
-                <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-                  {item.description}
-                </p>
-
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-600">Pages:</span>
-                    <span className="font-medium">{item.pages}</span>
-                  </div>
-
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-600">Price:</span>
-                    <div className="text-right">
-                      <span className="line-through text-gray-500 mr-2">
-                        ₹{item.price}
-                      </span>
-                      <span className="text-green-600 font-semibold">
-                        ₹{item.discountedPrice}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-      </div> */}
 
       <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {Array.isArray(subject) &&
-          subject?.map((item) => (
+        {Array.isArray(subjects) &&
+          subjects?.map((item) => (
             <div
               key={item._id}
               className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"

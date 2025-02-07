@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import axiosInstance from "../axiosInstance";
 import { useSelector } from "react-redux";
+import Razorpay from "react-razorpay/dist/razorpay";
 
 const SearchResults = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query");
-  const [notes, setNotes] = useState([]);
+  const [subjects, setSubjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { userInfo, isUserLoggedIn } = useSelector((state) => state.auth);
@@ -15,9 +16,11 @@ const SearchResults = () => {
 
     const fetchNotes = async () => {
       try {
-        const response = await axiosInstance.get(`notes/search?query=${query}`);
+        const response = await axiosInstance.get(
+          `subject/search?query=${query}`
+        );
 
-        setNotes(response.data.data);
+        setSubjects(response.data.data);
       } catch (err) {
         setError(err?.response?.data?.message || "Something went wrong");
       } finally {
@@ -32,23 +35,20 @@ const SearchResults = () => {
     try {
       console.log(speciality, "meri speiclaity");
       const selectedPdf = speciality.name;
-      const amount = speciality?.subject?.discountedPrice || 0;
+      const amount = speciality?.discountedPrice || 0;
 
-      const pdfUrl = speciality?.subject?.pdf?.secure_url;
+      const pdfUrl = speciality?.pdf?.secure_url;
       const buyerName = userInfo.name;
       const buyerNumber = userInfo.phoneNumber;
       const buyerEmail = userInfo.email;
       // Create an order on the server
-      const { data: order } = await axiosInstance.post(
-        `order/create`,
-        {
-          price: amount,
-          buyerName: buyerName,
-          buyerEmail: buyerEmail,
-          buyerNumber: buyerNumber,
-          title: selectedPdf,
-        }
-      );
+      const { data: order } = await axiosInstance.post(`order/create`, {
+        price: amount,
+        buyerName: buyerName,
+        buyerEmail: buyerEmail,
+        buyerNumber: buyerNumber,
+        title: selectedPdf,
+      });
 
       const Orderoptions = {
         key: import.meta.env.VITE_APP_RAZORPAY_KEY_ID, // Razorpay key
@@ -62,18 +62,15 @@ const SearchResults = () => {
           console.log("res", response);
           try {
             // Verify the payment
-            const verifyResponse = await axiosInstance.post(
-              `order/verify`,
-              {
-                razorpayPaymentId: response.razorpay_payment_id,
-                razorpayOrderId: response.razorpay_order_id,
-                razorpaySignature: response.razorpay_signature,
-                buyerName: buyerName,
-                buyerEmail: buyerEmail,
-                buyerNumber: buyerNumber,
-                pdfUrl: pdfUrl, // in future change it with the url of the pdf
-              }
-            );
+            const verifyResponse = await axiosInstance.post(`order/verify`, {
+              razorpayPaymentId: response.razorpay_payment_id,
+              razorpayOrderId: response.razorpay_order_id,
+              razorpaySignature: response.razorpay_signature,
+              buyerName: buyerName,
+              buyerEmail: buyerEmail,
+              buyerNumber: buyerNumber,
+              pdfUrl: pdfUrl, // in future change it with the url of the pdf
+            });
 
             if (verifyResponse.data.success) {
               alert("Payment verified successfully!");
@@ -127,19 +124,20 @@ const SearchResults = () => {
       {loading && <p>Loading...</p>}
       {error && <p className="text-red-500">{error}</p>}
 
-      {!loading && !error && Array.isArray(notes) && notes.length === 0 && (
-        <p>No notes found for "{query}".</p>
-      )}
+      {!loading &&
+        !error &&
+        Array.isArray(subjects) &&
+        subjects.length === 0 && <p>No subjects found for "{query}".</p>}
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {Array.isArray(notes) &&
-          notes.map((note) => (
+        {Array.isArray(subjects) &&
+          subjects.map((note) => (
             <div
               key={note._id}
               className="border bg-black text-white p-4 rounded shadow"
             >
               <img
-                src={note?.subject?.banner[0].secure_url}
+                src={note?.banner[0].secure_url}
                 alt={note?.name}
                 className="w-full h-48 object-contain rounded-lg shadow-lg"
               />

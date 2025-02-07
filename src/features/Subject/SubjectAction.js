@@ -24,3 +24,24 @@ export const getAllSubjects = createAsyncThunk(
     }
   }
 );
+
+export const getSubjectById = createAsyncThunk(
+  "get/subject-by-id",
+  async (id, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const { data } = await axiosInstance.get(`/subject/${id}`, config);
+      return data.data;
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);

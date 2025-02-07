@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa";
 import { IoIosClose } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllnotes } from "../features/notes/notesAction";
 import axios from "axios";
 import Razorpay from "react-razorpay/dist/razorpay";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,6 +10,8 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import { Link, useNavigate } from "react-router-dom";
 import { getUserProfile } from "../features/Auth/AuthaAction";
+import { getAllSubjects } from "../features/Subject/SubjectAction";
+import axiosInstance from "../axiosInstance";
 
 // import { Pagination } from "swiper";
 
@@ -23,36 +24,38 @@ const DetailPage = () => {
   const [isFetching, setIsFetching] = useState(false);
 
   const dispatch = useDispatch();
-  const { notes, pagination, loading } = useSelector((state) => state.notes);
+  const { subjects, loading } = useSelector((state) => state.subjects);
 
   /**---userInfo---*/
   const { userInfo, isUserLoggedIn } = useSelector((state) => state.auth);
 
-  console.log(pagination, "my pagination");
+  // console.log(pagination, "my pagination");
+
+  console.log(subjects, "naye subjects");
 
   useEffect(() => {
-    dispatch(getAllnotes({ page: 1 }));
-  }, [dispatch, page]);
+    dispatch(getAllSubjects());
+  }, [dispatch]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop >=
-        document.documentElement.offsetHeight - 100
-      ) {
-        // Trigger fetch for the next page
-        if (pagination?.next && !isFetching) {
-          setIsFetching(true);
-          dispatch(getAllnotes({ page: pagination.next }))
-            .then(() => setIsFetching(false))
-            .catch(() => setIsFetching(false));
-        }
-      }
-    };
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (
+  //       window.innerHeight + document.documentElement.scrollTop >=
+  //       document.documentElement.offsetHeight - 100
+  //     ) {
+  //       // Trigger fetch for the next page
+  //       if (pagination?.next && !isFetching) {
+  //         setIsFetching(true);
+  //         dispatch(getAllnotes({ page: pagination.next }))
+  //           .then(() => setIsFetching(false))
+  //           .catch(() => setIsFetching(false));
+  //       }
+  //     }
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [dispatch, pagination, isFetching]);
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, [dispatch, pagination, isFetching]);
 
   // const handlePageclick = (newPage) => {
   //   if (newPage > 0 && newPage <= pagination.pages.length) {
@@ -60,14 +63,14 @@ const DetailPage = () => {
   //   }
   // };
 
-  const specialties = notes || [];
+  const specialties = subjects || [];
   const content = specialties.reduce((acc, speciality) => {
     acc[speciality.name] = {
       title: speciality?.name,
-      pages: speciality?.subject?.pages,
-      price: speciality?.subject?.discountedPrice,
-      image: speciality?.subject?.banner[0]?.secure_url,
-      description: speciality?.subject?.description,
+      pages: speciality?.pages,
+      price: speciality?.discountedPrice,
+      image: speciality?.banner[0]?.secure_url,
+      description: speciality?.description,
     };
     return acc;
   }, {});
@@ -113,21 +116,18 @@ const DetailPage = () => {
     try {
       console.log(speciality, "meri speiclaity");
       const selectedPdf = speciality.name;
-      const amount = speciality?.subject?.discountedPrice || 0;
+      const amount = speciality?.discountedPrice || 0;
       const buyerName = userInfo.name;
       const buyerNumber = userInfo.phoneNumber;
       const buyerEmail = userInfo.email;
       // Create an order on the server
-      const { data: order } = await axios.post(
-        "http://localhost:5000/order/create",
-        {
-          price: amount,
-          buyerName: buyerName,
-          buyerEmail: buyerEmail,
-          buyerNumber: buyerNumber,
-          title: selectedPdf,
-        }
-      );
+      const { data: order } = await axiosInstance.post("/order/create", {
+        price: amount,
+        buyerName: buyerName,
+        buyerEmail: buyerEmail,
+        buyerNumber: buyerNumber,
+        title: selectedPdf,
+      });
 
       const Orderoptions = {
         key: import.meta.env.VITE_APP_RAZORPAY_KEY_ID, // Razorpay key
@@ -141,19 +141,16 @@ const DetailPage = () => {
           console.log("res", response);
           try {
             // Verify the payment
-            const verifyResponse = await axios.post(
-              "http://localhost:5000/order/verify",
-              {
-                razorpayPaymentId: response.razorpay_payment_id,
-                razorpayOrderId: response.razorpay_order_id,
-                razorpaySignature: response.razorpay_signature,
-                buyerName: buyerName,
-                buyerEmail: buyerEmail,
-                buyerNumber: buyerNumber,
-                pdfUrl:
-                  "https://res.cloudinary.com/dapjyizvj/raw/upload/v1734943843/uploads/reev5wluktdww2c0jqd3.pdf", // in future change it with the url of the pdf
-              }
-            );
+            const verifyResponse = await axiosInstance.post("/order/verify", {
+              razorpayPaymentId: response.razorpay_payment_id,
+              razorpayOrderId: response.razorpay_order_id,
+              razorpaySignature: response.razorpay_signature,
+              buyerName: buyerName,
+              buyerEmail: buyerEmail,
+              buyerNumber: buyerNumber,
+              pdfUrl:
+                "https://res.cloudinary.com/dapjyizvj/raw/upload/v1734943843/uploads/reev5wluktdww2c0jqd3.pdf", // in future change it with the url of the pdf
+            });
 
             if (verifyResponse.data.success) {
               alert("Payment verified successfully!");
@@ -321,8 +318,8 @@ const DetailPage = () => {
                       </div>
                     )} */}
 
-                    {Array.isArray(speciality?.subject?.banner) &&
-                      speciality.subject.banner.length > 0 && (
+                    {Array.isArray(speciality?.banner) &&
+                      speciality.banner.length > 0 && (
                         <div className="relative">
                           <Swiper
                             modules={[Pagination]}
@@ -331,7 +328,7 @@ const DetailPage = () => {
                             pagination={{ clickable: true }}
                             className="rounded-md"
                           >
-                            {speciality.subject.banner.map((image, index) => (
+                            {speciality.banner.map((image, index) => (
                               <SwiperSlide key={index}>
                                 <img
                                   src={image.secure_url}
@@ -350,9 +347,9 @@ const DetailPage = () => {
                         Price:{" "}
                         <strong className="text-yellow-600">
                           <strike className="font-bold mr-3 text-red-500">
-                            ₹{speciality?.subject?.price}
+                            ₹{speciality?.price}
                           </strike>
-                          ₹{speciality?.subject?.discountedPrice}
+                          ₹{speciality?.discountedPrice}
                         </strong>
                       </p>
                     </div>
