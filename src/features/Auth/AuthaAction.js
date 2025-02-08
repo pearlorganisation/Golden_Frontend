@@ -97,8 +97,8 @@ export const userLogout = createAsyncThunk(
           "Content-Type": "application/json",
         },
       };
-      await axiosInstance.post(`/v1/auth/logout`, {}, config); // No need to capture `data`
-      return "Logout successful"; // Optional success message
+      await axiosInstance.post(`/v1/auth/logout`, {}, config);
+      return "Logout successful";
     } catch (error) {
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
