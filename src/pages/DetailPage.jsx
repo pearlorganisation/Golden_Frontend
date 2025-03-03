@@ -59,7 +59,7 @@ const DetailPage = () => {
   const handleSelect =(url)=>{
     let pdfUrl = [...storedPdfUrl];
     let toSendUrl = [...urlToSend]
-    if(pdfUrl.includes(url)){
+    if(pdfUrl.includes(url) && toSendUrl.includes(url?.pdf?.secure_url)){
       pdfUrl = pdfUrl.filter((el)=> url?.pdf?.secure_url !== el?.pdf.secure_url)
       toSendUrl = toSendUrl.filter((el)=>url?.pdf?.secure_url !== el )
     }else{
@@ -262,6 +262,7 @@ const DetailPage = () => {
             <div className="text-xl lg:text-4xl font-bold text-white bg-gradient-to-r from-blue-600 via-purple-600 to-green-600 px-6 py-4 mb-6 rounded-lg shadow-lg">
               PDF Plans
             </div>
+            { storedPdfUrl.length > 0 ? <div className="w-full flex justify-end p-4"><span className="bg-blue-300 p-2 rounded font-semibold">Buy {storedPdfUrl.length} PDF</span> </div>:<div><p className="text-center p-2 text-xl">Select Multiple PDFS and Enjoy Extra Discount</p></div>}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center items-center">
               {Array.isArray(specialties) &&
                 specialties.map((speciality) => (
