@@ -17,7 +17,6 @@ import axiosInstance from "../axiosInstance";
 
 const DetailPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  // const [globalDuration, setGlobalDuration] = useState("");
   const [selectedSpeciality, setSelectedSpeciality] = useState(0);
   const [page, setPage] = useState(1);
 
@@ -37,32 +36,6 @@ const DetailPage = () => {
     dispatch(getAllSubjects());
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     if (
-  //       window.innerHeight + document.documentElement.scrollTop >=
-  //       document.documentElement.offsetHeight - 100
-  //     ) {
-  //       // Trigger fetch for the next page
-  //       if (pagination?.next && !isFetching) {
-  //         setIsFetching(true);
-  //         dispatch(getAllnotes({ page: pagination.next }))
-  //           .then(() => setIsFetching(false))
-  //           .catch(() => setIsFetching(false));
-  //       }
-  //     }
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, [dispatch, pagination, isFetching]);
-
-  // const handlePageclick = (newPage) => {
-  //   if (newPage > 0 && newPage <= pagination.pages.length) {
-  //     setPage(newPage);
-  //   }
-  // };
-
   const specialties = subjects || [];
   const content = specialties.reduce((acc, speciality) => {
     acc[speciality.name] = {
@@ -77,40 +50,54 @@ const DetailPage = () => {
 
   console.log(specialties, "my specialties");
 
-  // const selectMonth = ["1month", "6month"];
-  // const Month = {
-  //   "1month": { rupees: 399 },
-  //   "6month": { rupees: 1499 },
-  // };
-  // const [selectedOptions, setSelectedOptions] = useState({});
+  const [storedPdfUrl, setStoredPdfUrl] = useState([])
+  const [urlToSend, setUrlToSend] = useState([]) 
 
-  // useEffect(() => {
-  //   if (specialties.length) {
-  //     setSelectedOptions(
-  //       specialties.reduce((acc, speciality) => {
-  //         acc[speciality.name] = "1month";
-  //         return acc;
-  //       }, {})
-  //     );
-  //   }
-  // }, [specialties]);
+  /** price to send if selected multiple pdfs */
+  const [finalPriceAfterDiscount, setFinalPriceAfterDiscount] = useState(0)
+  /** handle for selecting multiple notes and un select it */
+  const handleSelect =(url)=>{
+    let pdfUrl = [...storedPdfUrl];
+    let toSendUrl = [...urlToSend]
+    if(pdfUrl.includes(url)){
+      pdfUrl = pdfUrl.filter((el)=> url?.pdf?.secure_url !== el?.pdf.secure_url)
+      toSendUrl = toSendUrl.filter((el)=>url?.pdf?.secure_url !== el )
+    }else{
+      pdfUrl.push(url)
+      toSendUrl.push(url?.pdf?.secure_url)
+    }
+    setStoredPdfUrl(pdfUrl)
+    setUrlToSend(toSendUrl)
 
-  // const handleSelectChange = (speciality, value) => {
-  //   setSelectedOptions((prevState) => ({
-  //     ...prevState,
-  //     [speciality]: value,
-  //   }));
-  // };
+  }
+ 
+ // calculating the price of selected pdfs
+  let price = Array.isArray(storedPdfUrl) && storedPdfUrl.length > 0
+    ? storedPdfUrl.reduce((total, el) => total + (el.discountedPrice || 0), 0)
+    : 0; 
 
-  // const handleGlobalDurationChange = (duration) => {
-  //   setGlobalDuration(duration);
-  //   setSelectedOptions(() =>
-  //     specialties.reduce((acc, speciality) => {
-  //       acc[speciality.name] = duration;
-  //       return acc;
-  //     }, {})
-  //   );
-  // };
+     useEffect(()=>{
+        let len = storedPdfUrl.length;
+        let discount = 0;
+        if (len >0 && len <3) {
+          discount = 0.05;   
+        } else if (len >= 3 && len < 5) {
+          discount = 0.10;  
+        } else if (len === 5) {
+          discount = 0.15;   
+        } else if (len > 5) {
+          discount = 0.20; 
+        }
+        
+        let discountedPrice = price - price * discount;
+    setFinalPriceAfterDiscount(Math.floor(discountedPrice));
+  },[storedPdfUrl, price])
+ 
+/** this will be the handle for buying multiple pdfs.  */
+  const handleBuySelectedPdf =()=>{
+
+  }
+
 
   const handlePay = async (speciality) => {
     try {
@@ -270,26 +257,6 @@ const DetailPage = () => {
               </div>
             </div>
           )}
-
-          {/* Global Filter for Duration
-        <div className="mt-8">
-          <label className="block text-gray-600 text-sm font-medium mb-2">
-            Global Duration Filter:
-          </label>
-          <select
-            className="border border-gray-300 rounded-md w-full p-3 text-gray-700 text-base focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            value={globalDuration}
-            onChange={(e) => handleGlobalDurationChange(e.target.value)}
-          >
-            <option value="">Select Duration</option>
-            {selectMonth.map((item) => (
-              <option key={item} value={item}>
-                {item}
-              </option>
-            ))}
-          </select>
-        </div> */}
-
           {/* Specialties PDF Plans Section */}
           <div className="mt-10 flex items-center justify-center flex-col">
             <div className="text-xl lg:text-4xl font-bold text-white bg-gradient-to-r from-blue-600 via-purple-600 to-green-600 px-6 py-4 mb-6 rounded-lg shadow-lg">
@@ -305,19 +272,26 @@ const DetailPage = () => {
                       boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
                     }}
                   >
-                    <h3 className="text-sm lg:text-base font-semibold text-white min-h-12">
-                      {speciality.name}
-                    </h3>
-                    {/* {speciality?.subject?.banner[0]?.secure_url && (
-                      <div>
-                        <img
-                          src={speciality.subject.banner[0].secure_url}
-                          alt={speciality.name}
-                          className="w-full h-64 object-cover rounded-md mb-4"
-                        />
-                      </div>
-                    )} */}
+                    <div className="flex justify-between">
+                      <h3 className="text-sm lg:text-base font-semibold text-white">
+                        {speciality?.name}
+                      </h3>
+                      <div className="">
+                        <label className="inline-flex items-center">
+                          <input
+                            type="checkbox"
+                            className="form-checkbox h-5 w-5 text-blue-600"
+                            onChange={() => handleSelect(speciality)}
+                          // checked={storedPdfUrl.includes(speciality?.pdf?.secure_url)
 
+                          // }
+                          />
+                          <span className="ml-2 text-white">Select PDF</span>
+                        </label>
+                      </div>
+                    
+                    </div>
+                     
                     {Array.isArray(speciality?.banner) &&
                       speciality.banner.length > 0 && (
                         <div className="relative">
